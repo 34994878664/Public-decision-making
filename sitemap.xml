@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <!-- 上线后，把 https://github.com/34994878664/Public-decision-making.git/ 改成你的真实首页网址 -->
+    <!-- 上线后，把 https://34994878664.github.io/Public-decision-making//改成你的真实首页网址 -->
     <loc>https://example.com/</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <!-- 上线后，把 https://https://github.com/34994878664/Public-decision-making.git改成你的真实教程网址 -->
+    <!-- 上线后，把https://34994878664.github.io/Public-decision-making/改成你的真实教程网址 -->
     <loc>https://example.com/upload-guide.html</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
