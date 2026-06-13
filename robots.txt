@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 上线后，把下面地址改成你的真实网址
+Sitemap: https://example.com/sitemap.xml

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大众终极答案决策树｜迷茫问题行动导航器</title>
+  <meta name="description" content="一个面向普通人的迷茫问题决策工具：把赚钱、工作、感情、选择、焦虑、学习、人生方向等问题拆成可执行的下一步。非医疗、非法律、非投资建议。" />
+  <meta name="keywords" content="决策树,人生选择,迷茫怎么办,行动指南,大众决策工具,问题分析,选择困难" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="大众终极答案决策树" />
+  <meta property="og:description" content="把迷茫问题拆成：保命线、目标线、现实线、试错线、放大线、退出线。" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#101828" />
+  <style>
+    :root{
+      --bg:#0b1020;--bg2:#111827;--panel:rgba(255,255,255,.08);--panel2:rgba(255,255,255,.13);--text:#f8fafc;--muted:#b7c2d7;--line:rgba(255,255,255,.16);--brand:#8b5cf6;--brand2:#06b6d4;--brand3:#f59e0b;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;--shadow:0 30px 90px rgba(0,0,0,.42);--r:24px;--rs:15px
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 10% 0%,rgba(139,92,246,.32),transparent 30%),radial-gradient(circle at 90% 10%,rgba(6,182,212,.22),transparent 28%),radial-gradient(circle at 70% 90%,rgba(245,158,11,.16),transparent 30%),var(--bg);min-height:100vh}a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:26px 18px 64px}.nav{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 26px}.logo{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.04em}.mark{width:44px;height:44px;border-radius:15px;background:conic-gradient(from 220deg,var(--brand),var(--brand2),var(--brand3),var(--brand));display:grid;place-items:center;box-shadow:0 18px 45px rgba(139,92,246,.28)}.logo small{display:block;color:var(--muted);font-size:12px;letter-spacing:0;font-weight:700;margin-top:2px}.navlinks{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid var(--line);background:rgba(255,255,255,.06);padding:9px 12px;border-radius:999px;color:var(--muted);font-size:13px;text-decoration:none}.pill:hover{background:rgba(255,255,255,.11);color:var(--text)}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:stretch}.card{border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.06));box-shadow:var(--shadow);backdrop-filter:blur(16px)}.hero-main{padding:34px;position:relative;overflow:hidden}.hero-main:after{content:"";position:absolute;right:-110px;bottom:-160px;width:360px;height:360px;border-radius:999px;background:rgba(6,182,212,.18);filter:blur(4px)}.tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.07);padding:8px 12px;color:#e0e7ff;font-weight:800;font-size:13px}.tag b{color:#fff}h1{font-size:clamp(36px,5.7vw,70px);line-height:.98;letter-spacing:-.075em;margin:20px 0 16px}.lead{font-size:clamp(16px,2vw,20px);line-height:1.75;color:var(--muted);max-width:760px;margin:0 0 22px}.lead strong{color:var(--text)}.cta{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2}.btn{appearance:none;border:none;border-radius:999px;padding:13px 18px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s transform,.2s background}.btn:hover{transform:translateY(-1px)}.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 18px 42px rgba(6,182,212,.22)}.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line)}.hero-side{padding:24px;display:grid;gap:14px}.axiom{padding:16px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.06)}.axiom b{display:block;margin-bottom:6px}.axiom span{color:var(--muted);line-height:1.6}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}.section{padding:26px}.section h2{margin:0 0 12px;font-size:28px;letter-spacing:-.04em}.muted{color:var(--muted);line-height:1.7}.form{display:grid;gap:16px;margin-top:18px}.field label{display:block;font-weight:900;margin:0 0 8px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:rgba(8,13,30,.72);color:var(--text);border-radius:15px;padding:13px 14px;font:inherit;outline:none}.field textarea{min-height:94px;resize:vertical}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{position:relative}.choice input{position:absolute;opacity:0}.choice span{display:block;border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:15px;padding:12px 10px;text-align:center;color:var(--muted);font-weight:850;cursor:pointer}.choice input:checked+span{background:rgba(139,92,246,.23);border-color:rgba(139,92,246,.75);color:#fff}.sliders{display:grid;gap:14px}.q{border:1px solid var(--line);border-radius:18px;padding:15px;background:rgba(255,255,255,.05)}.q-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.q b{font-size:15px}.q em{font-style:normal;color:var(--muted);font-size:12px;line-height:1.5;display:block;margin-top:4px}.val{min-width:36px;height:28px;border-radius:999px;display:grid;place-items:center;background:rgba(255,255,255,.1);border:1px solid var(--line);font-weight:900}input[type=range]{width:100%;margin:14px 0 6px;accent-color:var(--brand2)}.scale{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.result{position:sticky;top:16px}.scorebox{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center}.dial{width:110px;height:110px;border-radius:999px;background:conic-gradient(var(--good) 0deg,var(--good) 0deg,rgba(255,255,255,.12) 0deg 360deg);display:grid;place-items:center;position:relative}.dial:before{content:"";position:absolute;inset:10px;border-radius:999px;background:#121a31;border:1px solid var(--line)}.dial span{position:relative;font-size:28px;font-weight:950}.badge{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:950;border:1px solid var(--line);background:rgba(255,255,255,.08);margin-bottom:8px}.answer h3{margin:0 0 8px;font-size:24px;letter-spacing:-.03em}.answer p{margin:0;color:var(--muted);line-height:1.65}.report{margin-top:16px;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:12px}.block{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.045);padding:14px}.block b{display:block;margin-bottom:6px}.block ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.65}.mini{font-size:13px;color:var(--muted);line-height:1.6}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.tool{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.055);padding:17px}.tool b{display:block;margin-bottom:7px}.tool span{color:var(--muted);line-height:1.55}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.step{padding:18px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.num{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;font-weight:950;margin-bottom:10px}.footer{margin-top:24px;padding:20px;color:var(--muted);text-align:center}.disclaimer{font-size:12px;color:#aab6cf;line-height:1.65}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;background:#111827;color:#fff;border:1px solid var(--line);padding:12px 16px;border-radius:999px;box-shadow:var(--shadow);transition:.2s;z-index:20}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}@media(max-width:900px){.hero,.grid{grid-template-columns:1fr}.tools,.steps,.choice-grid{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.hero-main,.section{padding:22px}.result{position:static}.scorebox{grid-template-columns:92px 1fr}.dial{width:92px;height:92px}.dial span{font-size:24px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="logo"><div class="mark">🧭</div><div>大众终极答案决策树<small>把迷茫变成下一步</small></div></div>
+      <nav class="navlinks"><a class="pill" href="#tool">开始测试</a><a class="pill" href="upload-guide.html">手机上传图文攻略</a><a class="pill" href="#rule">底层规则</a></nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="tag">不是算命，<b>是行动导航</b></div>
+        <h1>所有迷茫，先拆成一个能执行的答案。</h1>
+        <p class="lead">普通人最痛苦的不是不知道大道理，而是卡在“到底该不该做”。这个工具把赚钱、工作、感情、学习、创业、焦虑、选择困难，拆成六条线：<strong>保命线、目标线、现实线、试错线、放大线、退出线</strong>。</p>
+        <div class="cta"><a class="btn primary" href="#tool">马上做一次决策</a><a class="btn secondary" href="upload-guide.html">查看上传教程</a></div>
+      </div>
+      <aside class="card hero-side" id="rule">
+        <div class="axiom"><b>1｜先保命，再优化</b><span>涉及违法、高杠杆、身体健康、极端情绪、关系暴力，先暂停，别拿大决策证明自己。</span></div>
+        <div class="axiom"><b>2｜能小试，就别空想</b><span>如果风险可控、可逆、成本低，答案通常不是继续纠结，而是做一个最小实验。</span></div>
+        <div class="axiom"><b>3｜长期复利大于短期爽感</b><span>真正值得放大的事，通常能积累能力、资源、信任、现金流或影响力。</span></div>
+        <div class="axiom"><b>4｜没有退出机制，不叫机会</b><span>任何选择都要提前写清楚：什么情况下继续，什么情况下减仓，什么情况下撤退。</span></div>
+      </aside>
+    </section>
+
+    <section class="grid" id="tool">
+      <div class="card section">
+        <h2>输入你的问题</h2>
+        <p class="muted">不用写得很专业。你可以写：“我要不要辞职？”、“这段关系要不要继续？”、“这个副业要不要做？”、“我现在很迷茫怎么办？”</p>
+        <div class="form">
+          <div class="field"><label for="problem">你正在纠结什么？</label><textarea id="problem" placeholder="例：我想做一个副业，但怕失败，也怕浪费时间。"></textarea></div>
+          <div class="field"><label>问题类型</label><div class="choice-grid">
+            <label class="choice"><input type="radio" name="cat" value="赚钱/机会" checked><span>赚钱/机会</span></label>
+            <label class="choice"><input type="radio" name="cat" value="工作/事业"><span>工作/事业</span></label>
+            <label class="choice"><input type="radio" name="cat" value="感情/关系"><span>感情/关系</span></label>
+            <label class="choice"><input type="radio" name="cat" value="学习/成长"><span>学习/成长</span></label>
+            <label class="choice"><input type="radio" name="cat" value="人生选择"><span>人生选择</span></label>
+            <label class="choice"><input type="radio" name="cat" value="焦虑/状态"><span>焦虑/状态</span></label>
+          </div></div>
+          <div class="sliders" id="sliders"></div>
+        </div>
+      </div>
+
+      <div class="card section result">
+        <h2>你的实战答案</h2>
+        <div class="scorebox">
+          <div class="dial" id="dial"><span id="score">0</span></div>
+          <div class="answer"><span class="badge" id="badge">等待测试</span><h3 id="headline">先填左边的问题</h3><p id="summary">系统会给你一个可执行方向：停止、延后、最小试错、持续投入或放大。</p></div>
+        </div>
+        <div class="report" id="report"></div>
+        <div class="actions"><button class="btn primary" id="copyBtn">复制报告</button><button class="btn secondary" id="downloadBtn">下载报告</button><button class="btn secondary" id="resetBtn">重置</button></div>
+        <p class="disclaimer">提示：这是通用决策辅助工具，不是医疗、法律、心理咨询或投资建议。涉及人身安全、严重情绪危机、违法风险、重大财务风险时，请优先找现实中的专业人士。</p>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>它到底怎么给答案？</h2>
+      <div class="tools">
+        <div class="tool"><b>保命线</b><span>先看有没有不可逆伤害、违法、暴力、严重债务、身体风险。红线一出，先停。</span></div>
+        <div class="tool"><b>试错线</b><span>能不能用低成本做一个小测试？能小测的问题，不要靠脑内辩论解决。</span></div>
+        <div class="tool"><b>放大线</b><span>当长期价值、确定性、复利、资源积累同时变强，就从试错进入持续投入。</span></div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>万能三步行动法</h2>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><b>把问题变小</b><p class="muted">不要问“我人生怎么办”，先问“未来7天我能验证哪一件事”。</p></div>
+        <div class="step"><div class="num">2</div><b>写清继续条件</b><p class="muted">比如：7天获得3个反馈、卖出1单、完成1次沟通，就继续。</p></div>
+        <div class="step"><div class="num">3</div><b>写清退出条件</b><p class="muted">比如：伤害健康、持续亏损、没有反馈、碰到底线，就停止或换方向。</p></div>
+      </div>
+    </section>
+
+    <footer class="footer">© 大众终极答案决策树｜静态网页工具｜<a href="upload-guide.html">上传图文攻略</a></footer>
+  </div>
+  <div class="toast" id="toast">已复制</div>
+
+<script>
+const qs = [
+  {id:'safety', title:'这件事有没有明显红线？', low:'没有红线', high:'红线很重', help:'违法、暴力、严重健康风险、极端情绪、高利贷、孤注一掷都算红线。', reverse:true},
+  {id:'reversible', title:'做错以后能不能退回来？', low:'很难退', high:'很好退', help:'越可逆，越适合快速试错。'},
+  {id:'longterm', title:'它对长期人生有没有复利？', low:'只有短期爽', high:'长期增值', help:'能不能积累能力、人脉、作品、现金流、信用、认知。'},
+  {id:'cost', title:'需要付出的成本有多高？', low:'成本很低', high:'成本很高', help:'时间、钱、情绪、名誉、关系成本都算。', reverse:true},
+  {id:'info', title:'你掌握的信息够不够？', low:'完全不清楚', high:'比较清楚', help:'是否了解真实代价、成功路径、失败案例和替代方案。'},
+  {id:'desire', title:'这是不是你真实想要的？', low:'被别人推着走', high:'我真的想要', help:'区分真实目标和面子、焦虑、攀比。'},
+  {id:'leverage', title:'它有没有杠杆或放大效应？', low:'做一份拿一份', high:'可复制可放大', help:'内容、产品、技能、系统、流量、资产、口碑都属于放大器。'},
+  {id:'cash', title:'你的现金/时间压力有多大？', low:'压力很小', high:'压力很大', help:'压力越大，越不能做回报周期太长的豪赌。', reverse:true},
+  {id:'feedback', title:'外界反馈是否已经出现？', low:'没人反馈', high:'反馈明确', help:'真实用户、真实收入、真实改善、真实沟通都算反馈。'},
+  {id:'window', title:'机会窗口是否紧迫？', low:'不急', high:'很紧迫', help:'窗口紧迫不等于盲目冲，必须和风险一起看。'}
+];
+const sliders = document.getElementById('sliders');
+qs.forEach(q=>{
+  const div=document.createElement('div'); div.className='q';
+  div.innerHTML=`<div class="q-top"><div><b>${q.title}</b><em>${q.help}</em></div><div class="val" id="v-${q.id}">5</div></div><input id="${q.id}" type="range" min="0" max="10" value="5"><div class="scale"><span>${q.low}</span><span>${q.high}</span></div>`;
+  sliders.appendChild(div);
+});
+const els = Object.fromEntries(qs.map(q=>[q.id, document.getElementById(q.id)]));
+const vals = Object.fromEntries(qs.map(q=>[q.id, document.getElementById('v-'+q.id)]));
+const scoreEl=document.getElementById('score'), dial=document.getElementById('dial'), badge=document.getElementById('badge'), headline=document.getElementById('headline'), summary=document.getElementById('summary'), report=document.getElementById('report'), toast=document.getElementById('toast');
+function val(id){return Number(els[id].value)}
+function cat(){return document.querySelector('input[name="cat"]:checked').value}
+function problemText(){return document.getElementById('problem').value.trim() || '未填写具体问题'}
+function calc(){
+  qs.forEach(q=>vals[q.id].textContent=els[q.id].value);
+  const raw = {
+    safety: val('safety'), reversible: val('reversible'), longterm: val('longterm'), cost: val('cost'), info: val('info'), desire: val('desire'), leverage: val('leverage'), cash: val('cash'), feedback: val('feedback'), window: val('window')
+  };
+  const opportunity = raw.reversible*1.05 + raw.longterm*1.35 + raw.info*.9 + raw.desire*1.05 + raw.leverage*1.05 + raw.feedback*.9 + raw.window*.45;
+  const danger = raw.safety*1.8 + raw.cost*1.05 + raw.cash*1.05 + Math.max(0, 5-raw.info)*.6;
+  let score = Math.round(Math.max(0, Math.min(100, 48 + opportunity*4.0 - danger*3.2)));
+  let state='观察', title='先观察，不要急着做大动作', text='目前信息和收益不够支撑你立刻加大投入。先补信息、降成本、做一个小验证。', color='var(--warn)';
+  let next = [], stop = [], focus=[];
+  const red = raw.safety>=8 || (raw.cash>=8 && raw.cost>=7) || (raw.safety>=7 && raw.reversible<=4);
+  if(red){score=Math.min(score,28);state='红线暂停';title='终极答案：先停下来，保命和止损优先';text='这件事的不可逆风险偏高。现在不要证明勇敢，先降低危险、找现实中的专业帮助或可信赖的人一起判断。';color='var(--bad)';next=['暂停所有不可逆操作，至少冷静24小时。','写下最坏结果：钱、健康、关系、法律风险分别是什么。','找一个现实中靠谱的人复盘，不要独自硬扛。'];stop=['涉及违法、暴力、极端情绪或健康风险。','需要借高利贷、孤注一掷、隐瞒重大代价。','你已经睡不着、吃不下、无法正常工作学习。'];focus=['安全','止损','求助'];}
+  else if(score>=76 && raw.longterm>=7 && raw.feedback>=6){state='可以放大';title='终极答案：继续做，并有节奏地放大';text='长期价值和反馈都不错，可以进入持续投入阶段，但仍要设止损线，不能无脑all in。';color='var(--good)';next=['把它变成一个30天计划，而不是今天的冲动。','每周记录一个核心指标：收入、作品、用户反馈、关系改善或能力增长。','把有效动作标准化，减少无效消耗。'];stop=['连续两周没有任何正反馈。','成本开始明显伤害健康或现金流。','你只是为了面子坚持，不再服务真实目标。'];focus=['持续投入','复盘','放大'];}
+  else if(score>=58 && raw.reversible>=6){state='最小试错';title='终极答案：别再空想，做一个最小实验';text='这件事还没到全力投入的程度，但风险可控，适合用小成本试一次，让现实给你答案。';color='var(--brand2)';next=['设计一个7天内能完成的小测试。','测试只验证一个问题：有人要吗？我能坚持吗？结果真实吗？','测试前写好继续条件和退出条件。'];stop=['小测试都不愿做，只想等完美时机。','测试成本失控，变成大投入。','反馈明显为负但你还在自我欺骗。'];focus=['7天验证','低成本','真实反馈'];}
+  else if(score>=42){state='先补信息';title='终极答案：先别决定，先把信息补齐';text='你现在最缺的不是勇气，而是关键信息。贸然行动和一直拖延都不对，先补3个事实。';color='var(--warn)';next=['找3个做过这件事的人/案例。','列出真实成本：钱、时间、关系、机会成本。','设计一个几乎不亏的小测试。'];stop=['你只能说“感觉会好/感觉会坏”，没有事实。','你回避成本，只看好处。','你把别人的期待当成自己的目标。'];focus=['查事实','问前人','低风险验证'];}
+  else{state='暂缓/撤退';title='终极答案：现在不适合推进，先撤回到基本盘';text='当前收益、确定性或长期价值不够，风险和压力偏高。先把生活基本盘稳住，再考虑下一轮机会。';color='var(--bad)';next=['停止新增投入，保留观察。','先修复现金流、睡眠、工作/学习节奏。','把问题改写成更小、更可逆的版本。'];stop=['越做越焦虑，且看不到真实反馈。','需要牺牲基本生活稳定。','长期价值不清楚，只是短期刺激。'];focus=['暂缓','修基本盘','重新定义'];}
+  const degree = Math.round(score*3.6); dial.style.background=`conic-gradient(${color} 0deg, ${color} ${degree}deg, rgba(255,255,255,.12) ${degree}deg 360deg)`;
+  scoreEl.textContent=score; badge.textContent=state; headline.textContent=title; summary.textContent=text;
+  const p = problemText();
+  report.innerHTML = `
+    <div class="block"><b>你的问题</b><div class="mini">${escapeHtml(p)}｜类型：${cat()}</div></div>
+    <div class="block"><b>优先关注</b><div class="mini">${focus.map(x=>'「'+x+'」').join(' ')}</div></div>
+    <div class="block"><b>下一步只做这三件事</b><ul>${next.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="block"><b>触发这些情况就停止</b><ul>${stop.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="block"><b>一句话结论</b><div class="mini">${title}。不要追求“人生终极正确”，先追求“下一步不犯大错，并且能得到真实反馈”。</div></div>`;
+}
+function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function reportText(){return `【大众终极答案决策树报告】\n问题：${problemText()}\n类型：${cat()}\n分数：${scoreEl.textContent}\n状态：${badge.textContent}\n结论：${headline.textContent}\n说明：${summary.textContent}\n\n建议：\n${[...report.querySelectorAll('.block')].map(b=>b.innerText).join('\n\n')}`}
+function showToast(t='已复制'){toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1600)}
+document.querySelectorAll('input,textarea').forEach(x=>x.addEventListener('input',calc));
+document.getElementById('copyBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(reportText());showToast('报告已复制');}catch(e){showToast('复制失败，可手动选中报告')}});
+document.getElementById('downloadBtn').addEventListener('click',()=>{const blob=new Blob([reportText()],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='decision-report.txt';a.click();URL.revokeObjectURL(a.href);showToast('报告已下载')});
+document.getElementById('resetBtn').addEventListener('click',()=>{document.getElementById('problem').value='';qs.forEach(q=>els[q.id].value=5);calc();showToast('已重置')});
+calc();
+</script>
+</body>
+</html>
