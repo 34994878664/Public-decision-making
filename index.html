@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>萌薯幸存者 V2.1｜新手友好版网页肉鸽</title>
+  <title>萌薯幸存者 V2.2｜20波通关版网页肉鸽</title>
   <meta name="description" content="新手友好版萌系土豆风网页肉鸽 Like 生存小游戏：难度选择、推荐BD、更多流派、素材化主角怪物场景，手机和电脑都能玩。" />
   <meta name="keywords" content="网页小游戏,肉鸽,幸存者,土豆兄弟like,HTML5游戏,Canvas游戏,GitHub Pages小游戏" />
   <meta name="robots" content="index,follow" />
@@ -41,7 +41,7 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
 .panel h1{font-size:clamp(36px,8vw,66px);line-height:1;margin:0 0 12px;letter-spacing:-1.2px}
 .panel h2{font-size:clamp(26px,5vw,42px);line-height:1.1;margin:0 0 10px}
 .panel h3{margin:12px 0 8px}.panel p{margin:0 0 16px;color:var(--muted);line-height:1.7}.tag{display:inline-flex;color:var(--gold);font-weight:950;border:1px solid var(--line);background:rgba(255,255,255,.07);padding:7px 11px;border-radius:999px;margin-bottom:14px;font-size:13px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.difficultyCards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 8px}.classCard,.choice,.difficultyCard{border:1px solid var(--line);background:rgba(255,255,255,.07);border-radius:20px;padding:14px;text-align:left;cursor:pointer;transition:.16s transform,.16s border-color,.16s background}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.difficultyCards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 8px}.sideCards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px 0}.difficultyCards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 8px}.classCard,.choice,.difficultyCard{border:1px solid var(--line);background:rgba(255,255,255,.07);border-radius:20px;padding:14px;text-align:left;cursor:pointer;transition:.16s transform,.16s border-color,.16s background}
 .classCard:hover,.classCard.active,.difficultyCard:hover,.difficultyCard.active,.choice:hover{transform:translateY(-2px);border-color:rgba(255,214,110,.5);background:rgba(255,255,255,.11)}
 .classCard img{width:54px;height:54px;image-rendering:auto;float:right;margin-left:8px}.classCard b,.choice b{display:block;color:#fff;font-size:18px;margin-bottom:5px}.classCard span,.choice span{display:block;color:var(--muted);font-size:13px;line-height:1.55}
 .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
@@ -53,7 +53,7 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
 .stick{position:absolute;left:50%;top:50%;width:56px;height:56px;margin-left:-28px;margin-top:-28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#ffb0d7);box-shadow:0 14px 30px rgba(0,0,0,.25)}
 .mobileTip{position:fixed;right:14px;bottom:18px;color:rgba(255,255,255,.66);font-size:12px;text-align:right;display:none;pointer-events:none}
 @media(max-width:860px){
-  .top{grid-template-columns:1fr}.btns{justify-content:flex-end}.bars{top:102px}.cards{grid-template-columns:1fr 1fr}.difficultyCards{grid-template-columns:1fr 1fr}.choices{grid-template-columns:1fr}.panel{padding:20px}.joystick,.mobileTip{display:block}.loadout{display:none}.pill{font-size:12px;padding:6px 8px}
+  .top{grid-template-columns:1fr}.btns{justify-content:flex-end}.bars{top:102px}.cards{grid-template-columns:1fr 1fr}.difficultyCards{grid-template-columns:1fr 1fr}.sideCards{grid-template-columns:1fr 1fr}.choices{grid-template-columns:1fr}.panel{padding:20px}.joystick,.mobileTip{display:block}.loadout{display:none}.pill{font-size:12px;padding:6px 8px}
 }
 @media(max-width:460px){.cards{grid-template-columns:1fr}.panel h1{font-size:38px}}
 
@@ -63,6 +63,10 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
 .choice.recommended{border-color:rgba(137,246,181,.75);box-shadow:0 0 0 1px rgba(137,246,181,.22),0 14px 34px rgba(0,0,0,.24)}
 .recTag{display:inline-block;background:rgba(137,246,181,.16);border:1px solid rgba(137,246,181,.45);color:#b6ffd0;border-radius:999px;padding:3px 7px;font-size:12px;font-weight:950;margin-left:6px}
 .recReason{display:block;margin-top:7px;color:#b6ffd0!important;font-size:12px!important}
+
+.sideCard{text-align:center}.sideCard b,.difficultyCard b{display:block;color:#fff;font-size:16px;margin-bottom:4px}.sideCard span,.difficultyCard span{display:block;color:var(--muted);font-size:12px;line-height:1.45}.sideCard small,.difficultyCard small{color:var(--gold)}
+.joystick.right{left:auto;right:22px}.joystick.right ~ .mobileTip{left:14px;right:auto;text-align:left}
+.choice.recommended{border-color:rgba(137,246,181,.78);box-shadow:0 0 0 1px rgba(137,246,181,.24),0 14px 34px rgba(0,0,0,.24)}.recTag{display:inline-block;background:rgba(137,246,181,.16);border:1px solid rgba(137,246,181,.45);color:#b6ffd0;border-radius:999px;padding:3px 7px;font-size:12px;font-weight:950;margin-left:6px}.recReason{display:block;margin-top:7px;color:#b6ffd0!important;font-size:12px!important}
 
 </style>
 </head>
@@ -76,9 +80,11 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
         <div class="pill">Lv <b id="lv">1</b></div>
         <div class="pill">击杀 <b id="kills">0</b></div>
         <div class="pill">金币 <b id="coins">0</b></div>
+        <div class="pill">波次 <b id="wave">1/20</b></div>
         <div class="pill wide">BD <b id="build">豌豆枪</b></div>
       </div>
       <div class="btns">
+        <button class="ghost" id="stickBtn">摇杆左</button>
         <button class="ghost" id="pauseBtn">暂停</button>
         <button class="ghost" id="restartBtn">重开</button>
       </div>
@@ -94,13 +100,15 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
 
   <section class="panel" id="startPanel">
     <span class="tag">V2 素材增强版 · 手机/电脑都能玩</span>
-    <h1>萌薯幸存者 V2.1</h1>
-    <p>这版降低了默认难度，加入难度选择和推荐 BD。新手可以先选“休闲”，升级时看绿色推荐标签，不容易乱点。</p>
+    <h1>萌薯幸存者 V2.2</h1>
+    <p>这版加入摇杆左右切换、攻击音效、20波通关、通关后无尽模式、高风险后期角色，以及更多联动 BD。</p>
     <h3>选择初始角色</h3>
     <div class="cards" id="classCards"></div>
     <h3>选择难度</h3>
     <div class="difficultyCards" id="difficultyCards"></div>
-    <p class="tinyNote">手机新手建议先选“休闲”。推荐 BD 会根据你选的角色和当前武器自动标出来。</p>
+    <h3>摇杆位置</h3>
+    <div class="sideCards" id="sideCards"></div>
+    <p class="tinyNote">手机新手建议先选“休闲”。左手玩家选左摇杆，右手玩家选右摇杆。推荐 BD 会根据你选的角色和当前武器自动标出来。</p>
     <div class="actions">
       <button id="startBtn">开始生存</button>
       <button class="ghost" id="guideBtn">玩法提示</button>
@@ -140,6 +148,7 @@ const UI = {
   lv: document.getElementById("lv"),
   kills: document.getElementById("kills"),
   coins: document.getElementById("coins"),
+  wave: document.getElementById("wave"),
   build: document.getElementById("build"),
   hpFill: document.getElementById("hpFill"),
   xpFill: document.getElementById("xpFill"),
@@ -151,8 +160,10 @@ const UI = {
   choices: document.getElementById("choices"),
   classCards: document.getElementById("classCards"),
   difficultyCards: document.getElementById("difficultyCards"),
+  sideCards: document.getElementById("sideCards"),
   toast: document.getElementById("toast"),
   pauseBtn: document.getElementById("pauseBtn"),
+  stickBtn: document.getElementById("stickBtn"),
 };
 
 let W = 0, H = 0, DPR = 1;
@@ -187,6 +198,7 @@ const CLASSES = [
   {id:"tank", name:"铁皮厚薯", sprite:"player_tank", desc:"血量和护甲更高，适合站撸。", mod:p=>{p.maxHp+=45; p.hp=p.maxHp; p.armor+=5; p.speed*=.90;}},
   {id:"engineer", name:"工程机薯", sprite:"player_engineer", desc:"自带炮台，适合召唤流。", mod:p=>{p.weapons.turret=1; p.fireRate*=.92;}},
   {id:"rogue", name:"飞刀刺薯", sprite:"player_rogue", desc:"自带环绕飞刀，暴击更高。", mod:p=>{p.weapons.blade=1; p.crit+=.10; p.speed*=1.08;}},
+  {id:"curse", name:"诅咒芽薯", sprite:"player_mage", desc:"开局很脆很难，但每次升级成长更高，BD成型后爆发极强。", mod:p=>{p.maxHp-=42;p.hp=p.maxHp;p.armor-=2;p.damage*=.82;p.speed*=.96;p.weapons.poison=1;p.curseGrowth=1;p.xpBonus+=.18;p.crit+=.04;}},
 ];
 let selectedClass = "sprout";
 
@@ -197,6 +209,7 @@ const DIFFICULTIES = [
   {id:"hell", name:"地狱", tag:"高手", desc:"怪更多更凶，适合测试极限 BD。", enemyHp:1.28, enemyDamage:1.18, enemySpeed:1.12, spawnRate:1.22, progress:1.15, eliteRate:1.25, xpGain:1.05, startHp:0, startDamage:1, startArmor:0, revive:0}
 ];
 let selectedDifficulty = "easy";
+let selectedSide = localStorage.getItem("potatoStickSide") || "left";
 
 const BUILD_GUIDES = {
   sprout:{name:"新手均衡流", keys:["pea","fireRate","damage","maxHp","magnet","shield","xp","fire","aura","regen"], reason:"新手均衡流：先拿输出和生存，容易活到进化。"},
@@ -204,7 +217,8 @@ const BUILD_GUIDES = {
   mage:{name:"雷冰法术流", keys:["lightning","cooldown","ice","area","meteor","blackhole","damage","xp","nova"], reason:"法薯推荐：闪电/冰/陨石吃冷却和范围。"},
   tank:{name:"蒜香站撸流", keys:["aura","armor","maxHp","regen","lifeSteal","shield","healFlower","saw","poison"], reason:"厚薯推荐：光环、护甲、回血、吸血，站得住才有输出。"},
   engineer:{name:"召唤炮台流", keys:["turret","drone","pet","cooldown","proj","damage","range","magnet","laser"], reason:"工程师推荐：炮台、无人机、宠物都吃冷却和弹丸。"},
-  rogue:{name:"飞刀暴击流", keys:["blade","speed","crit","critDmg","carrot","pierce","damage","saw","nova"], reason:"刺薯推荐：飞刀/回旋武器配暴击、速度和穿透。"}
+  rogue:{name:"飞刀暴击流", keys:["blade","speed","crit","critDmg","carrot","pierce","damage","saw","nova","execute"], reason:"刺薯推荐：飞刀/回旋武器配暴击、速度和穿透。"},
+  curse:{name:"诅咒后期流", keys:["poison","blackhole","meteor","curseCore","area","cooldown","damage","xp","lifeSteal","nova","bloodMagic"], reason:"诅咒芽薯前期弱，优先拿毒、黑洞、陨石、冷却和成长，成型后很强。"}
 };
 
 
@@ -235,6 +249,36 @@ document.querySelectorAll(".difficultyCard").forEach(card => {
     document.querySelectorAll(".difficultyCard").forEach(c => c.classList.toggle("active", c === card));
   });
 });
+
+
+UI.sideCards.innerHTML = [
+  {id:"left", name:"左摇杆", desc:"左手控制移动"},
+  {id:"right", name:"右摇杆", desc:"右手控制移动"}
+].map(s => `<div class="sideCard ${s.id===selectedSide?"active":""}" data-id="${s.id}"><b>${s.name}</b><span>${s.desc}</span></div>`).join("");
+document.querySelectorAll(".sideCard").forEach(card => {
+  card.addEventListener("click", () => {
+    selectedSide = card.dataset.id;
+    localStorage.setItem("potatoStickSide", selectedSide);
+    applyStickSide();
+    document.querySelectorAll(".sideCard").forEach(c => c.classList.toggle("active", c === card));
+  });
+});
+function applyStickSide(){
+  const joyNode = document.getElementById("joystick");
+  if(selectedSide === "right") joyNode.classList.add("right"); else joyNode.classList.remove("right");
+  if(UI.stickBtn) UI.stickBtn.textContent = selectedSide === "right" ? "摇杆右" : "摇杆左";
+}
+setTimeout(applyStickSide, 0);
+let audioCtx = null, soundEnabled = true, lastSound = {};
+function initAudio(){ if(audioCtx) return; try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ soundEnabled = false; } }
+function playSound(type, volume=.045){
+  if(!soundEnabled) return; initAudio(); if(!audioCtx) return;
+  const now = audioCtx.currentTime; if(lastSound[type] && now-lastSound[type] < .045) return; lastSound[type]=now;
+  const map={pea:[520,.045,"square"],spread:[430,.04,"triangle"],carrot:[350,.075,"sawtooth"],fire:[160,.11,"sawtooth"],ice:[780,.08,"sine"],lightning:[980,.075,"square"],poison:[220,.12,"triangle"],blade:[700,.035,"triangle"],aura:[260,.055,"sine"],turret:[620,.035,"square"],mine:[120,.13,"sawtooth"],drone:[840,.03,"square"],laser:[1100,.12,"sawtooth"],meteor:[135,.16,"sawtooth"],blackhole:[90,.18,"sine"],coinshot:[920,.05,"square"],pet:[300,.05,"triangle"],nova:[660,.14,"sine"],saw:[760,.06,"sawtooth"],healFlower:[540,.12,"sine"],evolve:[880,.22,"sine"],wave:[440,.25,"triangle"]};
+  const [freq,dur,wave]=map[type]||[500,.05,"sine"]; const osc=audioCtx.createOscillator(), gain=audioCtx.createGain(); osc.type=wave; osc.frequency.setValueAtTime(freq,now);
+  if(["lightning"].includes(type)) osc.frequency.exponentialRampToValueAtTime(freq*1.8,now+dur); if(["blackhole","fire","meteor","mine"].includes(type)) osc.frequency.exponentialRampToValueAtTime(Math.max(40,freq*.55),now+dur);
+  gain.gain.setValueAtTime(volume,now); gain.gain.exponentialRampToValueAtTime(.0001,now+dur); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now); osc.stop(now+dur+.02);
+}
 
 const keys = new Set();
 window.addEventListener("keydown", e => {
@@ -289,7 +333,7 @@ const WEAPON_NAME = {
   pea:"豌豆机枪", spread:"散射豆荚", carrot:"回旋胡萝卜", fire:"爆裂火球",
   ice:"寒冰晶", lightning:"闪电链", poison:"毒雾蘑菇", blade:"环绕飞刀",
   turret:"小炮台", mine:"土豆地雷", drone:"无人机", aura:"蒜香光环", laser:"激光眼",
-  meteor:"陨石术", blackhole:"黑洞漩涡", coinshot:"金币弹", pet:"宠物史莱姆", nova:"能量新星", saw:"锯片陷阱", healFlower:"治疗花"
+  meteor:"陨石术", blackhole:"黑洞漩涡", coinshot:"金币弹", pet:"宠物史莱姆", nova:"能量新星", saw:"锯片陷阱", healFlower:"治疗花", curseCore:"诅咒核心", execute:"处决", bloodMagic:"血魔法"
 };
 
 const UPGRADES = [
@@ -315,6 +359,9 @@ const UPGRADES = [
   {type:"武器", key:"nova", emoji:"🌟", name:"能量新星", desc:"周期性从身边爆发一圈伤害。", apply:g=>addWeapon(g,"nova")},
   {type:"武器", key:"saw", emoji:"⚙️", name:"锯片陷阱", desc:"在脚下放置持续切割的锯片区域。", apply:g=>addWeapon(g,"saw")},
   {type:"武器", key:"healFlower", emoji:"🌸", name:"治疗花", desc:"周期性回血，同时对近处敌人造成自然伤害。", apply:g=>addWeapon(g,"healFlower")},
+  {type:"武器", key:"curseCore", emoji:"🟣", name:"诅咒核心", desc:"前期伤害一般，但每升一级都会变强，适合后期流。", apply:g=>addWeapon(g,"curseCore")},
+  {type:"武器", key:"execute", emoji:"☠️", name:"处决印记", desc:"敌人低血量时直接追加斩杀伤害。", apply:g=>addWeapon(g,"execute")},
+  {type:"武器", key:"bloodMagic", emoji:"🩸", name:"血魔法", desc:"血量越低，法术伤害越高。高风险高收益。", apply:g=>addWeapon(g,"bloodMagic")},
 
   // passives
   {type:"被动", key:"damage", emoji:"💥", name:"土豆力量", desc:"+18% 所有伤害。", apply:g=>addPassive(g,"damage",1,()=>g.p.damage*=1.18)},
@@ -341,6 +388,10 @@ const UPGRADES = [
   {type:"被动", key:"thorns", emoji:"🌵", name:"反伤刺皮", desc:"碰撞你的敌人会受到反伤。", apply:g=>addPassive(g,"thorns",1,()=>g.p.thorns+=.25)},
   {type:"被动", key:"reroll", emoji:"🔁", name:"BD 直觉", desc:"推荐 BD 出现率更高。", apply:g=>addPassive(g,"reroll",1,()=>g.p.recommendBias+=1)},
   {type:"被动", key:"bossDmg", emoji:"👑", name:"精英猎手", desc:"对精英和 Boss 伤害更高。", apply:g=>addPassive(g,"bossDmg",1,()=>g.p.bossDmg+=.18)},
+  {type:"被动", key:"comboPower", emoji:"🔗", name:"联动核心", desc:"你拥有的不同武器越多，所有伤害越高。", apply:g=>addPassive(g,"comboPower",1,()=>g.p.comboPower+=.045)},
+  {type:"被动", key:"elementMix", emoji:"🌈", name:"元素混合", desc:"火、冰、雷、毒互相增强。", apply:g=>addPassive(g,"elementMix",1,()=>{g.p.damage*=1.08;g.p.area*=1.05;})},
+  {type:"被动", key:"summonBond", emoji:"🐾", name:"召唤羁绊", desc:"炮台、无人机、宠物更强。", apply:g=>addPassive(g,"summonBond",1,()=>{g.p.cooldown*=.94;g.p.damage*=1.06;})},
+  {type:"被动", key:"lastStand", emoji:"🔥", name:"残血爆发", desc:"血量越低攻速越快。", apply:g=>addPassive(g,"lastStand",1,()=>g.p.lastStand+=1)},
 ];
 
 function addWeapon(g, key){
@@ -356,6 +407,7 @@ function newGame(){
     state:"menu",
     difficulty:DIFFICULTIES.find(d=>d.id===selectedDifficulty) || DIFFICULTIES[0],
     selectedClass:selectedClass,
+    wave:1, waveTimer:0, waveDuration:32, endless:false, cleared:false,
     t:0, last:performance.now(),
     spawnTimer:0, eliteTimer:35,
     kills:0, coins:0, level:1, xp:0, need:12,
@@ -367,16 +419,17 @@ function newGame(){
       hp:110,maxHp:110,armor:0,regen:.2,
       speed:220, damage:18, fireRate:1.25, cooldown:1, range:290, area:1,
       pierce:0, extraProjectiles:0, crit:.06, critDmg:2.0, magnet:96, lifeSteal:0,
-      goldBonus:0, xpBonus:0, luck:0, greed:false, shieldMax:0, shieldTimer:0, pickupHeal:0, thorns:0, recommendBias:0, bossDmg:0, revive:0,
+      goldBonus:0, xpBonus:0, luck:0, greed:false, shieldMax:0, shieldTimer:0, pickupHeal:0, thorns:0, recommendBias:0, bossDmg:0, revive:0, curseGrowth:0, comboPower:0, execute:0, bloodMagic:0, lastStand:0,
       weapons:{pea:1}, passives:{}, evolved:{}
     },
-    timers:{pea:0,spread:0,carrot:0,fire:0,ice:0,lightning:0,poison:0,turret:0,mine:0,drone:0,laser:0,meteor:0,blackhole:0,coinshot:0,pet:0,nova:0,saw:0,healFlower:0},
+    timers:{pea:0,spread:0,carrot:0,fire:0,ice:0,lightning:0,poison:0,turret:0,mine:0,drone:0,laser:0,meteor:0,blackhole:0,coinshot:0,pet:0,nova:0,saw:0,healFlower:0,curseCore:0,execute:0,bloodMagic:0},
     enemies:[], bullets:[], gems:[], particles:[], texts:[], clouds:[], mines:[], turrets:[], beams:[],
   };
 }
 let G = newGame();
 
 function startGame(){
+  initAudio();
   G = newGame();
   const c = CLASSES.find(x => x.id === selectedClass);
   G.p.sprite = c.sprite;
@@ -404,8 +457,9 @@ document.getElementById("againBtn").addEventListener("click", startGame);
 document.getElementById("restartBtn").addEventListener("click", startGame);
 document.getElementById("guideBtn").addEventListener("click", () => toast("移动躲怪，自动攻击，升级三选一"));
 UI.pauseBtn.addEventListener("click", togglePause);
+UI.stickBtn.addEventListener("click", () => { selectedSide = selectedSide === "left" ? "right" : "left"; localStorage.setItem("potatoStickSide", selectedSide); applyStickSide(); document.querySelectorAll(".sideCard").forEach(c => c.classList.toggle("active", c.dataset.id === selectedSide)); });
 document.getElementById("copyBtn").addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText(G.result || "萌薯幸存者 V2.1"); toast("战绩已复制"); }
+  try { await navigator.clipboard.writeText(G.result || "萌薯幸存者 V2.2"); toast("战绩已复制"); }
   catch(e){ toast("复制失败"); }
 });
 
@@ -520,6 +574,9 @@ function checkEvolutions(){
     ["novaCore", w.nova>=4 && p.maxHp>=2, "新星进化：生命核心"],
     ["sawFactory", w.saw>=4 && p.cooldown>=2, "锯片进化：陷阱工厂"],
     ["flowerGarden", w.healFlower>=4 && p.regen>=2, "治疗花进化：花园领域"],
+    ["curseLord", w.curseCore>=4 && p.xp>=2, "诅咒核心进化：诅咒君主"],
+    ["executioner", w.execute>=4 && p.crit>=2, "处决进化：死神契约"],
+    ["bloodLord", w.bloodMagic>=4 && p.lifeSteal>=2, "血魔法进化：血月"],
   ];
   evolutions.forEach(([key, ok, name]) => {
     if(ok && !e[key]){
@@ -536,6 +593,7 @@ function gainXP(v){
   while(G.xp >= G.need){
     G.xp -= G.need;
     G.level += 1;
+    if(G.p.curseGrowth){G.p.damage*=1.045;G.p.fireRate*=1.018;G.p.area*=1.012;addText(G.p.x,G.p.y-48,"诅咒成长","#ca95ff",.9,15);}
     G.need = Math.floor(G.need * (selectedDifficulty==="easy" ? 1.18 : 1.23) + 6);
     openUpgrade();
   }
@@ -569,7 +627,8 @@ function spawnEnemy(kind="normal"){
     e.hp *= 2.35; e.maxHp = e.hp; e.damage *= 1.4; e.xp *= 3; e.coin *= 3; e.elite = true; e.r *= 1.15;
   }
   const D = G.difficulty || DIFFICULTIES[0];
-  e.hp *= D.enemyHp; e.maxHp = e.hp; e.damage *= D.enemyDamage; e.speed *= D.enemySpeed; e.xp *= D.xpGain;
+  const waveScale = 1 + Math.max(0,(G.wave||1)-1)*0.045 + (G.endless?Math.max(0,G.wave-20)*0.035:0);
+  e.hp *= D.enemyHp * waveScale; e.maxHp = e.hp; e.damage *= D.enemyDamage * (0.88 + waveScale*.12); e.speed *= D.enemySpeed * (0.96 + Math.min(.28,(G.wave||1)*.006)); e.xp *= D.xpGain;
   G.enemies.push(e);
 }
 function enemyTemplate(sprite,x,y,r,hp,speed,damage,xp,coin,name){
@@ -590,6 +649,11 @@ function enemiesInRange(x,y,r){
 
 function calcDamage(mult=1){
   let d = G.p.damage * mult;
+  const weaponCount = Object.keys(G.p.weapons).filter(k=>G.p.weapons[k]>0).length;
+  if(G.p.comboPower) d *= 1 + weaponCount * G.p.comboPower;
+  if(G.p.curseGrowth) d *= 1 + G.level * 0.018;
+  if(G.p.weapons.bloodMagic) d *= 1 + (1 - G.p.hp/G.p.maxHp) * (.45 + G.p.weapons.bloodMagic*.14);
+  if(G.p.lastStand) d *= 1 + (1 - G.p.hp/G.p.maxHp) * .18 * G.p.lastStand;
   if(G.p.greed) d *= 1 + Math.min(2.2, Math.floor(G.coins/25)*.012);
   if(G.p.evolved.goldRush) d *= 1 + Math.min(1.5, G.coins/220);
   let crit = Math.random() < G.p.crit;
@@ -621,6 +685,7 @@ function fireWeapons(dt){
           const spread = (i-(count-1)/2) * 0.10;
           const a = base + spread + rand(-.025,.025);
           const dmg = calcDamage(.84 + w.pea*.06);
+          playSound("pea");
           spawnBullet({vx:Math.cos(a)*620, vy:Math.sin(a)*620, damage:dmg.d, life:1.05, maxLife:1.05, r:5.5, sprite:"proj_pea", pierce:p.pierce+(p.evolved.peaMachine?1:0), type:"pea"});
         }
       }
@@ -638,6 +703,7 @@ function fireWeapons(dt){
         for(let i=0;i<pellets;i++){
           const a = base + (i-(pellets-1)/2)*0.18;
           const dmg = calcDamage(.58);
+          playSound("spread");
           spawnBullet({vx:Math.cos(a)*520, vy:Math.sin(a)*520, damage:dmg.d, life:.62, maxLife:.62, r:5, sprite:"proj_pea", pierce:0, type:"spread"});
         }
       }
@@ -652,6 +718,7 @@ function fireWeapons(dt){
       for(let i=0;i<n;i++){
         const a = G.t*1.3 + i*Math.PI*2/n;
         const dmg = calcDamage(1.22);
+        playSound("carrot");
         spawnBullet({vx:Math.cos(a)*430, vy:Math.sin(a)*430, damage:dmg.d, life:1.55, maxLife:1.55, r:10, sprite:"proj_carrot", pierce:99, type:"carrot", returning:true});
       }
     }
@@ -668,6 +735,7 @@ function fireWeapons(dt){
         for(let i=0;i<n;i++){
           const a = base + (i-(n-1)/2)*.22;
           const dmg = calcDamage(1.55);
+          playSound("fire");
           spawnBullet({vx:Math.cos(a)*380, vy:Math.sin(a)*380, damage:dmg.d, life:1.5, maxLife:1.5, r:12, sprite:"proj_fireball", area:(78+w.fire*9)*p.area, type:"fire"});
         }
       }
@@ -685,6 +753,7 @@ function fireWeapons(dt){
         for(let i=0;i<n;i++){
           const a = base + (i-(n-1)/2)*.16;
           const dmg = calcDamage(.95);
+          playSound("ice");
           spawnBullet({vx:Math.cos(a)*560, vy:Math.sin(a)*560, damage:dmg.d, life:.95, maxLife:.95, r:9, sprite:"proj_ice", slow:.45, type:"ice", area:G.p.evolved.iceNova?45*p.area:0});
         }
       }
@@ -704,6 +773,7 @@ function fireWeapons(dt){
         lastX=e.x; lastY=e.y;
         addParticles(e.x,e.y,12,"#7ec8ff");
       }
+      playSound("lightning");
       if(p.evolved.storm){
         G.clouds.push({x:p.x,y:p.y,r:150*p.area,life:.55,maxLife:.55,damage:p.damage*3,type:"storm",sprite:"lightning"});
       }
@@ -717,6 +787,7 @@ function fireWeapons(dt){
       const target = nearestEnemy(p.range*1.1);
       const x = target ? target.x : p.x + rand(-160,160);
       const y = target ? target.y : p.y + rand(-160,160);
+      playSound("poison");
       G.clouds.push({x,y,r:(70+w.poison*13)*(p.area)*(p.evolved.plague?1.45:1),life:4.2+(p.evolved.plague?2.2:0),maxLife:4.2,damage:p.damage*(.58+w.poison*.08),type:"poison",sprite:"poison_cloud"});
     }
   }
@@ -765,6 +836,7 @@ function fireWeapons(dt){
         if(tar){
           const a = Math.atan2(tar.y-tu.y, tar.x-tu.x);
           const dmg = calcDamage(.62+w.turret*.05);
+          playSound("turret");
           spawnBullet({x:tu.x,y:tu.y,vx:Math.cos(a)*520,vy:Math.sin(a)*520,damage:dmg.d,life:.9,maxLife:.9,r:5,sprite:"proj_pea",pierce:0,type:"turret"});
         }
       }
@@ -775,6 +847,7 @@ function fireWeapons(dt){
     t.mine -= dt;
     if(t.mine <= 0){
       t.mine = (2.2 * p.cooldown) / Math.sqrt(w.mine);
+      playSound("mine");
       G.mines.push({x:p.x+rand(-50,50),y:p.y+rand(-50,50),r:15,damage:p.damage*(2.4+w.mine*.35),area:(85+w.mine*12)*p.area,life:18,sprite:"proj_mine"});
     }
   }
@@ -792,6 +865,7 @@ function fireWeapons(dt){
         if(tar){
           const a = Math.atan2(tar.y-dy, tar.x-dx);
           const dmg = calcDamage(.52);
+          playSound("drone");
           spawnBullet({x:dx,y:dy,vx:Math.cos(a)*560,vy:Math.sin(a)*560,damage:dmg.d,life:.75,maxLife:.75,r:4.5,sprite:"proj_pea",type:"drone"});
         }
       }
@@ -807,6 +881,7 @@ function fireWeapons(dt){
         const a = Math.atan2(tar.y-p.y, tar.x-p.x);
         const len = 780;
         const x2 = p.x + Math.cos(a)*len, y2 = p.y + Math.sin(a)*len;
+        playSound("laser");
         G.beams.push({x1:p.x,y1:p.y,x2,y2,life:.35,color:"#ff5f75",width:8,damage:p.damage*(2.2+w.laser*.25),laser:true});
         for(const e of G.enemies){
           const dd = pointLineDistance(e.x,e.y,p.x,p.y,x2,y2);
@@ -825,6 +900,7 @@ function fireWeapons(dt){
         const target = nearestEnemy(p.range*1.35);
         const mx = target ? target.x + rand(-45,45) : p.x + rand(-220,220);
         const my = target ? target.y + rand(-45,45) : p.y + rand(-220,220);
+        playSound("meteor");
         explode(mx,my,(95+w.meteor*13)*p.area,calcDamage(2.25+w.meteor*.18).d,"fire");
       }
     }
@@ -837,6 +913,7 @@ function fireWeapons(dt){
       const target = nearestEnemy(p.range*1.2);
       const bx = target ? target.x : p.x + rand(-160,160);
       const by = target ? target.y : p.y + rand(-160,160);
+      playSound("blackhole");
       G.clouds.push({x:bx,y:by,r:(110+w.blackhole*16)*p.area*(p.evolved.singularity?1.35:1),life:2.8+(p.evolved.singularity?1.2:0),maxLife:2.8,damage:p.damage*(.85+w.blackhole*.08),type:"blackhole",sprite:"poison_cloud"});
     }
   }
@@ -852,6 +929,7 @@ function fireWeapons(dt){
         for(let i=0;i<count;i++){
           const a = base + (i-(count-1)/2)*.14;
           const dmg = calcDamage(.72 + Math.min(1.4,G.coins/260));
+          playSound("coinshot");
           spawnBullet({vx:Math.cos(a)*610,vy:Math.sin(a)*610,damage:dmg.d,life:.95,maxLife:.95,r:6,sprite:"gem_coin",pierce:p.pierce,type:"coinshot"});
         }
       }
@@ -869,6 +947,7 @@ function fireWeapons(dt){
         const py = p.y + Math.sin(a0)*95;
         const tar = nearestEnemy(190,px,py);
         if(tar){
+          playSound("pet");
           damageEnemy(tar,p.damage*(1.1+w.pet*.12),"pet");
           addParticles(tar.x,tar.y,8,"#89f6b5");
         }
@@ -881,6 +960,7 @@ function fireWeapons(dt){
     if(t.nova <= 0){
       t.nova = (4.2 * p.cooldown) / Math.sqrt(w.nova) / (p.evolved.novaCore?1.35:1);
       const rad = (115+w.nova*18)*p.area;
+      playSound("nova");
       explode(p.x,p.y,rad,calcDamage(2.0+w.nova*.22).d,"nova");
       if(p.evolved.novaCore) p.hp = Math.min(p.maxHp,p.hp+8);
     }
@@ -890,6 +970,7 @@ function fireWeapons(dt){
     t.saw -= dt;
     if(t.saw <= 0){
       t.saw = (2.8 * p.cooldown) / Math.sqrt(w.saw) / (p.evolved.sawFactory?1.35:1);
+      playSound("saw");
       G.clouds.push({x:p.x+rand(-55,55),y:p.y+rand(-55,55),r:(58+w.saw*8)*p.area,life:5.4,maxLife:5.4,damage:p.damage*(1.0+w.saw*.11),type:"saw",sprite:"slash"});
       if(p.evolved.sawFactory) G.clouds.push({x:p.x+rand(-95,95),y:p.y+rand(-95,95),r:(58+w.saw*8)*p.area,life:5.4,maxLife:5.4,damage:p.damage*(.85+w.saw*.10),type:"saw",sprite:"slash"});
     }
@@ -899,6 +980,7 @@ function fireWeapons(dt){
     t.healFlower -= dt;
     if(t.healFlower <= 0){
       t.healFlower = (3.8 * p.cooldown) / Math.sqrt(w.healFlower);
+      playSound("healFlower");
       p.hp = Math.min(p.maxHp,p.hp+8+w.healFlower*3+(p.evolved.flowerGarden?8:0));
       const rr = (95+w.healFlower*15)*p.area*(p.evolved.flowerGarden?1.3:1);
       G.clouds.push({x:p.x,y:p.y,r:rr,life:1.8,maxLife:1.8,damage:p.damage*(.65+w.healFlower*.08),type:"flower",sprite:"poison_cloud"});
@@ -908,9 +990,29 @@ function fireWeapons(dt){
 
 }
 
+
+function updateWaves(dt){
+  if(G.endless){ G.waveTimer+=dt; if(G.waveTimer>=G.waveDuration){G.waveTimer=0; G.wave+=1; playSound("wave",.055); toast("无尽第 "+(G.wave-20)+" 波");} return; }
+  G.waveTimer+=dt;
+  if(G.waveTimer>=G.waveDuration){
+    G.waveTimer=0; G.wave+=1; playSound("wave",.055);
+    if(G.wave===5 || G.wave===10 || G.wave===15) spawnEnemy("elite");
+    if(G.wave===20) spawnEnemy("boss");
+    if(G.wave>20){ G.endless=true; G.cleared=true; G.wave=21; G.p.damage*=1.15; G.p.maxHp+=35; G.p.hp=Math.min(G.p.maxHp,G.p.hp+70); openClearPanel(); }
+    else toast("第 "+G.wave+" 波");
+  }
+}
+function openClearPanel(){
+  G.state="upgrade"; UI.upgradePanel.style.display="block"; UI.choices.innerHTML="";
+  const div=document.createElement("div"); div.className="choice recommended";
+  div.innerHTML=`<div class="emoji">🏆</div><small>通关<span class="recTag">20波完成</span></small><b>进入无尽模式</b><span>你已经完成 20 波。点击后继续无尽模式，敌人会越来越强，但你的 BD 也可以继续成长。</span>`;
+  div.addEventListener("click",()=>{UI.upgradePanel.style.display="none";G.state="playing";G.last=performance.now();toast("无尽模式开始");}); UI.choices.appendChild(div);
+}
+
 function update(dt){
   if(G.state !== "playing") return;
   G.t += dt;
+  updateWaves(dt);
   const p = G.p;
 
   // movement
@@ -936,10 +1038,11 @@ function update(dt){
   // spawn
   G.spawnTimer -= dt;
   const D = G.difficulty || DIFFICULTIES[0];
-  const spawnInterval = Math.max(.12, (.96 - G.t*.0021) / D.spawnRate);
+  const wavePower = Math.max(1, G.wave || 1);
+  const spawnInterval = Math.max(.10, (.98 - wavePower*.018 - G.t*.0009) / D.spawnRate);
   if(G.spawnTimer <= 0){
     G.spawnTimer = spawnInterval;
-    const count = 1 + Math.floor(G.t/(58 / D.spawnRate));
+    const count = 1 + Math.floor(wavePower/5) + (G.endless ? Math.floor((wavePower-20)/6) : 0);
     for(let i=0;i<count;i++) spawnEnemy("normal");
   }
   G.eliteTimer -= dt;
@@ -1160,7 +1263,7 @@ function addText(x,y,text,color,life=.8,size=13){
 function endGame(){
   G.state = "over";
   UI.overPanel.classList.remove("hidden");
-  G.result = `萌薯幸存者 V2.1 战绩：存活 ${fmt(G.t)}，等级 ${G.level}，击杀 ${G.kills}，金币 ${G.coins}，主BD：${buildName()}。`;
+  G.result = `萌薯幸存者 V2.2 战绩：存活 ${fmt(G.t)}，波次 ${G.endless ? "无尽"+Math.max(1,G.wave-20) : Math.min(G.wave,20)+"/20"}，等级 ${G.level}，击杀 ${G.kills}，金币 ${G.coins}，主BD：${buildName()}。`;
   UI.finalText.textContent = G.result;
 }
 
@@ -1170,6 +1273,7 @@ function updateUI(){
   UI.lv.textContent = G.level;
   UI.kills.textContent = G.kills;
   UI.coins.textContent = G.coins;
+  UI.wave.textContent = G.endless ? "无尽 " + Math.max(1,G.wave-20) : Math.min(G.wave,20) + "/20";
   UI.build.textContent = buildName();
   UI.hpFill.style.width = clamp(p.hp/p.maxHp*100,0,100) + "%";
   UI.xpFill.style.width = clamp(G.xp/G.need*100,0,100) + "%";
@@ -1180,7 +1284,8 @@ function buildName(){
   const w = Object.entries(G.p.weapons).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
   const top = w.slice(0,3).map(([k])=>WEAPON_NAME[k]||k).join("+") || "豌豆枪";
   const evo = Object.keys(G.p.evolved).length;
-  return evo ? top + `｜进化×${evo}` : top;
+  const prefix = G.endless ? "无尽｜" : "";
+  return prefix + (evo ? top + `｜进化×${evo}` : top);
 }
 
 function render(){
@@ -1426,7 +1531,7 @@ function weaponColor(type){
   return {
     pea:"#9dff80", spread:"#c9ff9e", carrot:"#ff9f52", fire:"#ff6b52", ice:"#9eeaff",
     lightning:"#7ec8ff", poison:"#89f6b5", blade:"#ffd66e", aura:"#89f6b5", laser:"#ff5f75",
-    meteor:"#ff6b52", blackhole:"#ca95ff", coinshot:"#ffd66e", pet:"#89f6b5", nova:"#ffd66e", saw:"#f8fbff", flower:"#89f6b5", thorn:"#89f6b5"
+    meteor:"#ff6b52", blackhole:"#ca95ff", coinshot:"#ffd66e", pet:"#89f6b5", nova:"#ffd66e", saw:"#f8fbff", flower:"#89f6b5", thorn:"#89f6b5", curse:"#ca95ff", execute:"#ff5f75", bloodMagic:"#ff5f75"
   }[type] || "#fff";
 }
 function pointLineDistance(px,py,x1,y1,x2,y2){
