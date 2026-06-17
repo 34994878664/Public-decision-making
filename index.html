@@ -2,479 +2,1445 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>大众塔罗站 第三版｜更整洁的今日运势・感情事业财运・未来一个月・未来一年</title>
-  <meta name="description" content="更整洁、完成度更高的大众塔罗第三版：今日一牌、未来一个月、未来一年、感情、事业、财运、复合、二选一、是或否，支持点击翻牌，适合普通用户直接使用。" />
-  <meta name="keywords" content="塔罗,今日运势,未来一个月运势,未来一年运势,感情占卜,事业占卜,财运占卜,在线塔罗" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>萌薯幸存者 V2.1｜新手友好版网页肉鸽</title>
+  <meta name="description" content="新手友好版萌系土豆风网页肉鸽 Like 生存小游戏：难度选择、推荐BD、更多流派、素材化主角怪物场景，手机和电脑都能玩。" />
+  <meta name="keywords" content="网页小游戏,肉鸽,幸存者,土豆兄弟like,HTML5游戏,Canvas游戏,GitHub Pages小游戏" />
   <meta name="robots" content="index,follow" />
-  <meta property="og:title" content="大众塔罗站 第三版｜更整洁、更容易上手" />
-  <meta property="og:description" content="今日一牌、感情、事业、财运、未来一个月、未来一年，一站式大众塔罗网页。" />
-  <meta property="og:type" content="website" />
   <style>
-    :root{
-      --bg:#0f0819;
-      --bg2:#1a0f2d;
-      --card:#ffffff10;
-      --card2:#ffffff08;
-      --line:#ffffff16;
-      --text:#fff9ff;
-      --muted:#d9cbed;
-      --gold:#ffd88c;
-      --pink:#ff9ed7;
-      --accent:#b8f0df;
-      --shadow:0 22px 56px rgba(0,0,0,.34);
-      --radius:24px;
-      --radius-sm:18px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      min-height:100vh;
-      color:var(--text);
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-      line-height:1.65;
-      background:
-        radial-gradient(circle at 8% 7%, rgba(255,158,215,.18), transparent 24%),
-        radial-gradient(circle at 92% 5%, rgba(255,216,140,.16), transparent 20%),
-        linear-gradient(140deg,var(--bg),var(--bg2));
-    }
-    a{color:var(--gold);text-decoration:none}
-    .wrap{width:min(1120px,92vw);margin:0 auto}
-    header{position:sticky;top:0;z-index:40;background:rgba(15,8,25,.8);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:950}
-    .logo{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--pink));color:#29133b;box-shadow:0 10px 24px rgba(255,216,140,.22)}
-    .navlinks{display:flex;gap:10px;flex-wrap:wrap}
-    .navlinks a{padding:8px 10px;border-radius:999px;color:var(--muted);font-size:14px}
-    .navlinks a:hover{background:#ffffff0a;color:#fff}
-    .hero{padding:44px 0 18px;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
-    .tag{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#ffffff08;color:var(--gold);font-size:14px}
-    h1{font-size:clamp(34px,7vw,68px);line-height:1.03;margin:18px 0 14px;letter-spacing:-1.2px}
-    .lead{font-size:clamp(16px,2.7vw,20px);color:var(--muted);margin:0 0 20px}
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn,button{border:0;cursor:pointer;border-radius:16px;padding:13px 18px;font-size:15px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s transform,.18s background,.18s opacity}
-    .btn:hover,button:hover{transform:translateY(-1px)}
-    .primary{background:linear-gradient(135deg,var(--gold),#ffbadf);color:#2a143d;box-shadow:0 16px 36px rgba(255,216,140,.20)}
-    .secondary{background:#ffffff0b;border:1px solid var(--line);color:#fff}
-    .heroCard,.panel{border:1px solid var(--line);background:linear-gradient(160deg,#ffffff10,#ffffff06);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .heroCard{padding:22px;overflow:hidden;position:relative}
-    .heroCard:before{content:"";position:absolute;right:-70px;top:-70px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle, rgba(255,216,140,.25), transparent 65%)}
-    .todayMini{position:relative;z-index:1;display:grid;grid-template-columns:126px 1fr;gap:18px;align-items:center}
-    .todayBack{height:192px;border-radius:18px;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;font-size:34px;font-weight:950;color:var(--gold);background:
-      radial-gradient(circle at 50% 35%, rgba(255,216,140,.55), transparent 15%),
-      radial-gradient(circle at 50% 65%, rgba(255,158,215,.34), transparent 18%),
-      linear-gradient(135deg,#56327b,#1e1032);
-      box-shadow:0 18px 42px rgba(0,0,0,.3)}
-    .eyebrow{color:var(--gold);font-size:13px;font-weight:900;margin-bottom:6px}
-    .todayTitle{font-size:28px;font-weight:950;line-height:1.12;margin-bottom:8px}
-    .todayDesc{color:var(--muted);font-size:14px;margin-bottom:10px}
-    .chips{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{padding:7px 10px;border-radius:999px;background:#ffffff0a;color:#fff;font-size:12px}
-    .heroNote{margin-top:16px;padding:14px;border-radius:16px;background:rgba(15,8,25,.45);border:1px solid var(--line);color:var(--muted);font-size:14px}
-    .section{padding:26px 0}
-    .panel{overflow:hidden}
-    .panelHead{padding:22px 22px 0}
-    h2{font-size:clamp(24px,4.5vw,38px);line-height:1.14;margin:0 0 8px}
-    .sub{margin:0 0 18px;color:var(--muted)}
-    .presetBar{display:flex;gap:10px;flex-wrap:wrap;padding:0 22px 14px}
-    .pill{padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:#ffffff06;color:var(--muted);font-size:14px;font-weight:800;cursor:pointer}
-    .pill.active,.pill:hover{color:var(--gold);border-color:rgba(255,216,140,.36);background:rgba(255,216,140,.10)}
-    .presetGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 22px 22px}
-    .presetCard{border:1px solid var(--line);border-radius:20px;background:#ffffff06;padding:18px;cursor:pointer;transition:.18s transform,.18s border-color,.18s background}
-    .presetCard:hover{transform:translateY(-2px);border-color:rgba(255,216,140,.36);background:#ffffff09}
-    .presetCard .icon{font-size:24px;margin-bottom:10px}
-    .presetCard b{display:block;font-size:17px;margin-bottom:5px}
-    .presetCard span{display:block;color:var(--muted);font-size:13px}
-    .form{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 22px 22px}
-    .field{display:flex;flex-direction:column;gap:8px}
-    .field.full{grid-column:1/-1}
-    label{font-size:14px;font-weight:900}
-    textarea,select,input{width:100%;padding:13px 14px;border-radius:16px;border:1px solid var(--line);background:rgba(15,8,25,.58);color:#fff;outline:none;font:inherit}
-    option{background:#25123a;color:#fff}
-    textarea{min-height:104px;resize:vertical}
-    .qchips{display:flex;gap:8px;flex-wrap:wrap}
-    .qchip{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:#ffffff05;color:var(--muted);font-size:13px;cursor:pointer}
-    .qchip:hover{color:#fff;border-color:rgba(255,216,140,.36)}
-    .hint{font-size:13px;color:var(--muted)}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;padding:0 22px 22px}
-    .result{display:none;margin-top:10px;padding:22px;border-top:1px solid var(--line);background:rgba(0,0,0,.10)}
-    .result.show{display:block}
-    .resultTop{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
-    .resultTitle{font-size:24px;font-weight:950;margin:0 0 4px}
-    .badge{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,216,140,.34);background:rgba(255,216,140,.08);color:var(--gold);font-size:13px;font-weight:900}
-    .drawBox{border:1px solid var(--line);border-radius:20px;background:#ffffff06;padding:18px;margin-bottom:18px}
-    .drawTitle{font-weight:950;margin:0 0 4px}
-    .drawSub{margin:0 0 14px;color:var(--muted);font-size:14px}
-    .drawGrid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
-    .drawGrid.cols4{grid-template-columns:repeat(4,1fr)}
-    .drawGrid.cols5{grid-template-columns:repeat(5,1fr)}
-    .drawGrid.cols1{grid-template-columns:1fr;max-width:180px}
-    .pickCard{height:236px;perspective:1000px;cursor:pointer}
-    .pickInner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .75s ease}
-    .pickCard.flipped .pickInner{transform:rotateY(180deg)}
-    .face{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;border:1px solid rgba(255,255,255,.20);box-shadow:0 16px 42px rgba(0,0,0,.30)}
-    .back{display:grid;place-items:center;color:var(--gold);font-size:34px;font-weight:950;background:
-      radial-gradient(circle at 50% 35%, rgba(255,216,140,.55), transparent 15%),
-      radial-gradient(circle at 50% 65%, rgba(255,158,215,.34), transparent 18%),
-      linear-gradient(135deg,#56327b,#1f1035)}
-    .front{transform:rotateY(180deg);padding:16px;position:relative;overflow:hidden;background:linear-gradient(160deg,#ffffff16,#ffffff07)}
-    .front:after{content:"✦";position:absolute;right:12px;top:8px;color:rgba(255,216,140,.42);font-size:30px}
-    .slot{font-size:13px;color:var(--gold);font-weight:900;margin-bottom:8px}
-    .name{font-size:20px;font-weight:950;line-height:1.14;margin-bottom:7px}
-    .meta{font-size:13px;color:var(--muted);margin-bottom:9px}
-    .keywords{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
-    .kw{padding:5px 7px;border-radius:999px;background:#ffffff0a;font-size:12px}
-    .meaning{font-size:14px;color:#f6ecff}
-    .summaryGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .box{border:1px solid var(--line);background:#ffffff06;border-radius:18px;padding:16px}
-    .box h3{margin:0 0 8px;font-size:18px}
-    .box p,.box li{margin:0;color:var(--muted)}
-    .box ul{margin:0;padding-left:20px}
-    .infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .smallCard{border:1px solid var(--line);background:#ffffff06;border-radius:18px;padding:16px}
-    .smallCard b{display:block;margin-bottom:6px}
-    details{border:1px solid var(--line);background:#ffffff06;border-radius:18px;padding:14px 16px;margin-bottom:10px}
-    summary{cursor:pointer;font-weight:900}
-    footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
-    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#fff;color:#25123a;padding:10px 14px;border-radius:999px;box-shadow:0 12px 35px rgba(0,0,0,.28);font-weight:900;display:none;z-index:99}
-    .toast.show{display:block}
-    @media(max-width:980px){
-      .hero{grid-template-columns:1fr}
-      .presetGrid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media(max-width:860px){
-      .navlinks{display:none}
-      .todayMini,.form,.summaryGrid,.infoGrid{grid-template-columns:1fr}
-      .presetGrid,.drawGrid,.drawGrid.cols4,.drawGrid.cols5{grid-template-columns:1fr}
-      .actions button{width:100%}
-      .pickCard{max-width:240px}
-    }
-  </style>
+*{box-sizing:border-box}
+:root{
+  --bg:#0b1221;--panel:rgba(12,18,32,.9);--line:rgba(255,255,255,.14);
+  --text:#f8fbff;--muted:#b9c7da;--gold:#ffd66e;--pink:#ff9fce;--blue:#7ec8ff;--green:#89f6b5;
+  --shadow:0 28px 80px rgba(0,0,0,.42);
+}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;touch-action:none;user-select:none}
+body{
+  background:
+    radial-gradient(circle at 18% 10%,rgba(126,200,255,.16),transparent 25%),
+    radial-gradient(circle at 85% 6%,rgba(255,159,206,.14),transparent 23%),
+    linear-gradient(135deg,#0b1221,#18243c 55%,#101525);
+}
+#game{position:fixed;inset:0;width:100vw;height:100vh;display:block;image-rendering:auto}
+.hud{position:fixed;inset:0;pointer-events:none}
+.top{position:absolute;left:10px;right:10px;top:10px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start}
+.stats{display:flex;gap:7px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:rgba(5,10,20,.62);backdrop-filter:blur(10px);border-radius:13px;padding:7px 10px;font-size:12px;font-weight:900;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.pill b{color:var(--gold)}.pill.wide{max-width:min(52vw,540px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btns{display:flex;gap:8px;pointer-events:auto}
+button{border:0;border-radius:15px;padding:11px 15px;font-size:14px;font-weight:950;cursor:pointer;color:#1b1430;background:linear-gradient(135deg,var(--gold),#ffb0d7);box-shadow:0 16px 32px rgba(255,214,110,.2)}
+button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-shadow:none;color:#fff}
+.bars{position:absolute;left:10px;right:10px;top:60px;display:grid;gap:7px}
+.bar{height:14px;border:1px solid var(--line);background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.18)}
+.bar div{height:100%;width:0%;transition:width .1s linear}
+#hpFill{background:linear-gradient(90deg,#ff596f,#ffd66e)}
+#xpFill{background:linear-gradient(90deg,#7ec8ff,#c996ff)}
+.loadout{position:absolute;left:10px;bottom:12px;max-width:58vw;display:flex;gap:6px;flex-wrap:wrap}
+.loadout span{border:1px solid var(--line);background:rgba(5,10,20,.58);backdrop-filter:blur(8px);border-radius:999px;padding:5px 8px;font-size:12px;font-weight:850}
+.panel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;width:min(880px,92vw);max-height:88vh;overflow:auto;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(18px);border-radius:28px;box-shadow:var(--shadow);padding:24px;text-align:center}
+.panel h1{font-size:clamp(36px,8vw,66px);line-height:1;margin:0 0 12px;letter-spacing:-1.2px}
+.panel h2{font-size:clamp(26px,5vw,42px);line-height:1.1;margin:0 0 10px}
+.panel h3{margin:12px 0 8px}.panel p{margin:0 0 16px;color:var(--muted);line-height:1.7}.tag{display:inline-flex;color:var(--gold);font-weight:950;border:1px solid var(--line);background:rgba(255,255,255,.07);padding:7px 11px;border-radius:999px;margin-bottom:14px;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.difficultyCards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 8px}.classCard,.choice,.difficultyCard{border:1px solid var(--line);background:rgba(255,255,255,.07);border-radius:20px;padding:14px;text-align:left;cursor:pointer;transition:.16s transform,.16s border-color,.16s background}
+.classCard:hover,.classCard.active,.difficultyCard:hover,.difficultyCard.active,.choice:hover{transform:translateY(-2px);border-color:rgba(255,214,110,.5);background:rgba(255,255,255,.11)}
+.classCard img{width:54px;height:54px;image-rendering:auto;float:right;margin-left:8px}.classCard b,.choice b{display:block;color:#fff;font-size:18px;margin-bottom:5px}.classCard span,.choice span{display:block;color:var(--muted);font-size:13px;line-height:1.55}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.upgrade{display:none}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.choice .emoji{font-size:28px;margin-bottom:8px}.choice small{display:inline-block;color:var(--gold);font-weight:900;margin-bottom:5px}
+.hidden{display:none!important}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);display:none;z-index:40;border:1px solid var(--line);background:rgba(5,10,20,.78);backdrop-filter:blur(12px);border-radius:999px;padding:9px 14px;font-weight:950;box-shadow:0 14px 35px rgba(0,0,0,.28)}
+.toast.show{display:block}
+.joystick{position:fixed;left:22px;bottom:28px;width:134px;height:134px;border-radius:50%;display:none;z-index:20;pointer-events:auto;border:1px solid var(--line);background:rgba(255,255,255,.08);backdrop-filter:blur(8px)}
+.stick{position:absolute;left:50%;top:50%;width:56px;height:56px;margin-left:-28px;margin-top:-28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#ffb0d7);box-shadow:0 14px 30px rgba(0,0,0,.25)}
+.mobileTip{position:fixed;right:14px;bottom:18px;color:rgba(255,255,255,.66);font-size:12px;text-align:right;display:none;pointer-events:none}
+@media(max-width:860px){
+  .top{grid-template-columns:1fr}.btns{justify-content:flex-end}.bars{top:102px}.cards{grid-template-columns:1fr 1fr}.difficultyCards{grid-template-columns:1fr 1fr}.choices{grid-template-columns:1fr}.panel{padding:20px}.joystick,.mobileTip{display:block}.loadout{display:none}.pill{font-size:12px;padding:6px 8px}
+}
+@media(max-width:460px){.cards{grid-template-columns:1fr}.panel h1{font-size:38px}}
+
+.difficultyCard b{display:block;color:#fff;font-size:16px;margin-bottom:4px}
+.difficultyCard span{display:block;color:var(--muted);font-size:12px;line-height:1.45}
+.tinyNote{font-size:13px!important;color:#9fb3cc!important;margin-top:4px!important}
+.choice.recommended{border-color:rgba(137,246,181,.75);box-shadow:0 0 0 1px rgba(137,246,181,.22),0 14px 34px rgba(0,0,0,.24)}
+.recTag{display:inline-block;background:rgba(137,246,181,.16);border:1px solid rgba(137,246,181,.45);color:#b6ffd0;border-radius:999px;padding:3px 7px;font-size:12px;font-weight:950;margin-left:6px}
+.recReason{display:block;margin-top:7px;color:#b6ffd0!important;font-size:12px!important}
+
+</style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <div class="brand"><div class="logo">✦</div><span>大众塔罗站 第三版</span></div>
-      <nav class="navlinks">
-        <a href="#oracle">开始占卜</a>
-        <a href="#daily">今日一牌</a>
-        <a href="#topics">热门主题</a>
-        <a href="#guide">玩法说明</a>
-      </nav>
+  <canvas id="game"></canvas>
+
+  <div class="hud">
+    <div class="top">
+      <div class="stats">
+        <div class="pill">⏱ <b id="time">00:00</b></div>
+        <div class="pill">Lv <b id="lv">1</b></div>
+        <div class="pill">击杀 <b id="kills">0</b></div>
+        <div class="pill">金币 <b id="coins">0</b></div>
+        <div class="pill wide">BD <b id="build">豌豆枪</b></div>
+      </div>
+      <div class="btns">
+        <button class="ghost" id="pauseBtn">暂停</button>
+        <button class="ghost" id="restartBtn">重开</button>
+      </div>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div>
-        <span class="tag">✨ 第三版：更整洁、更顺眼、更大众</span>
-        <h1>想问什么都可以，先翻一组牌。</h1>
-        <p class="lead">这版我重点优化了你说的问题：减少杂乱感、统一布局、增强整洁度，同时保留大众最需要的功能——今日一牌、未来一个月、未来一年、感情、事业、财运、复合、是或否，以及点击翻牌的仪式感。</p>
-        <div class="cta">
-          <a class="btn primary" href="#oracle">马上开始占卜</a>
-          <a class="btn secondary" href="#daily">先看今日一牌</a>
-        </div>
-      </div>
-      <div class="heroCard" id="daily">
-        <div class="todayMini">
-          <div class="todayBack">☾</div>
-          <div>
-            <div class="eyebrow">今日一牌</div>
-            <div class="todayTitle" id="dailyName">加载中…</div>
-            <div class="todayDesc">每天进来都能先看到一个提示，不需要先思考问题也能直接开始。</div>
-            <div class="chips" id="dailyKeywords"></div>
-            <div class="sub" id="dailyText" style="margin:10px 0 0"></div>
-          </div>
-        </div>
-        <div class="heroNote">第三版思路：回到“第一版的整洁感”，保留“第二版的互动感”，做成更平衡的版本。</div>
-      </div>
-    </section>
+    <div class="bars">
+      <div class="bar"><div id="hpFill"></div></div>
+      <div class="bar xp"><div id="xpFill"></div></div>
+    </div>
 
-    <section id="oracle" class="section">
-      <div class="panel">
-        <div class="panelHead">
-          <h2>选择一个热门问题，开始抽牌</h2>
-          <p class="sub">先用快捷入口降低门槛，再让用户输入更具体的问题。这样既适合大众，也更容易留住人。</p>
-        </div>
+    <div class="loadout" id="loadout"></div>
+  </div>
 
-        <div class="presetBar">
-          <span class="pill active" data-preset="today">今日运势</span>
-          <span class="pill" data-preset="month">未来一个月</span>
-          <span class="pill" data-preset="year">未来一年</span>
-          <span class="pill" data-preset="love">感情关系</span>
-          <span class="pill" data-preset="reunion">复合可能</span>
-          <span class="pill" data-preset="career">事业工作</span>
-          <span class="pill" data-preset="money">财运机会</span>
-          <span class="pill" data-preset="yesno">是或否</span>
-        </div>
+  <section class="panel" id="startPanel">
+    <span class="tag">V2 素材增强版 · 手机/电脑都能玩</span>
+    <h1>萌薯幸存者 V2.1</h1>
+    <p>这版降低了默认难度，加入难度选择和推荐 BD。新手可以先选“休闲”，升级时看绿色推荐标签，不容易乱点。</p>
+    <h3>选择初始角色</h3>
+    <div class="cards" id="classCards"></div>
+    <h3>选择难度</h3>
+    <div class="difficultyCards" id="difficultyCards"></div>
+    <p class="tinyNote">手机新手建议先选“休闲”。推荐 BD 会根据你选的角色和当前武器自动标出来。</p>
+    <div class="actions">
+      <button id="startBtn">开始生存</button>
+      <button class="ghost" id="guideBtn">玩法提示</button>
+    </div>
+  </section>
 
-        <div class="presetGrid">
-          <div class="presetCard" data-preset="today"><div class="icon">🌞</div><b>今日运势</b><span>看今天的主能量、机会和提醒。</span></div>
-          <div class="presetCard" data-preset="month"><div class="icon">🌙</div><b>未来一个月</b><span>看未来 30 天主线、挑战与机会。</span></div>
-          <div class="presetCard" data-preset="year"><div class="icon">🪐</div><b>未来一年</b><span>看年度总运、感情、事业、财运。</span></div>
-          <div class="presetCard" data-preset="love"><div class="icon">💘</div><b>感情走向</b><span>TA 怎么想？关系会不会变好？</span></div>
-          <div class="presetCard" data-preset="reunion"><div class="icon">💌</div><b>复合可能</b><span>还有没有机会？该主动还是再等等？</span></div>
-          <div class="presetCard" data-preset="career"><div class="icon">💼</div><b>事业工作</b><span>换不换工作、值不值得继续。</span></div>
-        </div>
+  <section class="panel upgrade" id="upgradePanel">
+    <span class="tag">升级了 · 三选一</span>
+    <h2>选择一个强化</h2>
+    <p>武器、被动、召唤、元素、经济都会出现。满足条件会自动触发进化 BD。</p>
+    <div class="choices" id="choices"></div>
+  </section>
 
-        <div class="form">
-          <div class="field full">
-            <label for="question">你的问题</label>
-            <textarea id="question" placeholder="例如：我和 TA 未来一个月还有机会吗？我未来一年整体运势怎么样？我现在要不要换工作？"></textarea>
-            <div class="qchips">
-              <span class="qchip" data-q="我今天的整体运势如何？">今天运势</span>
-              <span class="qchip" data-q="我未来一个月的整体运势会怎样？">未来一个月</span>
-              <span class="qchip" data-q="我未来一年的整体运势会怎样？">未来一年</span>
-              <span class="qchip" data-q="我和TA未来一个月的关系会怎样？">感情走向</span>
-              <span class="qchip" data-q="我和前任还有复合机会吗？">复合可能</span>
-              <span class="qchip" data-q="我现在要不要换工作？">换工作</span>
-            </div>
-          </div>
-          <div class="field">
-            <label for="topic">问题类型</label>
-            <select id="topic">
-              <option value="daily">今日运势 / 近期提醒</option>
-              <option value="month">未来一个月 / 30 天运势</option>
-              <option value="year">未来一年 / 年运</option>
-              <option value="love">感情 / 暧昧 / 关系走向</option>
-              <option value="reunion">复合 / 前任 / 能否重来</option>
-              <option value="career">事业 / 工作 / 跳槽</option>
-              <option value="money">财运 / 副业 / 投资心态</option>
-              <option value="choice">二选一 / 去留判断</option>
-              <option value="yesno">是或否 / 能不能成</option>
-              <option value="general">综合 / 任何问题</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="spread">牌阵</label>
-            <select id="spread">
-              <option value="daily">今日运势：能量 / 机会 / 提醒</option>
-              <option value="month">未来一个月：主题 / 挑战 / 机会 / 建议</option>
-              <option value="year">未来一年：总运 / 感情 / 事业 / 财运 / 提醒</option>
-              <option value="three">三张牌：现状 / 阻碍 / 建议</option>
-              <option value="choice">四张牌：A选择 / B选择 / 隐藏因素 / 建议</option>
-              <option value="yesno">是或否：三张牌判断倾向</option>
-              <option value="one">一张牌：直接答案</option>
-            </select>
-            <div class="hint">如果只是普通用户，默认用“今日运势 / 未来一个月 / 未来一年 / 感情走向”就很够用了。</div>
-          </div>
-        </div>
+  <section class="panel hidden" id="overPanel">
+    <span class="tag">本局结算</span>
+    <h2>小土豆倒下了</h2>
+    <p id="finalText"></p>
+    <div class="actions">
+      <button id="againBtn">再来一局</button>
+      <button class="ghost" id="copyBtn">复制战绩</button>
+    </div>
+  </section>
 
-        <div class="actions">
-          <button class="primary" id="drawBtn">开始抽牌</button>
-          <button class="secondary" id="todayBtn">今天来一抽</button>
-          <button class="secondary" id="monthBtn">抽未来一个月</button>
-          <button class="secondary" id="yearBtn">抽未来一年</button>
-          <button class="secondary" id="copyBtn">复制结果</button>
-          <button class="secondary" id="downloadBtn">下载结果</button>
-          <button class="secondary" id="resetBtn">重新开始</button>
-        </div>
+  <div id="toast" class="toast">提示</div>
+  <div class="joystick" id="joystick"><div class="stick" id="stick"></div></div>
+  <div class="mobileTip">左下摇杆移动<br>自动攻击最近敌人</div>
 
-        <div id="result" class="result"></div>
-      </div>
-    </section>
+  <script>
+(() => {
+"use strict";
 
-    <section id="topics" class="section">
-      <h2>第三版主要优化点</h2>
-      <p class="sub">这次不是一味加功能，而是重点做“版面更稳、层级更清楚、看起来更舒服”。</p>
-      <div class="infoGrid">
-        <div class="smallCard"><b>更整洁</b><span>减少过多装饰块，统一间距和卡片样式，页面不会再显得乱。</span></div>
-        <div class="smallCard"><b>更平衡</b><span>保留第二版的点击翻牌互动感，但回归第一版那种更清爽的阅读体验。</span></div>
-        <div class="smallCard"><b>更大众</b><span>保留“今日一牌、感情、复合、事业、财运”这些普通人最关心的入口。</span></div>
-      </div>
-    </section>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-    <section id="guide" class="section">
-      <div class="panel">
-        <div class="panelHead">
-          <h2>玩法说明</h2>
-          <p class="sub">最简单玩法：点一个热门主题 → 输入问题 → 开始抽牌 → 按顺序翻开每一张牌 → 查看解读。</p>
-        </div>
-        <div style="padding:0 22px 22px">
-          <details open><summary>怎么问更有代入感？</summary><p class="sub">用“时间范围 + 对象 + 具体事情”。比如“未来 30 天我和 TA 关系会怎样？”“我未来一年事业运会怎样？”</p></details>
-          <details><summary>为什么要按顺序翻牌？</summary><p class="sub">这样更像真实抽牌过程，也能让用户有等待、参与和仪式感，不会一秒看完就走。</p></details>
-          <details><summary>逆位是不是不好？</summary><p class="sub">不一定。逆位更多表示延迟、卡顿、内耗、需要调整，并不等于坏结局。</p></details>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="wrap">
-    <div>© 大众塔罗站 第三版｜纯静态 HTML，可直接上传到 GitHub Pages / Netlify / Cloudflare Pages。</div>
-  </footer>
-  <div id="toast" class="toast">已复制</div>
-
-<script>
-const majors = [
-  {name:'愚者', arc:'大阿卡那', up:['新的开始','自由','冒险'], rev:['鲁莽','逃避','准备不足'], u:'你正站在新阶段入口，未知很多，但也有机会。', r:'现在不是盲目冲出去的时候，先确认风险和底线。'},
-  {name:'魔术师', arc:'大阿卡那', up:['主动','资源','创造'], rev:['分散','操控','空想'], u:'你手里已有资源，关键是主动整合并开始行动。', r:'想法很多但执行不足，别被表面机会带偏。'},
-  {name:'女祭司', arc:'大阿卡那', up:['直觉','秘密','等待'], rev:['迷雾','压抑','信息不足'], u:'答案未必在表面，先观察，等待信息浮现。', r:'你可能被情绪或未知信息困住，需要核实事实。'},
-  {name:'皇后', arc:'大阿卡那', up:['滋养','丰盛','吸引'], rev:['依赖','消耗','过度付出'], u:'这件事有成长空间，温和投入会带来回报。', r:'你可能付出过多，先把能量收回到自己身上。'},
-  {name:'皇帝', arc:'大阿卡那', up:['秩序','掌控','责任'], rev:['僵硬','控制','失序'], u:'需要规则、计划和边界，靠稳定执行推进。', r:'过度控制或缺少结构都会造成阻碍。'},
-  {name:'恋人', arc:'大阿卡那', up:['选择','关系','价值一致'], rev:['犹豫','失衡','价值冲突'], u:'核心在选择与价值观，你需要问自己真正想要什么。', r:'关系或选择里有不一致，别只看短期吸引。'},
-  {name:'战车', arc:'大阿卡那', up:['推进','胜利','意志'], rev:['失控','急躁','方向乱'], u:'只要方向明确并持续推进，就有突破机会。', r:'行动太急或方向不稳，先控节奏再冲。'},
-  {name:'力量', arc:'大阿卡那', up:['耐心','勇气','温柔力量'], rev:['自我怀疑','压抑','脆弱'], u:'用耐心和稳定心态处理，硬碰硬不如柔性坚持。', r:'你需要先照顾自己的状态，不要假装很强。'},
-  {name:'隐士', arc:'大阿卡那', up:['独处','内省','寻找答案'], rev:['孤立','逃避社交','迷路'], u:'先安静下来，答案来自深入思考而不是外界噪音。', r:'别把逃避包装成思考，需要重新连接现实。'},
-  {name:'命运之轮', arc:'大阿卡那', up:['转机','周期','变化'], rev:['延迟','反复','抗拒变化'], u:'局势正在变化，顺势调整会比硬扛更有利。', r:'变化被拖住，可能要先处理旧问题。'},
-  {name:'正义', arc:'大阿卡那', up:['公平','因果','判断'], rev:['偏见','不公','逃避责任'], u:'按事实、规则和责任判断，结果会回到因果本身。', r:'你可能没有看全事实，别急着下结论。'},
-  {name:'倒吊人', arc:'大阿卡那', up:['暂停','换角度','牺牲'], rev:['卡住','无谓牺牲','拖延'], u:'暂停不是失败，换个角度反而能看清。', r:'你可能卡在无效等待里，需要主动改变条件。'},
-  {name:'死神', arc:'大阿卡那', up:['结束','转化','重生'], rev:['抗拒结束','拖泥带水','旧模式'], u:'某个旧阶段需要结束，腾出空间才有新开始。', r:'你明知该变却不舍得，拖延只会消耗更多。'},
-  {name:'节制', arc:'大阿卡那', up:['平衡','调和','循序渐进'], rev:['失衡','过量','急于求成'], u:'适合慢慢调和，不要极端，稳定节奏最重要。', r:'现在节奏失衡，先减负、降速、重建秩序。'},
-  {name:'恶魔', arc:'大阿卡那', up:['欲望','束缚','诱惑'], rev:['松绑','觉醒','摆脱依赖'], u:'看清诱惑和依赖，别让短期欲望控制选择。', r:'你正在意识到束缚，有机会摆脱旧模式。'},
-  {name:'高塔', arc:'大阿卡那', up:['突变','崩塌','真相'], rev:['余震','害怕改变','延迟爆发'], u:'不稳定结构可能被打破，虽然痛但能看见真相。', r:'问题并未消失，只是暂时被压住了。'},
-  {name:'星星', arc:'大阿卡那', up:['希望','疗愈','愿景'], rev:['失望','信心不足','期待落空'], u:'保持希望，长期愿景正在恢复你的能量。', r:'你需要重建信心，别让一时低谷否定未来。'},
-  {name:'月亮', arc:'大阿卡那', up:['不确定','潜意识','幻想'], rev:['真相浮现','走出迷雾','焦虑'], u:'局面还不清楚，别在恐惧和幻想里做决定。', r:'迷雾会慢慢散开，但你要主动求证。'},
-  {name:'太阳', arc:'大阿卡那', up:['成功','明朗','快乐'], rev:['延迟快乐','小挫折','自信不足'], u:'整体能量明朗，适合公开、推进、表达自己。', r:'好结果有机会，但需要先恢复自信和真实表达。'},
-  {name:'审判', arc:'大阿卡那', up:['觉醒','召唤','复盘'], rev:['自责','不敢面对','旧事未结'], u:'这是复盘和升级的节点，别再按旧方式生活。', r:'你可能逃避关键问题，先面对才能翻篇。'},
-  {name:'世界', arc:'大阿卡那', up:['完成','圆满','整合'], rev:['未完成','差最后一步','闭环不足'], u:'一个阶段接近完成，适合收尾、发布、扩大。', r:'还差关键闭环，别半途而废。'}
-];
-const suits = [['权杖','行动、热情、事业推进'],['圣杯','情感、关系、感受'],['宝剑','思考、冲突、决策'],['星币','金钱、现实、资源']];
-const minors = [
- ['Ace','新机会','种子开始','机会刚出现，适合尝试但别急着放大。','机会被拖住，先确认资源是否到位。'],
- ['二','选择','权衡','你正在权衡，先明确优先级。','犹豫造成消耗，别一直悬而不决。'],
- ['三','合作','初步成果','合作或外部支持会带来推进。','沟通不顺，团队或计划需要修正。'],
- ['四','稳定','休整','适合稳住基本盘，先别贪多。','过度保守会让机会停滞。'],
- ['五','冲突','损耗','有摩擦和竞争，需要控制损耗。','冲突有机会缓和，但要先承认问题。'],
- ['六','过渡','改善','局面开始改善，有人或资源会帮你。','仍有旧问题拖累，别急着庆祝。'],
- ['七','防守','考验','需要守住边界，坚持会看到效果。','防守过度或立场不稳会被消耗。'],
- ['八','速度','推进','进展会加快，适合抓住窗口。','节奏混乱，信息延迟，先别冲动。'],
- ['九','坚持','临界点','已经接近临界点，撑住但别硬撑。','疲惫明显，休息比逞强更重要。'],
- ['十','负担','完成前压力','压力很重，但也接近一个阶段结束。','负担过量，该卸下不属于你的责任。'],
- ['侍从','消息','学习','有新消息或新学习机会，保持开放。','经验不足，别被一时兴趣带跑。'],
- ['骑士','行动','冲刺','行动力上升，适合快速推进。','急躁会带来失误，先稳住方向。'],
- ['王后','成熟能量','照顾与吸引','温和成熟的方式更容易达成目标。','过度情绪化或过度照顾别人会失衡。'],
- ['国王','掌控','领导','需要拿出主导权和长期规划。','控制欲或固执会让事情变僵。']
-];
-const deck = [...majors];
-suits.forEach(([suit,desc])=>{ minors.forEach(([rank,k1,k2,u,r])=>{ deck.push({name:`${suit}${rank}`, arc:suit, up:[k1,k2,desc.split('、')[0]], rev:['阻滞','失衡','需要调整'], u:`在${desc}层面，${u}`, r:`在${desc}层面，${r}`}); }); });
-
-const presetMap = {
-  today:{q:'我今天的整体运势如何？',topic:'daily',spread:'daily'},
-  month:{q:'我未来一个月的整体运势会怎样？',topic:'month',spread:'month'},
-  year:{q:'我未来一年的整体运势会怎样？',topic:'year',spread:'year'},
-  love:{q:'我和TA未来一个月的关系会怎样？',topic:'love',spread:'three'},
-  reunion:{q:'我和前任还有复合机会吗？',topic:'reunion',spread:'three'},
-  career:{q:'我现在要不要换工作？',topic:'career',spread:'three'},
-  money:{q:'我最近的财运和赚钱机会如何？',topic:'money',spread:'three'},
-  choice:{q:'A和B两个选择，我更适合哪一个？',topic:'choice',spread:'choice'},
-  yesno:{q:'这件事继续做，能不能成？',topic:'yesno',spread:'yesno'}
-};
-const topicNotes = {
-  daily:'今天的牌更像提醒：今天适合主动、等待、表达，还是休息和避开冲突。',
-  month:'未来一个月更适合看节奏：哪里会卡、哪里会顺、你该怎样过这 30 天。',
-  year:'未来一年更像年度总览，不是预言死结果，而是提醒你未来一年的主线和重点。',
-  love:'感情问题里，更建议观察互动质量、边界感和对方真实行动，而不是只看一句话。',
-  reunion:'复合问题里，重点不是“想不想”，而是“有没有现实条件、双方有没有改变”。',
-  career:'事业问题里，重点看资源、能力、节奏和可验证结果，先小步试错再放大。',
-  money:'财运问题里，先守住风险底线，再谈机会；不要因为占卜结果去冲动投资。',
-  choice:'二选一不是找绝对正确，而是看哪个更符合你的长期价值和现实条件。',
-  yesno:'是或否问题只看当前倾向，不代表命定结果。现实条件改变，结果也会改变。',
-  general:'把注意力放在“事实、感受、下一步”三件事上，不要只追求绝对答案。'
-};
-const positions = {
-  one:['核心答案'],
-  daily:['今日能量','今日机会','今日提醒'],
-  month:['本月主能量','本月挑战','本月机会','本月建议'],
-  year:['年度主轴','感情运','事业运','财运','年度提醒'],
-  three:['现状','阻碍','建议'],
-  choice:['A选择能量','B选择能量','隐藏因素','最终建议'],
-  yesno:['支持因素','反对因素','最终倾向']
+const UI = {
+  time: document.getElementById("time"),
+  lv: document.getElementById("lv"),
+  kills: document.getElementById("kills"),
+  coins: document.getElementById("coins"),
+  build: document.getElementById("build"),
+  hpFill: document.getElementById("hpFill"),
+  xpFill: document.getElementById("xpFill"),
+  loadout: document.getElementById("loadout"),
+  startPanel: document.getElementById("startPanel"),
+  upgradePanel: document.getElementById("upgradePanel"),
+  overPanel: document.getElementById("overPanel"),
+  finalText: document.getElementById("finalText"),
+  choices: document.getElementById("choices"),
+  classCards: document.getElementById("classCards"),
+  difficultyCards: document.getElementById("difficultyCards"),
+  toast: document.getElementById("toast"),
+  pauseBtn: document.getElementById("pauseBtn"),
 };
 
-function $(id){return document.getElementById(id)}
-function toast(msg){const t=$('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1500)}
-function randInt(n){return Math.floor(Math.random()*n)}
-function escapeHtml(s){return s.replace(/[&<>\"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
-function spreadLabel(v){return $('spread').querySelector(`option[value="${v}"]`)?.textContent || v}
-function topicLabel(){return $('topic').selectedOptions[0].textContent}
-function drawCards(n){ const pool=[...deck], res=[]; for(let i=0;i<n;i++){ const idx=randInt(pool.length); const c=pool.splice(idx,1)[0]; const reversed=Math.random()<0.33; res.push({...c,reversed,orientation:reversed?'逆位':'正位',kws:reversed?c.rev:c.up,meaning:reversed?c.r:c.u}); } return res; }
-function yesNoJudge(cards){ let score=0; cards.forEach(c=>{ score += c.reversed?-1:1; if(c.arc==='大阿卡那') score += c.reversed?-0.6:0.6; }); if(score>=1.6) return {label:'倾向：可以 / 有机会', text:'牌面正向力量较多，但仍要配合现实行动。适合推进，但不要忽略细节。'}; if(score<=-1.6) return {label:'倾向：暂缓 / 条件不足', text:'牌面阻力较明显，现在不适合强推。先补信息、降风险、等条件成熟。'}; return {label:'倾向：不确定 / 先观察', text:'牌面力量拉扯，结果取决于后续行动和外部条件。建议先小范围试探。'}; }
-function buildReading(cards,spread,topic){
-  const majorsN=cards.filter(c=>c.arc==='大阿卡那').length;
-  const revs=cards.filter(c=>c.reversed).length;
-  let mood = revs/cards.length > .5 ? '现在阻力、延迟或内耗偏多，不适合盲目冲动。' : '整体能量相对顺，适合在看清现实的前提下推进。';
-  if(majorsN >= Math.ceil(cards.length/2)) mood += ' 大阿卡那较多，说明这件事对你影响较深，不只是小情绪。';
-  const key = cards.map(c=>c.kws[0]).join('、');
-  const advice = cards[cards.length-1];
-  const action = advice.reversed ? `先处理“${advice.kws[0]}”带来的卡点，再决定要不要继续。` : `围绕“${advice.kws[0]}”做一个小行动，别只停留在想。`;
-  const avoid = revs>0 ? '避免反复抽牌、冲动摊牌、情绪化消费，或为了缓解焦虑而立刻做大决定。' : '避免因为牌面看起来不错就忽略现实验证，任何好趋势都需要行动承接。';
-  let special='';
-  if(spread==='daily') special='今天的关键，是把注意力放在一件最重要的事上。';
-  if(spread==='month') special='未来 30 天的关键，不在一次性逆袭，而在节奏、耐心和持续调整。';
-  if(spread==='year') special='这一年更像一个成长周期，重要的是主线稳定、阶段复盘和长期选择。';
-  if(spread==='choice') special='A 与 B 的比较，不是哪个更完美，而是哪个更符合你的底层需求与现实资源。';
-  if(spread==='yesno') special='是或否只看当前倾向，现实条件一变，结果也会跟着变化。';
-  return {summary:`这组牌的关键词是：${key}。${mood} ${topicNotes[topic] || topicNotes.general} ${special}`, action, avoid, majors:majorsN, revs};
+let W = 0, H = 0, DPR = 1;
+function resize(){
+  DPR = Math.min(2, window.devicePixelRatio || 1);
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = Math.floor(W * DPR);
+  canvas.height = Math.floor(H * DPR);
+  canvas.style.width = W + "px";
+  canvas.style.height = H + "px";
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 }
-function makePlainText(question,topic,spread,cards,pos,reading,yn){
-  return `【大众塔罗站 第三版｜占卜结果】\n问题：${question}\n类型：${topic}\n牌阵：${spread}\n\n${yn?`是或否倾向：${yn.label}\n${yn.text}\n\n`:''}牌面：\n${cards.map((c,i)=>`${i+1}. ${pos[i]}：${c.name}（${c.orientation}）｜关键词：${c.kws.join('、')}｜${c.meaning}`).join('\n')}\n\n整体解读：\n${reading.summary}\n\n下一步：\n${reading.action}\n\n避坑：\n${reading.avoid}\n\n提示：本结果仅供娱乐和自我反思，不构成医疗、法律、投资或重大人生决策建议。`;
+window.addEventListener("resize", resize);
+resize();
+
+const ASSET_PATHS = {"player_sprout":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADdUlEQVR4nO2aP2hTQRzHvxHJkiFQhYCzmqG6dJFQMDikSyg+yVALCq4uWSrWQR2ig0pdurgGFNQh9EQymE66lC5Z1KF1Lyh0cOjSJQ7h7Hm5e+/+/O6lxftAabjkd/f7/e57f98DIpFIJBKJRCL/J4VpNHrr6oWR7rs3X37k6lNujaUFrSOPZARvwCVwmZCJCJoAXfCry3Nam+dvh8ryUEkIUqkq8LSgdaiSQZ2IU5SVAXTB6+wohpQIaTZl51wDVyGrgUoJ5ArgUAYfoj4OmQLE3j9/ttTnn1uNapOqDeBfJVCogEQBuuABoLe505+0oIFiPgg2BEJBPRS8EyD2QqhxKiO246sCcgXIY556DqDGaxKZRu+LUEyIp8m8CYg4kVIr6thPgvIqQr2q5KKAemcs1c+PzYcJt2nXSkF84jgrwHT81ztD7O/tbu/v7W7zoLIQbda3DrSSp1gNgipAFXC9M0xVgspmfeug2a6NN1iqOeDXzDwAYCGZN07CgHULgGUCvr5a+tuA7tyu4sy5i1ds2lHZ6CY/HrwtC8md0YB1C0YJEAM/qTx49FBVNgq6CqiknjURutj4kKkAk96/dHjznlz2rfhuDRg7b7sKpNlMtvVhzahSDd6T4OvWi4nggbGjYhJsUdmoEu2LVwJ0wXPEJPjiG/yzJ08nygasWzj2O8EsPl277pQYp2VQZHV5Djh0taaFJ0Gntst332sPSpkKSDO+3bufKm/ZoXpnqNzomPwmayi5BA8QHIZ0SUhzuLe50+d/Nm3p6szqiDSsztDykijuBk3uA8Se5Vtb4GiXJ35vsnKktZ/V8xzvW1XbSxFVElqNatMneJ/b4dwvRNq1Up+f8I7+2wVPifccIGbf5IDUalSbovxFTIOnfDZA8mAk5CMxGepHZCQbobzf6qBsl2wnaDsUXKB+LAYEvBSlTkKopJJLl/L9ACD8SxLkClA559p7ebwhEmLySgBgZXF24+dv9WnJ5R2hSrkIAHj58fsNAMzLQwGqjVCiKqyUi1AlwVYRPHhNe8yqMgnfBCRZP+DO69RgYmvoA7NuAH4JSDJ/ISAGk5YMw6B1/jBbo6k8HK2Ui3wsT7CyOLuRpy8n/krMF58EMConiGAuRlTLYKIq1MlZJ39HO5bhWyrB9gGBYVQV5XWKSzxsGZEPkUgkEpH5A7JXeIAty/K2AAAAAElFTkSuQmCC","player_gunner":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADp0lEQVR4nO1az0tUQRz/bMReJIQKxM4pgd7dZSHo4mXVXnjbDKRLNy9GBVse+gERdvEPiAV1b+Kr9JCXIBDbu4Gsd6PCQ4iXLtthGR1n5+eb77x1631AZN++78z385nPfGfevAUyZMiQ4T9GLu0OB6dWW6Z7vn+4m1peF0N3IBK+UarYhJ2JCSlIsIYZcUvCWuxt1wGEESKIAINTqy0K4iL2tuvkIlygbAwIRx5ou8mmhriAVICQ5BmoRSATIA3yDJQikE+BXgNJQUlz9F3x+XFOy5FsH8CWKl+kLWQ2BSgbm7k5dKYwLcyOObfx4NcyWT6AeQoEc0AS8t0AWQ3gR//61b7N+sYuAKAyMVqm6iMESKaASF78nlKE57XGmc8rX/a9OPRcEaSeWt4C8KOf1rzn+xELryvIHSDa/Z+uAd0YfR58PUhaC4KfCFGgvrF7UlipHXXuiyBPXvbZF6k4oFBtW/XrK/tpwmLmin1BcmJI7ADb+V+oNnB40GwcHjQbjJQJfMzSzrHS8hSrQVAHyAgXqg2tE2QxSzvH5blie4MlqwE/L5cAAONRyVqErbiWAxwFaL6bOelA3JHpcOXasPMSIcaoih8j74rxaLa1FddyVgLwxHsVT549lV1rBV0FZFY3FcIkMT4wOsBm9IeOph+K1/YvrS0C7eRdVwFdTGdf7xetGlXAuwguT7/pIA+0E+VFcIUsRia0L7wEUJFn4EXwhS/51y9edlzbimu5c78TNOHTrduJhEm0DPJYmB0DjpJG04KJoHLb8P0V5YOS0QG64Htrj7T2FhMqVBvSjY7NPaaplIQ8QPAwpBJBl3B9Y3eT/bn0pWrTNBA6OD1Di0sivxu0OQ/gR5ZtbYHTXR7/vc3KoevfNPIM3oeirociMhEqE6NlH/I+B6OpH4jMFfs22RPe6X838pTwrgG8+jYPSJWJ0TJvfx625KlGHwjwXgAIez54Lt8L+CbRzX7JdoKuUyEJKK3PEGwrTC1CKFHJrSs7m/OpCTLilFOO3AGy5JKOXmjyQJgfSkYAMD85sv7j9x/pDTpHqMQa6M8DAN5+/HYHQOyVIQeqjVAkuzjQn4dMBFdHMPKK/mKnxgT4ChCZbmDJq9xgE2uZQ+zcAfwEiIx3cODJ6MSwJK3KJ3YN6srL0YH+PJvLHZifHFlPM5eePxLzhY8AMVUSRIiTBFEtg5HsosrOKvsnjIsNuWkRbB8QGDFVQ2k9xUUesTFRDhkyZMiQQcRfcZKFBvuSK40AAAAASUVORK5CYII=","player_mage":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAENklEQVR4nO1aMU8UQRT+1hhiQgyFBYkQCwg05IwFEa45xe5ykDsl0eYukR8gJKAEtSA0YgSJyk+AxuJkDZyUJjRwxI5gAdEKiBYUFjYkZixwcNib2ZndfbuD8b7kwt3uvpn3fe+9mbe7AJbR1zbBbPtgDX1tE+zVXcZsinDO1sR9bRMs3z1ta/oTWBNARL572lopWBFAFn1bIiQugJf8yFt84d9tiJCoAGel7kVYXQN49G1mQWICBIl+kiIkIoCMvBh12e+kRDgf9wRJ1T1jbMV7zHGcfp1d7ALI4I22ePz1PbTz33+EYx+/Pnf8xmOMrUxWkZMd14kQawlQRF9XCiryADBZRU6WGSJiE0BFXhV9v/MqEfzIc+hEiEWAuOq+mOk4EcGEPIefCORrQDHTwfb31OfFGg+CfPc03n8CipkyW1zb9V0TgoA0A47JDyKuVT/fPY39vcFTmRAVpBkQJ3kOnglUIBOAbd9nwDcAQ1RDKjFCOBZJCVCmpDE+D+WmelAxuXSqBxVVP0AiwP7eIMUwgXGr/bFWBD/yAIEAxUwHa2ktRx0mFFpayyjd6FSKoCMPWGqFqeE4Tr+VewErtS9BMdPBnvZfDWV7Jh6K2gRZCWx++EU11Cmsrm/V1Hc2nTJqgU2QyBqQndsAAKyO9ga2GU43xuITR+gSEOv/wYCaWHZuA4cHO9XDg50qJ6WDaPNm/acy2n7zmiLWNUBGWCeC7LwoAmX6AwFLoDpTOon6/LJZNAHg0uXOniDzyGyoiXMYZUB1psRE8v8KTHyOtQRki55uIQxjEwXaBwsqFcUSWBh88dB7fvPo3Sz/HmUX8Npcb7hTM1epPD575eKFmjHyN68BAHoeLSh5Rs4AGXngtKOro72BoyizkZH388EEkQTQTaxyOAwoxxLx37fCoQWgaELOArQC+C0gpfL4rOoccHohBI4XNpNGSHaNdyxT+PkPEJSASgQ/h1fXtyr8E2Qu1Zi6QPgh0PN175YoboUmJSFGdjjdeEKed3nieZNdQ5xftg0+q2xp+UV+wWB6U8QhEyGbTuWikF9c23We5FI1/YqJAIk/EhtON1b4zc3fv8HIUyLyGiC+pjK5QcqmUzkx/UWYkvdG38hIAfIMmF/e0JZCNp3KZdPhx6cESSNE+bIy6XnJOsGgpRAGlKnPEVsrTC1CXKKSrgGLa7uOuC1yp6O0zTLiZ/b/AwC5c2GjFzd5gKARkqAAAGMDXUvffxxJL/DLCJVYzU0NAICXy9u3AbiRPBRAVQIF2cHmpgbIRAiaEZy8Yj430GAeRBWgoLuAO6/KBhNbQx/cwBMgmgAF7RUCRDJ+YhiSVvnjBjWy8nq8uamB13INxga6lpL0pf5ILIKtS+UEEdwwRlTbYEF2UJXOqvQPaedqfPNFbH1AzHCpBkrqLq4QwdYl8qGOOuqoow4vfgN+XNtTdYVMcAAAAABJRU5ErkJggg==","player_tank":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADOUlEQVR4nO1av2sUQRR+/iBNihQpAmkP0wTShpPD8ppNZCVFmvgHaHGIMfkjkiiSQv8A01iEDDHbWIok2B7YKLaChYWFjSCxOGcdJ/Pjzbw3uxw7Hxy37M6b975v3sy8WRYgIyOjy7jWtMNic3Tpa1O9PmwsrptNOFFJF3dLjEndPrUYSTuXxJGkjahOxeQ/kRBJOuUgriOVEOwCFJujS07iOqpTwSrCda6OANKTB5hkFWYhxYJNgCbI174YRWARoEnytU8mEcgCtEG+9s0gAusaMI3IAlCM20z/OgbiNOh8BpDPArJCm1Z0PgPIJeWD3edsVVksXu49iubR+QzIArQdQNsgCbB151br8x+AFkfOgLYDaBudFyB6/1Tn3cNyxdpubX8M379++gAAML+4tHq2Y29rsxn1Zyv1+XDQK+T1CzGu7x+9+xzMJ2kGrO2PUfd8zw8vftaEVfIcCDoLnD/bqEddVd6H+cWl1RA/JhsMcTW+24+PUdmAEkDteFogY/YJkXQKmOa7bw2IsaHAmya20VenwKuNvSf684vfRwfyWs7rECI2m/6NrSu+7h/vHgDYF2NXFpAzwEQe4P9Az3ZWgkfRZGMi74oBA5IAPse2gGPg6ytWhM4XQtECuIqfaYJXANcCIhcfG9SFEGCysGEKIVMbvS/s8+TboE0EV8Bv33+p5C/El61P30C4EFQ761uiuhVipoQ6smp9L6s89Tlm13D5x1aC5Jei2EORhEmE4aBXUMjHHIIkGvlGSMWoP1vJw82//zDynCCvAar6mAPScNAr9OOtBJY81+gDMH0io7+TS7lF6iJTBWAphKhBtOmXrRIMnQox4Ex9iWSlMLcIqURlT13TO3rKmmAizjnl2DPAFFzs6KUmD5DmS9ESAGB7ffnk249fxgaujLCJtTA3AwAAT998vAcAghShAq5CqDTdXJibAZMIoRkhyVv8iaDONFAFKH0NZPC2bMDYImMQwQ6AJkDpbaFAJeMSA0naFo8INWr8LAAwIfl3Ll/B9vrySZOx5FdiBFvBFQQTRIwR1zZYmm7a0tmW/pF2whObE8nqgMQQXB01dYorCbaCKYaMjIyMDB1/APC0U1nlglQ6AAAAAElFTkSuQmCC","player_engineer":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAD4klEQVR4nO1aP0hVURj/KSWhg0Pgg+Ys0VYRHZzEN4jwJAoxhXBpERuMpoY3NIUNhUtboIkU4YV4g44Ohrj2xCzBSWhwCCyiIBvie5133vn/54p5fiBezz3f/b7f73znnO94L5CQkJCQkJBwXtF02gHkiZev107o+u7tYhNwTgRgifO4kGcghMnBTmlASxufch2U3JypSMsQQgx+9Cn1qb3Z14EOk4OdJy7kfW1l4AWJmgGy4B/d6ZXaPH61LWx3zQbV/AciCcAS3/jdU3dvfapVaz+8+L3u78Hmau3aVojcBSDyPHEeIiF44jxICFMRdOSBgAIM992oOdu9eLXWPvFsta7f8v2x2nXXr8/wsVnf+iCNX0eeFsOo2yBPhNpYQiFseIjIE2EewXcBGkkREQLdo74uNjLYkAcCCRB6q3L1a0seyKEOyAsu5IEAApzW6LP+XckDETKAVmnVokX3qK+LDWFoZqGhryl5wHMbZEefre7Y/Vy1pbG1gIsNVY2sCDbkgUgCAPqixqUQmu44qIwXu0fob7ZsHppZsCYPRKwDiCBPSlUKy2ymOw4qdL2ytlMnAsGFPJDDLrA+1Yrj/SqO96tG5wDehiUfA84CqNKfxUB5G0eHe1tHh3tbA2XxSU9l8/z9t4bRFvl13Y2iZoCIsE4E0X1WBFH6+8BqDdh9MVFTWXZuF+HylWt9Nn5ENibE2fi67i0brQlGArAPPiugmHVCRJ0Cm+XGtUHU5mvjA22ayEafnQKLN5884O9/vPRmnq5pXtsQkdlc/3GrwdfU24fzgHwxVmWBdwaIyAP1gW6We61HUWQjIq+KwQReAugcywJ2ge5ZriL8N8dhVzgLoCp+zhK0AqgWEFp8ZGAXQuDvwmZSCIn68M8yvR99G5SJoAp4ZW2nQj82vmTP1A2EClYnKH5LZLdCkynBjuxsf1uNPFV57H2TXUPl37QS9H4vYHooIohEGC92j/iQ93mJmvvr8dn+tgodbv79tiMfEt5rAKu+yQFpvNg9wqY/C1PyoUYfCPRqjD+Lx9wieZF9BQhSCOX9VUdIv8EqQdup4IKQqU+IVgqHFiGWqNG+D2DhsyaIiIeccsEzQBSc6+jFJg/E+USmBABzoz2rX77+FHZw+Uao0N4CAHj6rjoGIPOKkEGoQqgkaiy0t0Akgm1GEHmJv8zqYRx8BSjpOlDwsmwwsTWMIbN2AD8BStoeDFgyKjEMScviyWyNTuVT2UJ7C83lBsyN9si/k4mA9C8xD9ssVBCBkLkYhdoGS6JGWTrL0t/RLtPEpkS0OiAyslAPyusUV/KwzQLFkJCQkJDA4w99QeakDZXYEwAAAABJRU5ErkJggg==","player_rogue":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADpklEQVR4nO1aP0hVURj/GeGgwRtShIZ8INUguDiEUS0ODSLeaFWaoiVcDJdmF7ElXKIpdBVvhEODS0bh4CK8QSN4z0GIl4NQDS2vQb7X4bxz7vn3nXufeX8gPu8953zf73e+7zt/fECJEhcaPXkb7BsYaZna/P7xLTe/LudhRCR9vXrL2P4IaLePLUbUwYm4DWkdjuoHAOIJEWVQDuIyYgnBLkDfwEiLk7iMo/oBqwiXuAYC4pMHzqLKppDagk2APMgTOEVgESBP8gQuEYIFKII8gUOEIAGKJE8IFYG1CJ5HeAvQDbNPCImCMgKKdqBoeAnQTeFP8E2DMgKKdqBoeN8H0OnsvOPCR0DwsXL2/o124Xn6YBQAsL1X36Jnk+PVqVAbKrz+UGt/Xv/41ZtHkAAq8nmCQ4Rc7gRDETOiur4GiORVf/tiv9Fs7TearVwiYGb1LFTfPbNPE+ozP9HP5sd+o9mxUfKOANv8n1mt4eT4cPfk+HCXSJkg9nn15Zc25EW7oj8yaLbl52PDgz1RU0BF2CSC6r0ogksN0BEX4ZQCO0tJezCxAptw9drN2y52VH1siO8sJa3K7Bur8ceGB3sASwFE4t2KxbXPXv2ipoCq6JkKoU8fAFieu2PtF80+YLER0s2+mAJrj5afy+8//Xy7Qp9DVgG5z90rjztszW0srgBnRdEmBVgFUJEniCJwQEWeMLexuEKrQpYIInkgMAWyyAPZDrvCNJboy+n6E+txu34n6AuVCPLsAwECFHH4cYVNJBgFuPci1dYJKj46yDVgZrVmtRFStTHVE917mnXV7AMMKaATIcvh7b36Fv242NKNaZoIHXnA8T5AXhHEpdAmJcSZnZ/o7zjiiu9tlsws+1mRKyLKjVAWVCJMjlenQsiH3AjlfiEyP9G/RYebf7/dyHMiuAaI6tsckCbHq1Ni+IuwJc81+wDTd4Tks3jMJVIWOVQAlo1QqBNF2mXbCbqmgg84Q58QbSvMLUIsUdlDV3U3F1ITVMQ5U449AlTO+c5ebPJAnK/KJgCwMD26+f30j7JBVkToxBqq9AIAXr6vPQSQBnkogGsjlKgeDlV6oRLBNSKIvMZe6jSYhFABElMDcl4XDTZ9LX1InQ0gTIDE2EKASCZLDEvSOn9S106F/HN0qNJLudyBhenRzTx9+W+vxGwRIkDK5QQTUp9OXMtgonqoC2dd+Hv2Sw2+ZSLaPiAyUq6B8jrFJQF9UyYfSpQoUaKEjL+cLI+7HWFe0QAAAABJRU5ErkJggg==","enemy_slime":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACHklEQVR4nO2asU7DMBCGr4idrY+BhPoWVYfAggQSA08R1BmRp2CoBBILeKh4C4TEY7DxBGUh6DC2c3c+O0HcN0WJfbn/r+363AIYhmEYhmEYhmEYhmEY/4tZqcDb3dtZ6P5qdnhf6p0S9koEjYkfejYG6gZQBE7JBFUDOMKmYoLaGiAVdHnV3oXuv3fPxdYnzH6Nl0iYt8tdf13SjMkagClpxuhTYPvx+msKPHYPyT6aJkzSAJ+YIRpGqBjQD9Hbm+6c048iHhMyIteEbAPw/ASgm8AVj/GNyDEhax/giz9pT0nCcsT370nlwUHsXEg8ZnVwFBwJXPGbxfr7+uLl+sczjZGgYoAvHifd4ydPgRIHmyAxQDQFuOJT92NQ4+D3S6ZCkWrwL8E2IPXpj0XOKFAfAbG5zl0DtOIMUWQK+ElKk9aKk6JYMaSVbAnRGFsEx05gbMwAbge82xqq2zGbxZq8GeK09fPg7garj4AhYdwdYy4iAySjAK/mlG0udfXPrQWKVYMxKJ+wRDxAZQMA5CYA5FeMWoci6idCNeoDzRMh1TNBTAkjJnkm2BOrwjSMmPypMKKZt8unVAOKIYTfBY4BwHESi6FhQOPfGDIhhy/xPk4aL8eAhtJIw4yI6BCOG1tqQCPpxDGDIdrHcRpXNaASjtPYqkFhP6eZhCKO26HIt8AIOGlH9X2AcrwUTiNIjf/hNAoxnEIMwzAMw+cTvHn7ANj3+SwAAAAASUVORK5CYII=","enemy_bat":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACsElEQVR4nO2ZoW4bQRCGf1dlYUFRuaWCPEBkFlRgcqjMUf0ELXSewKZBha4aFnTEIKjM6gMUVDKvisqKr6AZd73eXc/szt3ZzXzobO3OzT/77955DBiGYRiGYRiGYRgGAGA0nDV959AGIV0vDw1ebxaDNpPqgqwFHQ1nzccPTTMazppTdQTlTjpCY6IOICbj+d+LFU7GESR2m3uCpJjRcNb4Qe5XtwCOsxAx4fer22i+Bx3gc4yOkKy4j7gARGkhXr96t7cnv//4JIpRIpw4eMPQNgiRsplLSLgPpxBaeWU7wGcynifd4Au/urzZi/H12+edsaFCaKy6C8ty3GoT/kHpig8J96FCAP+KkCOc40o1B7i458Ov3z+333PE0zjXDednF2or7vOilahPuElzxYfGtyUeYBZgvVkMyNYS7h6mAOTiCZpHcSRwD+VWHXAKsM+A9WYxwArsw9BfteXj9fZ6+uZLdF5s3N3DFO/fLln35q4+0IEDri5vdkQB2Psc+375eJ29fbg8+y0gKkDuYdglEvsD5gB5AXJc4B96sUOQOy6GdPWBlt4EQ3DFSEWXInaA9HeB+16fg2T+ZDwX9/9aOwO4z+y+4hGiAkhXvw+kLmAXIEc8rVruNqB50tWXFKGzx6C0CKVnBxdWAUqsf352sb3minLHufMlcF2g1nsj/HeEUFcISLfECL8bRGh2hVTeA1zRsZuRGCpEyg1+L3Av5lPvEShvloj/GCE4olNotMWBXXekco3lGL2hLz5m7WMitVViRUhugdJV7prUVhFxyv8Ix/gfNanQha0rhRi1Qowg2gWolOOlqDWCaBSgUohRSp07saQAVcHctqilE3J/DFWZ89qmkk6wpmjfCfRNbgFqzSQUqaUT7CmgmATwTN8DDlEpxKgVYhiGYRg+fwCGNVy1tCxfUgAAAABJRU5ErkJggg==","enemy_skull":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB/ElEQVR4nO2Zy03EMBCGs4haEGVQgpH2lBpSwJZAAVtDTpHWJVAGohm4AIos27HH39hCO9+FRzKvP+NHnGkyDMMwDMMwDOMeOfUOOM/nr6N71nXrlleXQCVFp9AWQ9V5S+EhWkKoCZAr/np9S9otyyV5TUMEFQFixeeKThETgxYBFyAsXlJ4SCgEKcID5WiadIqP+SHnFkzJfVJU4TH23UB0AtIB5BPpHbdZAK22T0EPB3QO0C5eI06TAKNaP6QlD6wDej19Ot4j4iXD0/PL3++fH+/qdrWIO6Ck7fZFxP4m7aTDABkCsXZMJX1UTI0dMQzQVeAXssia6xJUBPhPmACjExiNigBHy1bqutSuBbUOoIvU2gsgAqSOscKkS4sotcsdn5Ui3gmu63Yq2XxIn1ytnfRsQH0rHCO3nmtue2NgcwDRjiPiNQnQ8wtOjpY80FWgVxeQcZoFCNXXFoE+Ikc6YNRQIOKiifc8IqNER+eAXp1AxunybTB2cLEsl+L/0x9D9qi8C2h1goZfex0encBo7l4A+mXIwf5y/j3hkBDAAT5a43qpkxYB3OEd/XA/P32toXQOcId3jMHVGkjX1cNA83y+CX0nWdftteA2X+Pz7leBlp2Vo5IA8bUGxNbSAT5a8VJDem/tYH85POGkx+urA3x4wIdhGIYR8g3QyMIqStS2iQAAAABJRU5ErkJggg==","enemy_mushroom":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACSUlEQVR4nO2YPU4DMRCFHcQRoE2TnoICEBI3AMknSEcRkCjSkyL0KZBCCrqcwAU3QEJASZ8mLYcIBWzYdTa2x36eVbTzSVGijT2eeZ4d/yglCIIgCILQUjqcgz31TlehbW8WHyy+ZR2EErCPXILAjSKD3gZSDJihkMAH5xfB9mZvr942CCGSDbgCpwTswyVIihBJAtQFHx30pP//ezh3Nq0TI1aEaAHs4CGB2xCFiBFhj9pBKWDwidjjxhRgsmLlQZIDd81+gScLCsrZQMkEUgZAgwdT9oeSCcECcKzvSEL9jaoBsNn3pXdg+hfE+BUkACn1J/3qhxnqqxCVAVupC9gnwnC+OdN1zzLhrZbBsx8SKCOhq8I+izdoCLtGHyQBXPvxgXJnQMjhJoTB+3P1waSvZmfX0fawNSAzG8F7nocAE8A1CykzlBv4hcjq+6uy9HQOj2Bj2LYR47DeCSKoEyFF5J2qAUptBpuaYWwZcKvpZ4mpyX8zvHMZgIZ9I3Q/vvO2eRg9MnjyS+szQARo2oGmYVsFut3eehX4fBk7255cjta/l8tFVh9ZMqAcvFLVAG3s/+y+aFr/CogATTvQNCwC2IXMVQTt/3IXQbad4NXxgVIqbCdYtJWzAAMiQNMONE3rBeAoghrQ1yR7sQW0ABpsz2XXIAwjBNAAG6njmlgjKQJobws+9N+3oXaMLYLa26IZNLUD+50g531fCK1fBlP22hrlBBBD7YA4bGiAjVRMbEf0aUuD7bkwCCMcl6IaYMMAbAiCIAg2P0nuqnBrS1XsAAAAAElFTkSuQmCC","enemy_golem":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABtElEQVR4nO2aQU4DMQxFDeI0LEAqu55gJCQUzsOa8xAhIc0JuqMSLLgObFoUwsx08u3goPy3aqXa+f7jpGkTEUIIIYQQQgghhPTGmVWizXb4tMq1lv1uVOtXJ/AoPEdjxLlm4BaKF9HpgJ3LBx1uA5oKZnyJP94jnQB1QAvFT42LdIJqCkyJ+Gu04xcbkLrsXfyRVEdpF6g74L9DA7wFeEMDvAV4c1F7gMe7j+/XD8+X1eNKqdoBaRFT763jEGa3jqXfp/meYEn00hMticu3wqeY2iovToGr65tVid/fXouEWKLV2P0iSANqJZ6b56dWdDQOpWoH5KLXFoHGIVTfB6DiaxadwjXAW4A3NMBbgDfdG1D9W0CkfM+eU/O/x+47oHsDFqeA56+8tWg1zhowd8zU0rlAOn66zpQckUFngy2ZIIIXL2KwBmhXeO/xIQNyl71MsDgdVl2QaOV+gAh+SUIzBcJ+N94r4s046AhILNoBvwbbbIcnMBfMzAOIJTnMDGiIWPLh7neCqAHRUoQhsTTA4p5gMMihJaKBZhclDwTjfEtEiyTWBkwRDHJEgxyEEEJyvgC2qoY+V0oxgQAAAABJRU5ErkJggg==","enemy_ghost":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB9UlEQVR4nO2ZvU0EMRCFF0QT1wANkNEAqSUKOKINiRBFICrYiOvAKQ2QUceVAQFaZFm21555zwbtfNn9zPPM88/OytNkGIZhGIZh7JOL3gPePr99bf3n4+WhW15dBqopOgfbDKq4pvAYlhE0A0rFz/PxnPttWU6H3G8MEygGpIovFZ0jZQbaBKgYqvAYphEwA+LiEYXHxEYgTLjUCqRgFM/ShRgQzj6r+JQ+4imjNgD5qBsxPnQLsGefMY7KgJ5LPwa1FSiH4H9CbMDI2U+NK10Fu18BVz0Gebq7+W1gXt8/q1aLJEaCaAW0LP+wkNRnbYx2G1C3QC7xUkGSGA12BmgFSu/v6DjpWCV2vwLMAKb49f1j0/fSGA3qM2CzC5yP7c/0xhjN2dClEZI0MszmJ8TOgNEJjMYMGJ3AaMwAljCqbWW0vyEUA5bldJjn41mbfKjDMgJuwJr0NP00SZqXpVAHYWgKqAFh0iuSxFM6Uq0tIJ3gmlSuLQ4Tr7kaL/2nVqsW0eWi5iI0N7u572u0wlXRemGqNgB17y+dTe2NseoMkCadOid657AC2QJ/iS5boIAD65XwCBGEAQ6gocVLAzUGOEUsC98aID0EnTCOjWsNsLfB0QmMRmqARyYBxLcG2FMAmMQ07bQP2MIBNDxAwzAMw4j5BkF/BZgZAQCkAAAAAElFTkSuQmCC","enemy_boss":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADAklEQVR4nO2aL3obMRDFJ/3CSwLCCnwDk9wgIGhLik18gwD7BBvQG5QEh2RRQG9g0hsUlAWE5AQuyGqjTvVnZjQjuV/1Q46zkt57O9Ku1gvQ6SQZ16vjuF4dW+uQQNF+Ru3Ifd7/+Elq0xKO3nNqp7vrK/fxSOm4Bc6403r3/ZBtQzYxrldHL4Sl81MIAhsHeNNH0UauAAyuCIC6Yfhl7hvnwhKMqwBToypCZzukg6pBXAEhLNcJinEJbIG5KvDRqAiucc7ZBxAE4ERxzoQfxHhzkb2n2D+9nEnOONc8gPIUwGIWLl8BAIBi/v2417/60S5/AGEFAMSrYBE8m1bl+SMAhIOQnH0ApQoInW0TLvWrQhzAnPay2lPLe3ebF3z3NXMHNwexf3r5QwNlfIzKZSpnnmI6Ri6MOQQxxQHEzJeYjhELoySED2I1UNd8ql/q9AshvwoEBrUyHiJUDZJKEFVAa/Ox8SSVwA7gFMynxuWGULQGxETUpHR8VgA43dbmHVgHpwrIAZSstFZsN/F7BKpe+RMhL/Xt5gDf7u2rIWV4d3uVv4MMoLYbxOI0AgkZ1g6a9licOfelwjUM4yrI3RuYPA/AorebA7lCakwlH7MHIo5PX96N/3p4MxebyyHzofaaZKdAyaXPF+/gmJC250yD4huhGCHxqe+121MxCSAn0vr/HMwq4F+hB9BaQGtMAsit1Nb/52BWATGRVPGl7amYTgEsliu+tD0Fk71AS7h7gb4IthbQGlIAuIwkDx5qwC1/gAq7QYD0kxwqVttk8RQ4tSqQ6iEHUPojZG2oelkVcKprgWTuO4qvAq1DKB2fHUAo3VYhaPxA+t//Oly0sNV+PwBA/yWJojUgNqjVlLB4Q6SkAgb3Yby5eEwdaPyO0Gfvz4nbvzSAAX+RC8Gh8pbYDDLvmEiNZ9QCcFCDKCFi3DFx+lIPwGERRMa4Y+L0qbIGpNAIgmgcoOIa4DNwDqYEwjDsmJjHL2hvcAbl/lJMGp3U2OENCn1MCn10Op1OB/MbWU2HhcNo9FQAAAAASUVORK5CYII=","proj_pea":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABTUlEQVR4nO3Zy1XDMBCFYZFDJ3RACdlQS+jBLHAPoQkWbLOhBDqgFlhNjo4jKU48d5TH/22dSJ5rWbbklAAAAAAAAHBfHnp0+vT+/Fc79vv2E3pOYZ21iq6JCCMkACt+N2zH6bGX8XVo/VcdgrTx/KqXijdf6XMfwsf4XfyNKghZAHOLN3kIKZWDUIQgCeDU4s00hJQOg/AOYeXZmMJmWEvbdw8gv/peJ5+3c87TpMU1AO+Ti+hHdgt4D13VrSCfA0oT25LfeXMLoHXvHytubvGKuSDsKVArsteVN4+RnfUutuTi3wPUCKD3CfRGAF4N5YuU2pJ2qbxdr0URI0DVsPcoUI0q1wCiNjQ9+3EfAYq5QHHvG/kcsDQE1dA3IXuC5pQl7VXvCZraiq0VxM3sCueWLF3VE2vIe8C5RdzMl6GpS/o2CAAAAAAAcHf+AUllhE4D2NExAAAAAElFTkSuQmCC","proj_carrot":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABoUlEQVR4nO2YPVLDMBSE1wxHSOMUHIKGxodgKDJcgSacAArTU6TJHSiYHIKTUJCGO4hKHuFxYlm/T8p+lSexE+3bfZIsgBBCCCGEkIth+/Ok9PVVzoHkwBQPAE2ugaTGFL5b7wfdF5GAsesm1RdgLN50HwCu0w4nHedcN6kyAbbigcomwTnh4/gDFSVgiesm1RRgyl2b76spgCvVFKDvWrXaHBY/V/Qk2Hft0PcvDzfD58+Pt//uO9cexe0DTok2WW0O+P24t/q9IgpgI1rz9vmN169jswUUMD85ii3AEtFT7Nb7xmZpFDUH+IrW7i95JnsCfEX7kq0AWngO0SZJWyCm2y7xBxIkIHfE54iSgNSiXd0HAiZAutOn8EqABNE+7gMOCZAgOiTWBZCybIVmcXQkFcI3/oBDCxh/WEUrBFkGc6QihPtAoGWw5FRE2wrHTEUo94GIW+FSUhH9XWDklJgVRJPlQMSnPULGH8h0HiCpPcQcidmkIrT7gIAjMY2kVIih71rVd61S73fKfAkLiZgETDGVCkIIIYQQQgghhHjzByHlsPw/Z9YsAAAAAElFTkSuQmCC","proj_fireball":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB7UlEQVR4nO2ZTU7DMBCFH4hLVKxQT4GUfU/Q47Sqwqmyr9RLtGKFOEZYWbjBSWzPnyvm28fj9+bHSQw4juM4juMYMV73o2X8Z8vgAUsTTA2IhVuZ0EQFWGJmQCrjFlXQXAVom9CcAYCuCSYG5AjUMkHdgMN2ky1Mw4QX6QDAveh+6DRCZiNaAYftZizJeIrxuievsYSYAalN12a/H7qi1imBvQXmNtq/v5LW7YcO2J1HAPi4fT+RFotgWwiYyXos/PRGjnHcnQHwmcBmwFT8n4wziA9wmsAyA1bFC8ExF9iHYFI8Y/YB3qOUbMDdGa+UeeDXBGoVNPktkEOYA1RIBmRlf638T59VseN4lCpQeRVOUimc/OwEWQNS2Z9uvnRAMooHCC1QNfyom588z9EGchUQZ5Y5a5wItwCjcCET5Y7BBxAPPMJ7gHD72BrA/IpcQ9sVoDA8qw2IP0WPly+e3cRkiI/j1n4at1kBisdmmwYoQjKA1AZzAzAz+xzlD7RWAQZvjGQD2IZhgXiu7AMCFSByIgiuz2LANAvl86C871Nxa9C9F4gJQ7DwvA80dy8QyLoZyhQ/V0nN3gzFLBqxYoCG8ICYAcCCCUNX/FdXQjwgbECA8tdWSnhAxYCYHDOkRTuO4ziO4ziO4/x7fgDO0tcZwBq+UgAAAABJRU5ErkJggg==","proj_ice":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABr0lEQVR4nO2bvVHDQBBGn6iAwAltKKEIK3ARjinBgUogdhEOzkWQuAwIcOAOjmhnGA94LN3+eEb7Mgc68b399hJGkCRJkiRhXGotl1pL1Pufol4M0I+lRr4fggU8AmEC+rHUzXZ9/v074u8IEXAdHmCzXZ8jJOQKeL/wr+kLES1wFXArvOAtwU3APeEFTwl5B3i8ZMr0Ba8WmAuYE17wkJArYHl4y/QF6xaYCdAIL1hKyBWwOFRz+oJVC9QFWIQXLCTkCmgeZjl9QbsFagI8wguaElQEeIYXtCTkHdB6QMT0BY0WNAmIDC+0Slj8CnRzH4z8b85/PHfdMPWZbEDLwxp3wNsLHwDvX7zOPeOwP65Ou2FWlqYGnHZDd9gfVy1ntNISHhRWIFJCa3jIO0BHQEQLNKYPig3wlKAVHpRXwEOCZnjIO0BfgGULtKcPRg2wkGARHnIF7ARotsBq+mDcAA0JluEhV8BeQEsLrKcPTg2YI8EjPOQK+AmY0gKv6YNzA+6R4BkeAlbglgTv8JB3QBz9WOr4Wb/lg4lH+HbAnX4sddFfjCTEfzOUJEmyaH4A6NAoy7xiN/kAAAAASUVORK5CYII=","proj_blade":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAByElEQVR4nO2avY3CQBCFH6eriA6ISeiAiIQKoIKjgksuogMSYjqgEWJik7CShXzyzO78GeaTyCzsN+/trnfWQJIkSZIkSZIkyRuxWu+61XrXjV33ZfEwlhThf78/3o9iSxF+u3fd7d6R3AeAb+0H06YI/XjH+z+q+8AEEyDt+GQKkFEfiHpr/IHACbByPFwBrKM+M7kLAQnhm+0ep+OBpck9Ad6Tm1sCpIXXuA84JMDb8VfMChBNeEF9CFgIr40/oJiAqI6/Ip4ACeHnyxXLxZx0bYv7gGACpIRb01wADeFU9yWoLkAEx1vjD1QUQFu4pfsAowARHO8j4T5AKEA04dKMtsVLlTfbPfvPz5crS7x1/AHiEOhFjdRv13ZcKv4AcxJ83nR0SCwXc3YRPNwHKlYBahqKoMjjH2g4GjsdDzPKvCDtrGT8gcY3Qc6QAP5Pg1f8AcHNEPVAcqgIVhufIcQ2Q7Vp8HQfEO4HcJbLmpVCA7WOUJSm5xhqHSHuy9Nbwznbkzjv42DSFaZOkB6YtcVzSPTgHHlrxh9wOhuMlAbXw9HIc4M5Q0NCO/5AoA8lqbtLacJ8IFHou67x5jcZLOKfJEmSJB/OA8RnvBLRSbHRAAAAAElFTkSuQmCC","proj_mine":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABmklEQVR4nO2aIVIDQRBFfygUGgQaDSKGI8RyHU7AdbA5QswK0GgEaGxQk5rtmg2E7d89xf6nUqmku//f7snMbgAhRO/sXx72rNhnrMBeFPEsE7o2wIpmmLDyDujBlNDV3bN7vd0Z0BLPEF7oagSixQMdGZAhHuhgBCLnvZknIskUWVd9lC8yGQBcXt+MRH9sbw+vrzavAIDP97ewulIMWK/vR+9tn76webwAAAzDLtSALhbBIj6DLgzIRAZkF5CNDMguIBsZkF1ANos34Dwqkd0C/+azETvCkC3nKeItbBOowaeE27NAzTDsmu+zjKAZ0BJ/TLilZQTDBIoBVvwpwi3WCG8T6L8Cc8R7fP8n3A2or75X8XWcOQtqC1cDvIuLyEMbAe/WZY3C4neCbgYwZt/CWAvUAdkFZCMDsgvIRgZkF5CNmwH1IWXqSDuXOq7XoUgdwArs3QWsrnI1IOqprmce9w5grAWM2S/Q14C5JrBav6B7gt4BaxZ9V7im5+cCIfuAv4r4N0+GLMc6IvIPUkIIIYQQQgixWL4BUkKjbvKWlZsAAAAASUVORK5CYII=","gem_xp":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACBElEQVR4nO2bzW3CQBCFHynE59QSigiN2AfcCCmC1JAScqYR57QSQeCdmZ15Y8n7SbnEsMn7PD8IAdDpdDqdThrD8bxk/w9pDMfzMv0syy4llPDlJ0vCW8YfHY7n5TSO/353GseUdkgRsCXoAp7d/UJGFVAFrIUvsCXQBEjCF5gSKAI04QssCeECauE/3vH16hpDQuoWKOHXJEQTKsBS+o9EV0GYAG3pZ7VCiABr32dIcBfQMvRq1yMkuArw6Pka3hLcBEjCS6d97XGeEmhrULvqWKvRRQCj9B/xqoJmAZ6lr32eh4QmAZHhpc9vlWAWkFH2r2iRYBIgDe81yCTnWCWEbQHvKR61FdQCGH1vPddSBSoBW+r7V2gliAWw+77lfI0EsYDbdTpc5rn6uO9ffErPtCA5/zLPuF2ng+Q8VQtIJWSiCQ8YhqBEQlQV1M7VhgcC16C3hCipJgHseeDd9/eYK2BL88AaHmhsAcY8iOj7e5pnQKSE6PCA0xDMaAeP8ADxLTFtFUS/oCq4CfBsBUbpF1wrgNEKnuGBgBaoSajd3bXr3uGBoBlglcAODwQOQa2EjPBA8BbwmAmR4YHkD0iUu85aec8IM3uP9a206LsPkCrA0gqM8ACxBTQSWOEB8gyQSGCGBxKG4JoEdnigf1g6j618XyCVXX9jpLDr8J1Op5PNHwN4htTceH4VAAAAAElFTkSuQmCC","gem_coin":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABUklEQVR4nO2ayxHCMAxEBYVQEx1QBCkjFEEH1EQjcGLG43F+0koy431XiC29rH2ILUIIIYQQQggZkVP0hPPt8tn6z/R8h9UVMtGeppfwluE6uKXxGi8RLoOuNX6frpvPP+bX4m9oEXABreb3NL1ESwZSAlRA3byl8ZpaBErCGTGIiG/zrfFQ+wtEgHfzS+MiJJhjpGl+bZPTPG9ZDqYERL35GmQSYHtAVPPo+dQCSuvRzbfm1aYAloB/RSWgh7ffml+TAiYgu4BsDgvoKf4/LMuACcguIBsKyC4gGwrILiAbCsguIJvDAsqPD2sfNiIp6zj6cYQJyC4gG5WAnpaBJf4iTIBeQA8psL59EWACoiWg5jMJqK1HSUCeC0DO1yLPB9BnhJAlEJUEjwNS2B7gLcHrdJj3A1ADlQx9Q6Rk2DtCNcPeEmvR2z1BQgghhBBCBuULgbymRrNht28AAAAASUVORK5CYII=","turret":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABH0lEQVR4nO3YIRYCIRCAYfR5HbPFYjab9xAWi8myxUNsNpstFrMH0uh7iAqzDIOP/4urwOzsLAs4BwAAAAAAgLZMSgyymHcPadvbfVCNcarZ+T+YlRys22yj/zucjoqRvDRfASTAOgBrRecAiTFfEF/oi1J1Ana7fba++v4QvN78K0ACrAOw1nwCqp4EP01cOVWdAOfYDKnLUgE5FyupfY+tECqg5GCltrgpsidgtVy/Xbtcz9X05ytSAaGbqEXzcwAJsA7AGgmwDsAaCbAOwBoJsA7AWvMJUF8K++v22GWxtF0q1QoIbVpiNjLSdhJZjps0D0R+4UBkpOYToHbiKj3L0z4D9KlVwLdANX6Tav4VUE1A6InFPEVpOwAAkOQJVQBNZPLhrf4AAAAASUVORK5CYII=","drone":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABMklEQVR4nO3YsRGCMBTG8eg5h2tY29gwh40T4AQ4AY1z2NhYu4aLaOHp5SLJe8gLcJf/r1QIeR9EH3EOAAAAAAAAAFCOxdgXXO/qp3TM43oabV7ZL6QpWJIzkGwDWxQeyhFElgBSxVd1I55/OR2j31mHYB5AV/GaomO6wrAMwTSAsPghhYfCIKxCEAf5Zy1bFh5KLY+YVFgrzQDtWS7osH9PTFt8u3X3nzFubiOdV9XNN4Q+84pZiiNk0FV86vOcTAPQ3H2pSE0Ilkts1CdAe4fHfBImWQJzQgBTT2Bq5n2A9AOlWd/S32HfXmBQH6DpuPqEdLi5TSoETS/gG9oRmiwBfxKauxMrUlO8P75FO8y7gMUgvqLfBj+K3g/4KHpHyFfsnmDM3HaFAQAAAAAAgMK8AMIigb41q2OsAAAAAElFTkSuQmCC","floor_a":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACe0lEQVR4nO1aPW/CMBA9EEPEhyoBQurC0m79Cf39/Qnd2oURhaGCRBkq0cnFMbbjs8/xOeQtUDnY7t179+F4AgBreGDMrtfr7+vb+w/mR3V1bv09X6y8N/D1+fGEXZ8S01QLcwHKANvNDrabHdniYi7KObGY+fwohPLcMEog5eLl6dj6TAGUBGwbVXWc8p/CYJRA6g1QwTdDeWWBXFAUy//vTXPRPkNmgPJ0RFWI6rO6Mcp0K68nzztoBpi8LiNbA6gMKjueN7GJ1AAYytqe7bPSzJYBVEYaTBqsq7M1sJrQMgB1t5cDpgD+1guFWJNi7fli5SUL0hggFx4AbmmoCzIjY/QXLQmUp2OyJiaV9NhngdgOITUAlvJCs/v9i3ZcSIpCSiZ5zuSNxNYbR7CQgDC2S/fmC9N8gymEfMGCASZQs0CHlgFS6d5WP8SUBYBiAMpXXrmAtQQAbl4viiUZG+QTp5YBcvI4VcpmwYDYwc7WbE1gvB+Avx8AcKNgaOaguB8ge3i9eW6NNc3FGtxRElDTFRd0xS7beHAlmOIgJRTyyZeRAV0UPxy+I2wtHNiAipKAmNzV65TtLCVkpw72hohrVXsXA0TFdanqODtjBisDQlMcN+rrcNcM1dXZmeJcNY4Bi1I4BlydaG2Gcr33g4E3A9S3STlkBl0HOZ4J2gZtlM/B4y4YGdDnYlRpk/LskswAMd4Mq/OGzqmTdJZ1AGX8ITOAi3c4VozsGKBekoxtNFYGkM/++2IL2zSovgiJhegMiJUdqMCSAX0aiaUB+kR0CZgOUnW5XPb8wwfBvvDwBuitDuDaPhsNgGlCYl9jiQlyBnDP+wIiKP8B5SAV7aWm1BwAAAAASUVORK5CYII=","floor_b":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACmUlEQVR4nO1bTWvCQBAdixc1UmwJNITiRVDwD/j/T/0DhRZ6KaW0UIqIUS8FeygJ27i72Z2d/dQHgphEkzfvzYybSQ8AbuCM0T8ejz/LxWozHkyaD7eHtbMTeHx6uF4uVhvd43b7CgAARsPM6Pf72ANrwlyShUVNVg2WtIaAGC6EhWnka3AVIGMsNaAt4BI2A4ImIDTLFHkJAAAfX+8n22SEcQlIQfKqVc2qBahKlcrxvMirIIocgIGqRbUJqL1WQ8b8bDrv3McHWHtcYQ9MBVoEpAjjHCBriUOTfg32XLUJqKp98yWxWYJXGrUIkGXWNhkuGiW2Q8SWWmdlUNapUUPUOvOCYkRAaO0wBlwCbETLRuQpWvYkO0EdYi59AO9DXbn6qABUiMoCon+XJgE4KwuMB5MTsqJSgCi5mViOhICYPN9G8BbgyZYSUVnAFOStsC9QLpOjCWCXxkR9g8o+XbCdX4LPAbYRpQUo71v04DIf8Dcf4OsE2PmA8WACn99v/7abRFvl7lBwFri7vQcAd82VEQG+pkooEZQCfJBodU2Q6uYoFiqEcglIQdqquDRCog2U5ShkcAmgkr2INBu5AbuUH1QVUAH1AqwzAtp/YVlQX5ROEhcSEJvnu6QvWkNQUkDXAoSKp6kIxaijyEt4eX3mbrNqAQppY2aSdfYNIgm6aLZm0zlXBSQExJYvWCgRgL1AishuD2so8hKybAgAuLVF2TGXVtj3CbgET8lJKWC3r6QNFw9OFGA6zWVzsMqIgBSeLCFVgO8VIMzvNgTYHHMJWRlGSXA0zJqXCdoj+C6RVBXAgCwHhCxzGYJ4cBJT5tglMJPb8EILFHnp1ZtY6I7URNsKs5Fm3/MuXvack5CAUJ/26IKulX8BryUc6DzWYk0AAAAASUVORK5CYII=","floor_c":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAClklEQVR4nO1aTWsCMRB9lj1oEepa6EEQYRF66aGl//8nlHrwIhShFHootFoQ9VCwp0hcd/OxySQT9YFUrO5mX968mUnSAtDHGSPb7XZ/xdPzb6wBzF9fburuv12t9+/b3Wun+3TyHgBgs1gefJ6p/hkbrg9tgivyOzBHFnsAoVCn7uQIaOILqt9kAL/YDwmtAmT2gDDGFBIHWQAIo4YyqTZod68xGhcAgPe3ufNYjDzg/vFh/97lpoJo8Xfx8dn4WjZQqTaYCY7GBb6+f7xcy8fMC2hNUJ593+DgJ9pCyCfbHLBdrfcvwDAEfJFwd9v3ej0fCOYBnB5ahjUBIgUBPB7KtWNkXQr7zPcClaWwDXwNxqUYMoVc4AHV2Y61AqpQlnw+HABoXsFWEmDCXB18Lq64qk2MoVyBymNLTgFluBJtRICQXZXLlo3KdEBNq0Df1SMrBfhcBDVFJQGbxRKjcYHZZBpkENRQqbLWBE07Nw7FkAuUIZAPB0GXy2J0h5dl8aoPQy+SqsyPuvewygIxXNoELsUXizRYR6Y8+1RgQYArXEKWjABV7JpKNkSKbeFyPsDufICpEcoKmE2mB9+VFaA6HxACSXiAS3uuAxkBIn6rVn44bcZaExAj/1MSRh4CIQhz2cH20gt08t5RnKaCIwX4qL0plrOp4CUEOJmaLZJIgzq4+MwRASnI1idIFJASiWe/InTyBOhSdFImSNETnLwCdEhKART1RlIENIGONC0BTeJOtZnKDRcP0H0hZp3fVEk2v7sogOKitjNWbsFDttMnmQVsJoAlARQzX+cLLAiI2T2yNUH5RDclWCggBOp8gS0BplvmJuGjWjZnQUDME+jWBFDu08UACwXoIKewOoWoQkNVF/wDypUi00gzJIYAAAAASUVORK5CYII=","crack":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACg0lEQVR4nO1aTWvCQBAdi6eALC2FsBcvvVhK7/6D/nX/gHjqxUsQBAkFT4I9lE03Mdns18zOGh8IKsZs3sy8+didAcALTBjz6/V6ef9Y16kWsNtuxHr91bp//UO3nCeyOzHF3OXHYiGa95RWwsQNAbKUrc/VoUJfhE6mWIiGaAqS2YVAURRQFAXZ/W48wGRxV4vUp2Prs3h+tb+WKMScNCAlQsg0gR0BFJqjI4gA3Sp9FrG1klgIo8t3rR8T7ESQGixCwFbwYsW9jiACYi1oLJS6v4tJRBYhgGF5hWgE6BVcTmChATbA8gJUAmxjG9PFx4BCAGbejo1oBPSlsuXyDQAA9vtvAEjTaY6BRANcKkIF1s3QWD4e+v58Pv9dz2iYgiuCjB50CF4E+Kr2GCEpCPMiQBez2EKm/ptKILMohRVkKW8ySSi8PADTOpj/3SfeWXkABpL1Alwap2yaIQCc8MiKgFD0pW8SAvp6AC5FUnQRlKWE+nRsXhiImQ5n8Dgf0D4fEFqJuV6/226Ez/mEWBuo0TWAqoQNeXA9NFlnAaz9QB1Ou8P3AkWkLOWjFLYKAV9hDHVhimlxNA/AzPtYqA7VvwfYDjlsZ/25wCoE7lkYUdNgDh7iTIDrKJwSPrPKhgBfN+8ONmJ2eRQ7SY86IPUCTKAQ32ACuAw2ANqE6el6tfocJHPyITAJAkyh5HVcnpPbD8E2LU/CA0xgkQVS9hdBBHA88uIKJwJCYp9629sEfS0sQoDFMTnMQw/coD9fkAdwIso3RZOFgCKLgxb0agAna1KhPh3xPaA7KA3Z1HT1Hps0TZ4FsDzNJfarQ9UYJkka5KADKvUaCXCp9Cj28TAI+wUjGyQl7IHZKQAAAABJRU5ErkJggg==","prop_rock":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABRUlEQVR4nO3ZMQrCQBAF0I14mxRCDiAET2Nta2lr7WlCIAcIWOQ8sVoJAUVn/swk4b8qjbszP7tBdlMiIiIiIiIiIiIiIjJ1vtzG6BqywnvCefOP+9W9hinXyb+9+agg3Cb9ddl3bZOGvnWry3yisqrHY336+3dd27yfLQMxG7is6jGllCTNT1kHAR8Q1ficVRDQAKyan8pBoEKABeDR/BTqY7lDFOPd/HxeDXUAUc3n+bQhqAJAvAEETR2QLRAFserEASzl7WfSeiAr4FBViGFEtKtg1VsAgQFEF4Cg2QabCEADEsCz7xHDqEhXgTgAz0MLS5vaApLDVlUAW1gFe+0AQ98WS/hXKD1Uhb3BqLN+7WmyegVEQR2jry4A9LG52UcMvSWs7gtc7gXys/R+YJX3Ap/8Gkj0nWGIJd0aExERERFt3AucHXUxKG27ggAAAABJRU5ErkJggg==","prop_barrel":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAzElEQVR4nO3ZsQkCQRSE4adYhQjmZsbGXmwdFmARV4DFXG5sZgViGxqbCTfrsMz/FTAMw3Ise1UAAAAAACDNQhU07NZvVdavpsdrdv+lokjP4gdYtQgd9psWsVVVNd2f0rz4E8AA7gJu8QPIP4LXy0Ed+eV03NZ5vMny4k9A/ABNrsL/ugdwFRZgAHcBNwZwF3BjAHcBNwZwF3BjAHcBNwZwF3CLH4AXIVlSp+IH4EVobkDvGMBdwC1+gCa/x9W/sFuKPwHxAwAAAAChPpLMHyUyThV7AAAAAElFTkSuQmCC","prop_bones":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABaUlEQVR4nO2YwQ2DMAxFTdUpuDAE+4/QIbiwBj0hIVQF2/F3EvW/Y1Qa/x/H2IgQQgghhBBCCCHk35haB+Bl3z7HfW1eVrOeV0w4ufwSX1ovMZwBTyKtJgxlgFacxYRhDLCerPb3wxiAAmKApxi1ApYBkSYgDQ034BpsbeD79jnQ2QSvAV4RtcK1TVFoJ/gUtCaoiBO3dIShGfC0cXQT44nhDmQWsGaCVvj1uahZADoMlYSdwXrERwKfBrOKmRf4W6BGAFq8SOL3AEsmZAg/6W4WyBQvIvJGb9D7XADNgBYdoJUmfYCWjOsAHYZKzMs61XaOEbgd9gb3S3TEDOHFlQGR4kvrtftpMDvrCcZygpr2ORLTH6LFa/eJNEJ9BbLEa56LvBLddYInWSZ0a4BI2YSoa9C1ASK6fqGG7g04uZrQpAhaN0WcWvPXoIiu+GSPtDWYr8CTuJHEizhrgLelJYQQQgghhBDSCV8oob6KJFKC/QAAAABJRU5ErkJggg==","prop_plant":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABjUlEQVR4nO2ZPXKDMBCFHxlfwo0b1258AmhS5wauuUYuQc1J0AnSUKehyTFIE3k0jKUY7eKVk/d1jEHeffvQzwIQQgghhBBCCCGEEEL+E5V1ADEOl9Mc+23qR7W4d1oDaeETr9smeo8DZkBHiKIccLic5lTiS1w3iEUoQoB7qh7DdQOAfDe85Dy0BTnJS57zmAuw1va3qNsmOWmm2OwViAUUWlUj+ZCcOUF1FQiTjiXmfmbwUlBzQM4Mrln9cNw1LlCZA7St/EjEAjxz8oBQgGdPHihgGbQmW4C/UH2ADrAToG6b6z5ei5yNEB1g+eeaLsg9GmcLMPVjpRG8hgiSvkAxr0CuCFLxRAJouQAAzsf96mR85SVdIZXDkGRP4LoB5+P+ev3x+QXgl56gsAsUonIcnvqxcsBqEZbJ+7GA9LG5yK6wF8FfR/sBgc2XyS/H04othWpDJAzaRSro73l7fy2iMbLZd4FHVVBKMcugFRTAOgBrKIB1ANZQAOsArKEA1gFYQwGsAyCEEEKIGd97eZ/O8e9x9wAAAABJRU5ErkJggg==","explosion":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAHF0lEQVR4nO1dq3YjORCV56xJiIm/JCTEJMQ4OCT5gsEhQSHB+YKEGA9uMsQkZL4kJMQkwAvG8siyVO+S2jO+5+zZ3djulu5VVUmlVwhnnHHGX4jtw9Vr7zJQ8K13ATxwKuSHEMJ/vQtAxfb74pb0xYuvpXNRTDHp+fLtw9Xr5Pn9/ujvVLJzpORvpkPpK5OX9Ur0bCeMxgLEpEcQW376njGI0c0CDvx0pbWSUSKf+cxeYnQRYPt9cUtxFyigVi98Zmshmgpw4Ga0AmAuR2lVrYRoIsCRf9e6DIq/17q1HbyFcB8HqINrjobkh+BQ/gyuAnQh3wFpPawHeS4uCCS+RiLWajnkW1lA4Z2lcYsG5gKgrV7ac/EUgPrs3XMt44KpACSXo+k6MolSPQN5ppUIZjFATb4llhe2sacgqFV8M7EA00RZWtmcyPXnB/r7xWxe/PuwWVm1/hRaS1ALwGoJFAJqBIagE4D6+xyEeKIRge2C0m6YOfkYIHI9QAzmGnckigHbh6tXtwGKpJV6gNmTkvIhD8LcFm04OhWBI6ywrBIR2AIcDETGJoKFi2rcUPgxgJJYg0AhCWqtnnFgMZtru7BcK2AJUH04VYRYudbBlIK0TA1FIAtASjFAQlgPjjiQBPZGIthnQ0silCqDWUHL3lCtLHm5HUbyJAGO1OTkbKCWJHVFli4Me1Ysf6xTtHSCGBQr8FsVcfG1JBG1mM1NWnvtXRYBvUa2wbw2agGqAReV2B5BmfpOah0qloHx578uaP35IbaE0m+vby5/f/Y2FP8eQgg/f/xC34VBY5UMywCTcaKZrRqkLW4xmx+Qm+IpEeHxrlyep0wob/IBlGbT2i3OlbqjGvkUjIH8zXQIm+lQm8qUCyAJOpLK5SR6wor8HekUjqoCdM121tyJ5vuPd0vQmjTkp4RXSK/x2Wd/AFTZSBKVVArS75VEkE7UEFs5BJ0AmkKUKp2TE4mTuKH4m5JI6Xs45C9m8/0/RqmVogAi95MWjor158eegJp7wFo59Dn02fXNJXmKk1uvCkq8+owD0sJSKrn+/AjXwOfcmID9BrOohgPD4jiAbQEcc4QEkRDNRYl8DeHDhjUhn0/gt98hA1nH09vgKkJt4IaNnB2xF6C2X8sVKQmRHC8RoOde31z2EuHABRVX/lJ6ONIeAZRiaOGOUkgFiC7o4mtJ7Q2mbugoBpCWX0Or1zjQpBmswRWgFsuYC7mOBcj3b1HBDWRjIj8CE4E6ZsAyoIkA5SC8mQ5sEUpZzFOHND3BcEf1XpBEhBSlwo9dFMtMKFEEuBuqFSFHWsE1kCpoCc9sK0GE/jvlSwS0GguMALgA1laQo7UFUGfOrIBYAc0CLEWIcWBsvaDHu+VRL8gqJgAi0F2QRISxB10MkqUuNVRE4MUATIRTJ5yKvJ7U7U8FEfhBOIoQHyQdCf/88WtUbkibC6r5+VyY3/+/H4jJZsTSlzHTsSR4BESvIIvVP58v3kyHNN1zZAGTl/XK+3yEIihrfDR4vFseidBhDLJLQyCpiFZoPQbIRUj/u1P8aisA1nto0SJLlhBCt1yWzbIUyA/GiXdsKhIjn+vDoe9T3peWu1Z2g/jnsy6IQnrEYjZHeyDSAGo5+c6pEwPVxbnsQGwxh1DqlkLre+LnWHqh9HkqupZUwUxYhM4CGLtFjlBqfbklWHUd8+fk7+k4gOQJkBKuyQ1BFY7kWPfb4/Nq7q6TCPj+AOtMqGSJOCWDSfmO5/J0xjRkimI39M9I7UtUlio6bo7YPxsrg9WeNSKKLmjy/H4/eX6/N922P5ZEHWc9aAOAA7FdWuLPH7xXS9TmkVO/TUngpd+n7j0rwcgaoPOE+OnoCO3hSzmoFa0F0ae3gf2+lttoK0B7QVX1sL0BHPclqaAFKQ220WKnadmMhHMx4r8pQ/VeJ6NQ3h8xbFam55omIAnAOhMtLyiWJ2oBzbkUafkdjsRvs0esJMJYjiaDUCq38YFOZAHUB5WmldGSX/u95rn5byHLNTxJkWUBJiL0Oj+CMwikxC6gA8LhiX9mnEaEU7jhiGtFWdecy0+7fcKnQH5Ew8MIRQKwraDlgq5e3Vqv84Jq6HYFVIvek4DMyct6Jdljp3JBJBFOyfUIoWmMvqenS8jH9p9JD/BOezaGNzB1Pz09Qn2gawRU+eXFrck+LaP7xyzcsM8NGhY3XdTgfYuGYoJdAvs7ZKR7jSmwvEdGeplQsO2AmK6Mi7vtu6wtTSEVvDH5ITjfpDfqS9yYt/l5dbtdR8LNxwpOR8971sM9FWFWeOvLO/Pvd7oAut9tqlw4XF0LHbD6V92mmkMkhMGlzeAzHW7Jo6DvnfKaW5gsu7ab6fBP3ahdAusOSsO7grscVJWWodeLIYBpjRO5KZuKUQqQYz+6dliVcAYB1pcon3HGGWPB/9g9bOlOnXGyAAAAAElFTkSuQmCC","poison_cloud":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAFYUlEQVR4nO2cv47lNBTGv/BPq10JgQQNBWLmDaBhGwQlEhIVBQWizyPkCfII6REFBS0S/VbTwBsM0FAh7dVqQWh3USiIGY8nsX18zrF9E/+k6P5JYvt+3zlOnDgXaDQajUaj0Wg0GkejK92AGunn8YutdVM3fC9ZVzPAwie8i5QRzQDQhHfhGvESZ+c9wBFfYv9DG8AVT6KcwxogJT63vFckG3EAfHq9SClQ/SDcz+On7ndTN/yoXa8PYrSSg3Tqhu9it1UzYE14Fwkj+nn8aKXcR4F9Ygxg9w4xRqgYECO+IdWENeFXyr5jRC7xrTZ4TRA3gCK+IdaEfh4/Wd7+Qyj7lgkRBogfF30miBqQIr7BZ4IlPEAQ3+Ji6oZvlrJ8BqidlGyZULUBjvBAmviGi+X1r4316meEayaIjQM44q/t74j/7rJIcH9ZbLKcjvfz+KX73TkMxIzwvzDLcfd3TShClQZY0S8V9VvcR+bBqJsFVRqwoC1+FVRnwBL9hxAfEDSAO6otdHniWYE6b3VD1WUAtqP/YuP7WLj7qyBqQGoUl744VxLxDKCKaW/fz+PXgc1To7jK6AeUuqBYExIjnypmteIDFd0PiIh+l5iBWUj8Igdh4OayRI7rH1r9uxF3zYiqo95mD7ckOWK/hgJZYF+UK2bAyoWpZ/hPkEOR3YC1K4IWJhoPY0TWgVhAfJuc3UJWs917AtkMIIhvKHaGkpMsBiSIb8hlQpYsUL0jtgNUTdi6J6xuACP6DWd/PPDNiqg1AzpneW4tqlBmtUmUV5sBRnAfakaYqStSJsSUU9NImHpd6jmAVzUaAtyIl9KFVjE31BD5AzjtEDHBRL8P329JzZosjygFTJBoA9uEGAM0KH0MkAoA1jGhlPhAPgN+y1QPmZLiA3kzwDVBuvsjZ0Fp8YH8XVA1mVCD+ECZ01BjwnsF6q5GeEPJccCfnnUPpCurTXhDbgPejtzONodlxpbw/Ty+v7Ltz5y6Usj2VwX9PH7O2D3WhCf2h6kbflhpxx3hXXIaket+AEd8wN9d+er9zPkcFJ+ynQQ5LkdzxTeETPg10A6SqLlMUO2CBMW32eqOnmx8DwC/E+t4uLVi6oaJWJYXzQe1NcQ3uCb4xAfiDdgU3kXKCK0HtTXFNxgTJMSPFt6Fa4SYAc6T629KlevhAcLiA2EDksU3cExgG7DxlwE5DIh9ZthnwEMAP3nWfxDbmFQTWAYUFN8QY8KWAZQb8FFGpJiQNBKO+aOMikmZ+WCy5HJ5fUOmKQnjgDMU/x3rPXfayfXyelqWW/Tz2FMLLH1HLCdSc36urfcnbmEkA84w+g3SE65cE07mAzULog04Y/Gr5ghd0B9K5V47n08phUQZQIz+xykNSYDz30FanKg77D0DtKLf4GYBmb0bUIITZeOgAYkHX+1uqMbuJwnNDNAyYTfiA/pdkLQJuxIfyHMMkDJhd+ID+Q7CXBN2KT6Q9ywo1QSOeW8x9o3hMryJn9wTs2wxffcNpLqtp0LlUHiZsnEwA0L/RM7gsWexeT2h7Ke4Ef9eagMDsKMf2OdArETUG0jRD9T1kB4LdxpiP48fWx/vAfhbsLq16CeLDxDuCZe4HD11wyN3eqGz/s7cTx/9PH7Ib9Vm1/O/AVM3fBtbWPUZQBU5UNYV0wSxyDeQZkXkzALFgz8AcjYEo95AiX6AeBDWFiVnPVM3XE3dcBXY7BLbUc+KfEP1XZA2xoR+Hr8SKIsU/UDCaah2dObKspV6yeJJ7K8xMy6JUsK7pGQCxzzWQExKtFrEB+hicjNHa3Z0FDUJv4YvG7jCG7SeD9g0o3bRG41Go9FoHIR/AaJTs4sdVMsbAAAAAElFTkSuQmCC","iceburst":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAADL0lEQVR4nO2dsZHbQAxFIY/nguvAkStwJ4oduBNXoE4cKL5OXIEid3CBEznwQcPbkcjlEsAHjv9l0oxEEB9/l1otSBFCCCGEkLWcLtczOoatfEIHsHcoABgKAIYCgAkToNKEWSnWVVifmEeiopPPIWhvWFZYBUctQQfsEatKy+ymXmAOyHSlgYwFIsDPr4fviOPOgYoJOgdkcAE6BpgAmVyAjAV+FYSsQHT1i4AF0MrbkojRz+rn0E6EO2DvwAWwcMFaslS/iMhndAAi/xPRK8DL3+vL0nvHp8Ox55j9EfqRQgDldLme28TcS/gSc4JkmHindAvgbdvWBQ8T/yq/Fr/sWX5MX+p3qRCe1b82T4eRA3idwOlyPX/7Is/v3uxJ+BKNID1D1AgjuVktgB5IxL6S3lW9ReJbJkJYirAlH0MCWBx4inviW4yEsDj/TQJMAxkNIjz5ykYRrIZiEwFExqoBlnxlQATr4ddMAKU3wFvyEYlveRNiTgSvec9cAGUuYHjlt8w4wfvy200A5d4JpKp+pXFB1HKFuwAi73993q7zMyVfeRPh9x95FYlZrggRQElZ+S0d84El8NXQvRMmQInqF7nFN7IIOAIdACZEgDLVrwS6gA4AQwHAUAAw7gKUG/+VoHmADgBDAcBQADB3d0Vk27qBxjIf7QKf+2Jc2UlYJGRhjkMQGAoAhgKAcRfgNn42u9PSE/THDB0AhgKAoQBgQgQoNw8E/jFPB4AJE6CMCz7itpTT5Xqutr4UFa+7ANMtfuld8GB7oifYzbmZFugeDD3lNuf2BFxpd7SSfnv62gBTuWDFxJuyQWO0XQfuhA1tSilalCyqoWqPmAiwSc/ahlW7JJXQNlXPRu2qfcKKa6N2RMtO9U55kYBbFXjRBm55rwjl+HQ4ZrpVjUgyARY7Kge59+MqiwApblcz95O/TV6PIL3X81lEgLJloQ71WUv4f8CesajCrXdcRLsA7gDkOJxhDuDNu2WHN+9WMlQgOgaIAJmqX9nd8wPQlTclUyzuZH7uC58hQ3yp8NwvPkeM+OBVWRVc9aGpniwOQWAoABgKAIYCgKEAhBBCCIh/TrAqDWmf5eoAAAAASUVORK5CYII=","lightning":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAC1ElEQVR4nO2bS5bUMAxFX3GYw0ZghzAodlhsBFYQBuCD2x3bkmNbiv3urE91dce6kWTlAxBCCCGEEEIIIYQQQgghvni+jsP6GFbjg/YLz9dxUEQ/xAKO4/gV/0wRfXhIfzEW8OMnPsWfff/6EP8d8pYmAQGKuI4oYHGp+fYFv+PPUgkARWhQCwhQRB9UAUpFpBIAliUtTcGhiH40B4VlqQ+Xg0ER1+gWhJayBFBE98WzP+gYsnBJWQIoAhgkIMD+UGfKQikiz9QFsj+8x2RxFPEfs0WxLP3FfDFaERQwCElZejwen6cd0CTU94RHkZ7ZZ+VnRVxkgHRwA9bLgo/WByApPcC6GeFmF5QLPLD2ltR0IUGC9KxfKfAB0wWdPWkB7LH/D5jugs4a6tlZ3zv4nh4oM23CuQwA+p/xnoIeY5YBz9dxnJWa0A96BSz3CGVJ/kzcNuErlx9y8tL/42GmMG9s0p2QRoJ0i0sB/xghQbrDst5duRAAlJ8/BfQSUgG5SZoCEiR9oRa0WvCtgx7j5kBiWiVInuL2FHzA0eXomBAk7TZVElxv84BLAUC7hED6vTgjPElwKwBok1DKgtIVVytcCwDkEs7O6tI9BC9Z4KohldDOCndpyO4zIFDKBOB9SbpLQzY/A7RoBjbpy4WWmXCbDAjE9wdqfeEODfl2AgLaHZLXhnxbAYBMQkxpNrDi1gIAvYQcVllwewGAToK3CXkJAcC1TLAsRcsIAOoSQqA9NeSlBADygc1LQ15OAPBWQktJmpkFt5uEtdRu7lhPyMsLAOoX8lJmXqxbsgSl1PpCjhmlaAsBgE7CzIa8jQCgLRNGZ8FWAgC5hFkT8nYCgDYJo9hSAKAvR6OyYIttaInaHTZg7LZ02wwI1O6wxYzIgu0zIKY0sI16lH37DIjJZcLI9wgoIEOQMPolDgpIiButhzdoCCGEEEIIIYQQQgghhJAO/AEfngkQcZn1eQAAAABJRU5ErkJggg==","slash":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAB0klEQVR4nO3Zy1XDMBCFYYmTKlIDbKiDWqCWUAt1sIEa3IaywTkHx7Kl0YxGSf5vCyHje2X5QQgAAAAAHk30HqBUSmmq/UyM8Wgxi6ZhC5AEvmfEQoYqwCL0nFHKcC+gZ+g5nmW4FSAK/vfju/h3n0+vtX/eo4juBRQHXxN2qcJSehbRtYDd8C1Cz9kpo1cJXQoYKvgl5yLMC9gM3zP4pY0iLEswLSAb/kjBL2WKsCrBpACzVV9zZ2P0PdpFqBegGr7gVrLHd2uWoFqAypajdOBqC8F4S1IroDn8lQPVXGmr8zXMFoLOfLYFlBygcfBLo82pUoDWQfV8Ar2a2amE5gI0wvd8GfZvfocSmgoQhe+46nOqzwbFEp4kHxJbrPoRwg9hZRbN298d4gKqV/8gW86W4hJWjlP6fw1RAfcY/qx3CaICrk7Zwvvp0cOfFc+p8E6r6RpQtI//raJbCX92mbfyelB7FqhchOPL59vqDzpezExVbkU19F/G/bx/hRBuat/fUvSc0HCWH6SD5cxnQ0qnSTrUSGKMx71txe1B7FHkzoLs1gt9KaUppTRdtlgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADcnTPxJfWyjOgZUwAAAABJRU5ErkJggg=="};
+const IMG = {};
+let loaded = 0;
+for(const [k, src] of Object.entries(ASSET_PATHS)){
+  const im = new Image();
+  im.src = src;
+  im.onload = () => loaded++;
+  im.onerror = () => loaded++;
+  IMG[k] = im;
 }
-function setActivePreset(key){ document.querySelectorAll('.pill').forEach(el=>el.classList.toggle('active', el.dataset.preset===key)); }
-function applyPreset(key, scroll=true){ const p=presetMap[key]; if(!p) return; $('question').value=p.q; $('topic').value=p.topic; $('spread').value=p.spread; setActivePreset(key); if(scroll) $('question').scrollIntoView({behavior:'smooth', block:'center'}); }
-function setupDailyCard(){ const d=new Date(); const seed=Number(`${d.getFullYear()}${d.getMonth()+1}${d.getDate()}`); const card=deck[seed % deck.length]; const reversed=seed % 4 === 0; const kws=reversed?card.rev:card.up; $('dailyName').textContent=`${card.name} · ${reversed?'逆位':'正位'}`; $('dailyKeywords').innerHTML=kws.slice(0,3).map(k=>`<span class="chip">${k}</span>`).join(''); $('dailyText').textContent=reversed?card.r:card.u; }
 
-let latestText='';
-function renderResult(cards,pos,reading,yn,question,spreadText){
-  const cls = cards.length===1 ? 'cols1' : cards.length===4 ? 'cols4' : cards.length===5 ? 'cols5' : '';
-  $('result').classList.add('show');
-  $('result').innerHTML = `
-    <div class="resultTop">
-      <div><p class="resultTitle">你的牌已经准备好了</p><div class="sub">问题：${escapeHtml(question)}</div></div>
-      <span class="badge">${topicLabel()} · ${spreadText}</span>
-    </div>
-    <div class="drawBox">
-      <p class="drawTitle">请按顺序点击翻牌</p>
-      <p class="drawSub">这样更像真实抽牌过程，也更有停留和仪式感。</p>
-      <div class="drawGrid ${cls}" id="drawGrid"></div>
-    </div>
-    <div id="summaryWrap" style="display:none"></div>`;
+const CLASSES = [
+  {id:"sprout", name:"新手萌薯", sprite:"player_sprout", desc:"均衡开局，容错高。初始：豌豆枪 Lv.1。", mod:p=>{}},
+  {id:"gunner", name:"豌豆枪手", sprite:"player_gunner", desc:"攻速更快，自带豌豆枪 Lv.2。", mod:p=>{p.fireRate*=1.22; p.weapons.pea=2; p.maxHp-=8; p.hp=p.maxHp;}},
+  {id:"mage", name:"闪电法薯", sprite:"player_mage", desc:"自带闪电链，适合法术 BD。", mod:p=>{p.weapons.lightning=1; p.damage*=.92; p.cooldown*=.92;}},
+  {id:"tank", name:"铁皮厚薯", sprite:"player_tank", desc:"血量和护甲更高，适合站撸。", mod:p=>{p.maxHp+=45; p.hp=p.maxHp; p.armor+=5; p.speed*=.90;}},
+  {id:"engineer", name:"工程机薯", sprite:"player_engineer", desc:"自带炮台，适合召唤流。", mod:p=>{p.weapons.turret=1; p.fireRate*=.92;}},
+  {id:"rogue", name:"飞刀刺薯", sprite:"player_rogue", desc:"自带环绕飞刀，暴击更高。", mod:p=>{p.weapons.blade=1; p.crit+=.10; p.speed*=1.08;}},
+];
+let selectedClass = "sprout";
 
-  const grid=$('drawGrid');
-  cards.forEach((card,i)=>{
-    const item=document.createElement('div');
-    item.className='pickCard';
-    item.dataset.index=i;
-    item.innerHTML=`<div class="pickInner"><div class="face back">✦</div><div class="face front"><div class="slot">${pos[i]}</div><div class="name">${card.name}</div><div class="meta">${card.arc} · ${card.orientation}</div><div class="keywords">${card.kws.map(k=>`<span class="kw">${k}</span>`).join('')}</div><div class="meaning">${card.meaning}</div></div></div>`;
-    item.addEventListener('click',()=>{
-      if(item.classList.contains('flipped')) return;
-      const need = document.querySelectorAll('.pickCard.flipped').length;
-      if(Number(item.dataset.index)!==need){ toast('请按顺序翻牌'); return; }
-      item.classList.add('flipped');
-      if(document.querySelectorAll('.pickCard.flipped').length===cards.length){
-        setTimeout(()=>{
-          $('summaryWrap').style.display='block';
-          $('summaryWrap').innerHTML=`
-            ${yn?`<div class="box" style="margin-bottom:14px"><h3>是或否倾向</h3><p style="font-size:22px;font-weight:950;color:var(--gold);margin-bottom:8px">${yn.label}</p><p>${yn.text}</p></div>`:''}
-            <div class="summaryGrid">
-              <div class="box"><h3>整体解读</h3><p>${reading.summary}</p></div>
-              <div class="box"><h3>你下一步可以做什么</h3><ul><li>${reading.action}</li><li>先做一个 24 小时内能执行的小动作。</li><li>用现实反馈验证，不要只靠感觉。</li></ul></div>
-              <div class="box"><h3>需要避开的坑</h3><p>${reading.avoid}</p></div>
-              <div class="box"><h3>牌面强度</h3><p>大阿卡那：${reading.majors} 张；逆位：${reading.revs} 张。大阿卡那越多，说明这件事越重要；逆位越多，说明越需要调整节奏。</p></div>
-            </div>`;
-        }, 320);
+const DIFFICULTIES = [
+  {id:"easy", name:"休闲", tag:"新手推荐", desc:"怪少、怪慢、血量低，适合手机和第一次玩。", enemyHp:.62, enemyDamage:.55, enemySpeed:.78, spawnRate:.58, progress:.72, eliteRate:.55, xpGain:1.25, startHp:38, startDamage:1.12, startArmor:3, revive:1},
+  {id:"normal", name:"普通", tag:"推荐", desc:"比旧版更缓和，适合熟悉玩法后玩。", enemyHp:.82, enemyDamage:.72, enemySpeed:.88, spawnRate:.78, progress:.86, eliteRate:.72, xpGain:1.15, startHp:22, startDamage:1.06, startArmor:1, revive:0},
+  {id:"hard", name:"挑战", tag:"进阶", desc:"接近旧版强度，但节奏更合理。", enemyHp:1.0, enemyDamage:1.0, enemySpeed:1.0, spawnRate:1.0, progress:1.0, eliteRate:1.0, xpGain:1.0, startHp:0, startDamage:1, startArmor:0, revive:0},
+  {id:"hell", name:"地狱", tag:"高手", desc:"怪更多更凶，适合测试极限 BD。", enemyHp:1.28, enemyDamage:1.18, enemySpeed:1.12, spawnRate:1.22, progress:1.15, eliteRate:1.25, xpGain:1.05, startHp:0, startDamage:1, startArmor:0, revive:0}
+];
+let selectedDifficulty = "easy";
+
+const BUILD_GUIDES = {
+  sprout:{name:"新手均衡流", keys:["pea","fireRate","damage","maxHp","magnet","shield","xp","fire","aura","regen"], reason:"新手均衡流：先拿输出和生存，容易活到进化。"},
+  gunner:{name:"豌豆机关枪流", keys:["pea","fireRate","proj","pierce","damage","crit","critDmg","spread","coinshot"], reason:"枪手推荐：堆豌豆枪、攻速、额外弹丸和穿透。"},
+  mage:{name:"雷冰法术流", keys:["lightning","cooldown","ice","area","meteor","blackhole","damage","xp","nova"], reason:"法薯推荐：闪电/冰/陨石吃冷却和范围。"},
+  tank:{name:"蒜香站撸流", keys:["aura","armor","maxHp","regen","lifeSteal","shield","healFlower","saw","poison"], reason:"厚薯推荐：光环、护甲、回血、吸血，站得住才有输出。"},
+  engineer:{name:"召唤炮台流", keys:["turret","drone","pet","cooldown","proj","damage","range","magnet","laser"], reason:"工程师推荐：炮台、无人机、宠物都吃冷却和弹丸。"},
+  rogue:{name:"飞刀暴击流", keys:["blade","speed","crit","critDmg","carrot","pierce","damage","saw","nova"], reason:"刺薯推荐：飞刀/回旋武器配暴击、速度和穿透。"}
+};
+
+
+UI.classCards.innerHTML = CLASSES.map(c => `
+  <div class="classCard ${c.id===selectedClass?"active":""}" data-id="${c.id}">
+    <img src="${ASSET_PATHS[c.sprite]}" alt="${c.name}">
+    <b>${c.name}</b>
+    <span>${c.desc}</span>
+  </div>
+`).join("");
+document.querySelectorAll(".classCard").forEach(card => {
+  card.addEventListener("click", () => {
+    selectedClass = card.dataset.id;
+    document.querySelectorAll(".classCard").forEach(c => c.classList.toggle("active", c === card));
+  });
+});
+
+
+UI.difficultyCards.innerHTML = DIFFICULTIES.map(d => `
+  <div class="difficultyCard ${d.id===selectedDifficulty?"active":""}" data-id="${d.id}">
+    <b>${d.name} <small>${d.tag}</small></b>
+    <span>${d.desc}</span>
+  </div>
+`).join("");
+document.querySelectorAll(".difficultyCard").forEach(card => {
+  card.addEventListener("click", () => {
+    selectedDifficulty = card.dataset.id;
+    document.querySelectorAll(".difficultyCard").forEach(c => c.classList.toggle("active", c === card));
+  });
+});
+
+const keys = new Set();
+window.addEventListener("keydown", e => {
+  const k = e.key.toLowerCase();
+  if(["arrowup","arrowdown","arrowleft","arrowright"," ","w","a","s","d"].includes(k)) e.preventDefault();
+  keys.add(k);
+  if(k === " ") togglePause();
+});
+window.addEventListener("keyup", e => keys.delete(e.key.toLowerCase()));
+
+const joyEl = document.getElementById("joystick");
+const stick = document.getElementById("stick");
+const joy = {active:false, id:null, ox:0, oy:0, dx:0, dy:0};
+function joyStart(e){
+  const t = e.changedTouches ? e.changedTouches[0] : e;
+  joy.active = true;
+  joy.id = t.identifier ?? "mouse";
+  const r = joyEl.getBoundingClientRect();
+  joy.ox = r.left + r.width/2;
+  joy.oy = r.top + r.height/2;
+  joyMove(e);
+}
+function joyMove(e){
+  if(!joy.active) return;
+  let t = null;
+  if(e.changedTouches){
+    for(const q of e.changedTouches) if(q.identifier === joy.id) t = q;
+    if(!t) return;
+  } else t = e;
+  const max = 48;
+  let dx = t.clientX - joy.ox;
+  let dy = t.clientY - joy.oy;
+  const d = Math.hypot(dx, dy) || 1;
+  if(d > max){ dx = dx/d*max; dy = dy/d*max; }
+  joy.dx = dx / max;
+  joy.dy = dy / max;
+  stick.style.transform = `translate(${dx}px, ${dy}px)`;
+  e.preventDefault();
+}
+function joyEnd(){
+  joy.active = false; joy.dx = 0; joy.dy = 0;
+  stick.style.transform = "translate(0,0)";
+}
+joyEl.addEventListener("touchstart", joyStart, {passive:false});
+joyEl.addEventListener("touchmove", joyMove, {passive:false});
+joyEl.addEventListener("touchend", joyEnd);
+joyEl.addEventListener("mousedown", joyStart);
+window.addEventListener("mousemove", joyMove);
+window.addEventListener("mouseup", joyEnd);
+
+const WEAPON_NAME = {
+  pea:"豌豆机枪", spread:"散射豆荚", carrot:"回旋胡萝卜", fire:"爆裂火球",
+  ice:"寒冰晶", lightning:"闪电链", poison:"毒雾蘑菇", blade:"环绕飞刀",
+  turret:"小炮台", mine:"土豆地雷", drone:"无人机", aura:"蒜香光环", laser:"激光眼",
+  meteor:"陨石术", blackhole:"黑洞漩涡", coinshot:"金币弹", pet:"宠物史莱姆", nova:"能量新星", saw:"锯片陷阱", healFlower:"治疗花"
+};
+
+const UPGRADES = [
+  // weapons
+  {type:"武器", key:"pea", emoji:"🟢", name:"豌豆枪 +1", desc:"提升豌豆枪等级：更多弹丸、更高输出。", apply:g=>addWeapon(g,"pea")},
+  {type:"武器", key:"spread", emoji:"🌰", name:"散射豆荚", desc:"近距离扇形散射，适合清前排。", apply:g=>addWeapon(g,"spread")},
+  {type:"武器", key:"carrot", emoji:"🥕", name:"回旋胡萝卜", desc:"飞出去再飞回来，可多次命中。", apply:g=>addWeapon(g,"carrot")},
+  {type:"武器", key:"fire", emoji:"🔥", name:"爆裂火球", desc:"命中后范围爆炸，适合清群怪。", apply:g=>addWeapon(g,"fire")},
+  {type:"武器", key:"ice", emoji:"❄️", name:"寒冰晶", desc:"减速敌人，高等级可触发冰爆。", apply:g=>addWeapon(g,"ice")},
+  {type:"武器", key:"lightning", emoji:"⚡", name:"闪电链", desc:"自动电击多个敌人，越高级连锁越多。", apply:g=>addWeapon(g,"lightning")},
+  {type:"武器", key:"poison", emoji:"☠️", name:"毒雾蘑菇", desc:"制造毒雾区域，持续伤害。", apply:g=>addWeapon(g,"poison")},
+  {type:"武器", key:"blade", emoji:"🗡️", name:"环绕飞刀", desc:"围绕角色旋转，适合贴脸清怪。", apply:g=>addWeapon(g,"blade")},
+  {type:"武器", key:"turret", emoji:"🤖", name:"小炮台", desc:"召唤炮台自动射击。", apply:g=>addWeapon(g,"turret")},
+  {type:"武器", key:"mine", emoji:"💣", name:"土豆地雷", desc:"定时放置地雷，敌人靠近会爆炸。", apply:g=>addWeapon(g,"mine")},
+  {type:"武器", key:"drone", emoji:"🚁", name:"无人机", desc:"无人机环绕并自动射击。", apply:g=>addWeapon(g,"drone")},
+  {type:"武器", key:"aura", emoji:"🧄", name:"蒜香光环", desc:"身边持续伤害，站撸核心。", apply:g=>addWeapon(g,"aura")},
+  {type:"武器", key:"laser", emoji:"🔴", name:"激光眼", desc:"周期性扫射直线敌人。", apply:g=>addWeapon(g,"laser")},
+
+  {type:"武器", key:"meteor", emoji:"☄️", name:"陨石术", desc:"周期性砸向敌群，造成大范围爆炸。", apply:g=>addWeapon(g,"meteor")},
+  {type:"武器", key:"blackhole", emoji:"🕳️", name:"黑洞漩涡", desc:"吸住附近敌人并持续伤害，控场核心。", apply:g=>addWeapon(g,"blackhole")},
+  {type:"武器", key:"coinshot", emoji:"🪙", name:"金币弹", desc:"发射金币，金币越多伤害越高。", apply:g=>addWeapon(g,"coinshot")},
+  {type:"武器", key:"pet", emoji:"🐾", name:"宠物史莱姆", desc:"召唤宠物帮你咬怪，适合召唤流。", apply:g=>addWeapon(g,"pet")},
+  {type:"武器", key:"nova", emoji:"🌟", name:"能量新星", desc:"周期性从身边爆发一圈伤害。", apply:g=>addWeapon(g,"nova")},
+  {type:"武器", key:"saw", emoji:"⚙️", name:"锯片陷阱", desc:"在脚下放置持续切割的锯片区域。", apply:g=>addWeapon(g,"saw")},
+  {type:"武器", key:"healFlower", emoji:"🌸", name:"治疗花", desc:"周期性回血，同时对近处敌人造成自然伤害。", apply:g=>addWeapon(g,"healFlower")},
+
+  // passives
+  {type:"被动", key:"damage", emoji:"💥", name:"土豆力量", desc:"+18% 所有伤害。", apply:g=>addPassive(g,"damage",1,()=>g.p.damage*=1.18)},
+  {type:"被动", key:"fireRate", emoji:"🔥", name:"手速训练", desc:"+16% 攻击频率。", apply:g=>addPassive(g,"fireRate",1,()=>g.p.fireRate*=1.16)},
+  {type:"被动", key:"cooldown", emoji:"⏱️", name:"冷却压缩", desc:"法术/召唤类冷却缩短。", apply:g=>addPassive(g,"cooldown",1,()=>g.p.cooldown*=.90)},
+  {type:"被动", key:"range", emoji:"🎯", name:"远视眼镜", desc:"+16% 索敌和弹道范围。", apply:g=>addPassive(g,"range",1,()=>g.p.range*=1.16)},
+  {type:"被动", key:"area", emoji:"⭕", name:"范围膨胀", desc:"+18% 爆炸/毒雾/光环范围。", apply:g=>addPassive(g,"area",1,()=>g.p.area*=1.18)},
+  {type:"被动", key:"speed", emoji:"👟", name:"小短腿快跑", desc:"+11% 移动速度。", apply:g=>addPassive(g,"speed",1,()=>g.p.speed*=1.11)},
+  {type:"被动", key:"maxHp", emoji:"❤️", name:"更大一颗土豆", desc:"+30 最大生命并回复。", apply:g=>addPassive(g,"maxHp",1,()=>{g.p.maxHp+=30; g.p.hp=Math.min(g.p.maxHp,g.p.hp+30);})},
+  {type:"被动", key:"armor", emoji:"🛡️", name:"土豆硬皮", desc:"+4 护甲，减少接触伤害。", apply:g=>addPassive(g,"armor",1,()=>g.p.armor+=4)},
+  {type:"被动", key:"regen", emoji:"🌿", name:"发芽恢复", desc:"缓慢回血提升。", apply:g=>addPassive(g,"regen",1,()=>g.p.regen+=0.65)},
+  {type:"被动", key:"magnet", emoji:"🧲", name:"经验磁铁", desc:"+38% 拾取范围。", apply:g=>addPassive(g,"magnet",1,()=>g.p.magnet*=1.38)},
+  {type:"被动", key:"crit", emoji:"🎲", name:"暴击骰子", desc:"+8% 暴击率。", apply:g=>addPassive(g,"crit",1,()=>g.p.crit+=.08)},
+  {type:"被动", key:"critDmg", emoji:"🔪", name:"暴击增幅", desc:"+25% 暴击伤害。", apply:g=>addPassive(g,"critDmg",1,()=>g.p.critDmg+=.25)},
+  {type:"被动", key:"pierce", emoji:"🪡", name:"穿透针线", desc:"弹丸穿透 +1。", apply:g=>addPassive(g,"pierce",1,()=>g.p.pierce+=1)},
+  {type:"被动", key:"proj", emoji:"✨", name:"额外弹丸", desc:"弹道类武器额外弹丸 +1。", apply:g=>addPassive(g,"proj",1,()=>g.p.extraProjectiles+=1)},
+  {type:"被动", key:"lifeSteal", emoji:"🩸", name:"吸血芽", desc:"击杀有概率回血。", apply:g=>addPassive(g,"lifeSteal",1,()=>g.p.lifeSteal+=.05)},
+  {type:"被动", key:"gold", emoji:"🪙", name:"金币胃口", desc:"+50% 金币获取。", apply:g=>addPassive(g,"gold",1,()=>g.p.goldBonus+=.5)},
+  {type:"被动", key:"greed", emoji:"📈", name:"贪婪成长", desc:"金币越多，伤害越高。", apply:g=>addPassive(g,"greed",1,()=>g.p.greed=true)},
+  {type:"被动", key:"luck", emoji:"🍀", name:"幸运四叶草", desc:"更容易出现高价值强化。", apply:g=>addPassive(g,"luck",1,()=>g.p.luck+=1)},
+  {type:"被动", key:"shield", emoji:"🫧", name:"泡泡护盾", desc:"周期性抵挡一次碰撞伤害。", apply:g=>addPassive(g,"shield",1,()=>{g.p.shieldMax=Math.max(g.p.shieldMax,7); g.p.shieldTimer=0;})},
+  {type:"被动", key:"xp", emoji:"⭐", name:"学习能力", desc:"+18% 经验收益。", apply:g=>addPassive(g,"xp",1,()=>g.p.xpBonus+=.18)},
+  {type:"被动", key:"pickupHeal", emoji:"🍎", name:"捡豆回血", desc:"拾取经验时有小概率回血。", apply:g=>addPassive(g,"pickupHeal",1,()=>g.p.pickupHeal+=.04)},
+  {type:"被动", key:"thorns", emoji:"🌵", name:"反伤刺皮", desc:"碰撞你的敌人会受到反伤。", apply:g=>addPassive(g,"thorns",1,()=>g.p.thorns+=.25)},
+  {type:"被动", key:"reroll", emoji:"🔁", name:"BD 直觉", desc:"推荐 BD 出现率更高。", apply:g=>addPassive(g,"reroll",1,()=>g.p.recommendBias+=1)},
+  {type:"被动", key:"bossDmg", emoji:"👑", name:"精英猎手", desc:"对精英和 Boss 伤害更高。", apply:g=>addPassive(g,"bossDmg",1,()=>g.p.bossDmg+=.18)},
+];
+
+function addWeapon(g, key){
+  g.p.weapons[key] = (g.p.weapons[key] || 0) + 1;
+}
+function addPassive(g,key,amount,fn){
+  g.p.passives[key] = (g.p.passives[key] || 0) + amount;
+  fn();
+}
+
+function newGame(){
+  return {
+    state:"menu",
+    difficulty:DIFFICULTIES.find(d=>d.id===selectedDifficulty) || DIFFICULTIES[0],
+    selectedClass:selectedClass,
+    t:0, last:performance.now(),
+    spawnTimer:0, eliteTimer:35,
+    kills:0, coins:0, level:1, xp:0, need:12,
+    camera:{x:0,y:0},
+    result:"",
+    p:{
+      x:0,y:0,r:18,
+      sprite:"player_sprout",
+      hp:110,maxHp:110,armor:0,regen:.2,
+      speed:220, damage:18, fireRate:1.25, cooldown:1, range:290, area:1,
+      pierce:0, extraProjectiles:0, crit:.06, critDmg:2.0, magnet:96, lifeSteal:0,
+      goldBonus:0, xpBonus:0, luck:0, greed:false, shieldMax:0, shieldTimer:0, pickupHeal:0, thorns:0, recommendBias:0, bossDmg:0, revive:0,
+      weapons:{pea:1}, passives:{}, evolved:{}
+    },
+    timers:{pea:0,spread:0,carrot:0,fire:0,ice:0,lightning:0,poison:0,turret:0,mine:0,drone:0,laser:0,meteor:0,blackhole:0,coinshot:0,pet:0,nova:0,saw:0,healFlower:0},
+    enemies:[], bullets:[], gems:[], particles:[], texts:[], clouds:[], mines:[], turrets:[], beams:[],
+  };
+}
+let G = newGame();
+
+function startGame(){
+  G = newGame();
+  const c = CLASSES.find(x => x.id === selectedClass);
+  G.p.sprite = c.sprite;
+  c.mod(G.p);
+  G.difficulty = DIFFICULTIES.find(d=>d.id===selectedDifficulty) || DIFFICULTIES[0];
+  G.selectedClass = selectedClass;
+  G.p.maxHp += G.difficulty.startHp;
+  G.p.hp = G.p.maxHp;
+  G.p.damage *= G.difficulty.startDamage;
+  G.p.armor += G.difficulty.startArmor;
+  G.p.revive += G.difficulty.revive || 0;
+  G.p.xpBonus += (G.difficulty.xpGain || 1) - 1;
+  G.eliteTimer = selectedDifficulty === "easy" ? 62 : selectedDifficulty === "normal" ? 50 : 38;
+  G.state = "playing";
+  UI.startPanel.classList.add("hidden");
+  UI.overPanel.classList.add("hidden");
+  UI.upgradePanel.style.display = "none";
+  UI.pauseBtn.textContent = "暂停";
+  toast("萌薯出战！");
+  updateUI();
+}
+
+document.getElementById("startBtn").addEventListener("click", startGame);
+document.getElementById("againBtn").addEventListener("click", startGame);
+document.getElementById("restartBtn").addEventListener("click", startGame);
+document.getElementById("guideBtn").addEventListener("click", () => toast("移动躲怪，自动攻击，升级三选一"));
+UI.pauseBtn.addEventListener("click", togglePause);
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(G.result || "萌薯幸存者 V2.1"); toast("战绩已复制"); }
+  catch(e){ toast("复制失败"); }
+});
+
+function togglePause(){
+  if(G.state === "playing"){
+    G.state = "paused";
+    UI.pauseBtn.textContent = "继续";
+    toast("已暂停");
+  } else if(G.state === "paused"){
+    G.state = "playing";
+    UI.pauseBtn.textContent = "暂停";
+    G.last = performance.now();
+  }
+}
+
+function toast(msg){
+  UI.toast.textContent = msg;
+  UI.toast.classList.add("show");
+  setTimeout(()=>UI.toast.classList.remove("show"), 1400);
+}
+
+
+function recommendReason(u){
+  const guide = BUILD_GUIDES[G.selectedClass || selectedClass] || BUILD_GUIDES.sprout;
+  const w = G.p.weapons, p = G.p.passives;
+  if(guide.keys.includes(u.key)) return guide.reason;
+  const evoHints = [
+    {keys:["pea","fireRate"], ok:w.pea>=3 || p.fireRate>=2, text:"接近豌豆机关枪进化路线。"},
+    {keys:["lightning","cooldown"], ok:w.lightning>=2 || p.cooldown>=2, text:"接近雷暴法术进化路线。"},
+    {keys:["poison","area"], ok:w.poison>=2 || p.area>=2, text:"接近毒雾大范围进化路线。"},
+    {keys:["aura","armor","regen","maxHp"], ok:w.aura>=2 || p.armor>=1, text:"适合站撸生存流。"},
+    {keys:["turret","drone","pet","cooldown","proj"], ok:w.turret>=1 || w.drone>=1 || w.pet>=1, text:"适合召唤物 BD。"},
+    {keys:["blade","speed","crit","critDmg"], ok:w.blade>=1 || p.crit>=1, text:"适合飞刀暴击流。"},
+    {keys:["fire","meteor","blackhole","area","cooldown"], ok:w.fire>=2 || w.meteor>=1 || w.blackhole>=1, text:"适合爆炸控场流。"},
+    {keys:["gold","greed","coinshot"], ok:G.p.greed || w.coinshot>=1, text:"适合金币成长流。"}
+  ];
+  const hit = evoHints.find(h => h.ok && h.keys.includes(u.key));
+  if(hit) return hit.text;
+  if(u.key==="maxHp" || u.key==="shield" || u.key==="armor") return selectedDifficulty==="easy" ? "" : "当前难度下，补生存更稳。";
+  return "";
+}
+function scoreUpgrade(u){
+  let s = Math.random();
+  const r = recommendReason(u);
+  if(r) s += 4 + (G.p.recommendBias||0);
+  if(u.type==="武器" && G.p.weapons[u.key]) s += 1.3;
+  if(u.type==="武器" && Object.keys(G.p.weapons).length >= 7 && !G.p.weapons[u.key]) s -= 2.5;
+  if(["maxHp","armor","regen","shield","lifeSteal"].includes(u.key) && G.p.hp/G.p.maxHp < .55) s += 1.4;
+  if(G.level <= 3 && ["magnet","xp","pea","fireRate","damage","maxHp"].includes(u.key)) s += 1.2;
+  return s;
+}
+
+function openUpgrade(){
+  G.state = "upgrade";
+  UI.upgradePanel.style.display = "block";
+  UI.choices.innerHTML = "";
+  const opts = pickUpgrades(3);
+  opts.forEach(u => {
+    const div = document.createElement("div");
+    const rec = recommendReason(u);
+    div.className = "choice" + (rec ? " recommended" : "");
+    div.innerHTML = `<div class="emoji">${u.emoji}</div><small>${u.type}${rec?'<span class="recTag">推荐</span>':''}</small><b>${u.name}</b><span>${u.desc}</span>${rec?`<span class="recReason">${rec}</span>`:''}`;
+    div.addEventListener("click", () => {
+      u.apply(G);
+      checkEvolutions();
+      UI.upgradePanel.style.display = "none";
+      G.state = "playing";
+      G.last = performance.now();
+      toast("获得：" + u.name);
+      updateUI();
+    });
+    UI.choices.appendChild(div);
+  });
+}
+
+function pickUpgrades(n){
+  let pool = [...UPGRADES];
+  const ownedCount = Object.keys(G.p.weapons).length;
+  pool = pool.filter(u => {
+    if(u.type !== "武器") return true;
+    if(G.p.weapons[u.key]) return true;
+    return ownedCount < 8 || Math.random() < .22 + G.p.luck*.03;
+  });
+  pool = shuffle(pool).sort((a,b)=>scoreUpgrade(b)-scoreUpgrade(a));
+  const picks = [];
+  const recommended = pool.filter(u=>recommendReason(u));
+  if(recommended.length) picks.push(recommended[0]);
+  for(const u of pool){
+    if(picks.length >= n) break;
+    if(!picks.includes(u)) picks.push(u);
+  }
+  return picks.slice(0,n);
+}
+
+function checkEvolutions(){
+  const w = G.p.weapons, p = G.p.passives, e = G.p.evolved;
+  const evolutions = [
+    ["peaMachine", w.pea>=5 && p.fireRate>=3, "豌豆枪进化：豌豆机关枪"],
+    ["carrotReaper", w.carrot>=4 && p.pierce>=2, "回旋胡萝卜进化：收割胡萝卜"],
+    ["storm", w.lightning>=4 && p.cooldown>=3, "闪电链进化：雷暴领域"],
+    ["plague", w.poison>=4 && p.area>=3, "毒雾进化：瘟疫花园"],
+    ["iceNova", w.ice>=4 && p.crit>=2, "寒冰晶进化：冰爆新星"],
+    ["turretMatrix", w.turret>=4 && p.cooldown>=2, "炮台进化：炮台矩阵"],
+    ["garlicWall", w.aura>=4 && p.armor>=2, "蒜香光环进化：蒜香城墙"],
+    ["bladeStorm", w.blade>=4 && p.speed>=2, "飞刀进化：刀刃风暴"],
+    ["goldRush", G.p.greed && p.gold>=3, "经济进化：贪婪暴走"],
+    ["droneSwarm", w.drone>=4 && p.proj>=2, "无人机进化：蜂群协议"],
+    ["meteorRain", w.meteor>=4 && p.area>=2, "陨石术进化：陨石雨"],
+    ["singularity", w.blackhole>=4 && p.cooldown>=2, "黑洞进化：奇点核心"],
+    ["coinStorm", w.coinshot>=4 && G.p.greed, "金币弹进化：财富风暴"],
+    ["petArmy", w.pet>=4 && (w.drone||0)>=2, "宠物进化：史莱姆军团"],
+    ["novaCore", w.nova>=4 && p.maxHp>=2, "新星进化：生命核心"],
+    ["sawFactory", w.saw>=4 && p.cooldown>=2, "锯片进化：陷阱工厂"],
+    ["flowerGarden", w.healFlower>=4 && p.regen>=2, "治疗花进化：花园领域"],
+  ];
+  evolutions.forEach(([key, ok, name]) => {
+    if(ok && !e[key]){
+      e[key] = true;
+      G.p.damage *= 1.10;
+      addText(G.p.x, G.p.y-50, "进化！", "#ffd66e", 1.2, 22);
+      toast(name);
+    }
+  });
+}
+
+function gainXP(v){
+  G.xp += v * (1 + G.p.xpBonus);
+  while(G.xp >= G.need){
+    G.xp -= G.need;
+    G.level += 1;
+    G.need = Math.floor(G.need * (selectedDifficulty==="easy" ? 1.18 : 1.23) + 6);
+    openUpgrade();
+  }
+}
+
+function spawnEnemy(kind="normal"){
+  const p = G.p;
+  const angle = Math.random() * Math.PI * 2;
+  const distSpawn = Math.max(W,H)*0.72 + rand(60,180);
+  const x = p.x + Math.cos(angle)*distSpawn;
+  const y = p.y + Math.sin(angle)*distSpawn;
+  const t = G.t;
+  let r = Math.random();
+  let e;
+  if(kind === "boss"){
+    e = enemyTemplate("enemy_boss", x,y, 34, 1200+t*4.5, 34, 36, 75, 28, "Boss");
+  } else if(t > 140 && r < .12){
+    e = enemyTemplate("enemy_ghost", x,y, 21, 150+t*.9, 142, 18, 20, 7, "幽灵");
+  } else if(t > 100 && r < .16){
+    e = enemyTemplate("enemy_golem", x,y, 27, 420+t*1.6, 55, 28, 35, 12, "石头怪");
+  } else if(t > 65 && r < .24){
+    e = enemyTemplate("enemy_bat", x,y, 16, 42+t*.35, 158, 10, 8, 3, "蝙蝠");
+  } else if(t > 40 && r < .30){
+    e = enemyTemplate("enemy_skull", x,y, 18, 85+t*.55, 96, 16, 13, 5, "骷髅");
+  } else if(t > 25 && r < .34){
+    e = enemyTemplate("enemy_mushroom", x,y, 19, 70+t*.45, 72, 13, 10, 4, "蘑菇");
+  } else {
+    e = enemyTemplate("enemy_slime", x,y, 17, 46+t*.34, 82, 11, 5, 2, "史莱姆");
+  }
+  if(kind === "elite"){
+    e.hp *= 2.35; e.maxHp = e.hp; e.damage *= 1.4; e.xp *= 3; e.coin *= 3; e.elite = true; e.r *= 1.15;
+  }
+  const D = G.difficulty || DIFFICULTIES[0];
+  e.hp *= D.enemyHp; e.maxHp = e.hp; e.damage *= D.enemyDamage; e.speed *= D.enemySpeed; e.xp *= D.xpGain;
+  G.enemies.push(e);
+}
+function enemyTemplate(sprite,x,y,r,hp,speed,damage,xp,coin,name){
+  return {sprite,x,y,r,hp,maxHp:hp,speed,damage,xp,coin,name,slow:1,slowTimer:0,poison:0,burn:0,elite:false};
+}
+
+function nearestEnemy(range=Infinity, fromX=G.p.x, fromY=G.p.y){
+  let best = null, bd = Infinity;
+  for(const e of G.enemies){
+    const d = dist(fromX,fromY,e.x,e.y);
+    if(d < range && d < bd){ best=e; bd=d; }
+  }
+  return best;
+}
+function enemiesInRange(x,y,r){
+  return G.enemies.filter(e => dist(x,y,e.x,e.y) <= r);
+}
+
+function calcDamage(mult=1){
+  let d = G.p.damage * mult;
+  if(G.p.greed) d *= 1 + Math.min(2.2, Math.floor(G.coins/25)*.012);
+  if(G.p.evolved.goldRush) d *= 1 + Math.min(1.5, G.coins/220);
+  let crit = Math.random() < G.p.crit;
+  if(crit) d *= G.p.critDmg;
+  return {d, crit};
+}
+
+function spawnBullet(opts){
+  G.bullets.push(Object.assign({
+    x:G.p.x, y:G.p.y, vx:0, vy:0, r:7, damage:10, life:1, maxLife:1,
+    sprite:"proj_pea", pierce:G.p.pierce, hit:new Set(), type:"normal", area:0,
+    slow:0, poison:0, burn:0, returning:false, owner:null, rotate:0
+  }, opts));
+}
+
+function fireWeapons(dt){
+  const p = G.p, w = p.weapons, t = G.timers;
+  // Pea machine gun
+  if(w.pea){
+    t.pea -= dt;
+    let cd = (0.62 / p.fireRate) / (p.evolved.peaMachine ? 1.75 : 1);
+    if(t.pea <= 0){
+      t.pea = cd;
+      const target = nearestEnemy(p.range);
+      if(target){
+        const count = Math.min(12, w.pea + p.extraProjectiles + (p.evolved.peaMachine ? 2 : 0));
+        const base = Math.atan2(target.y-p.y,target.x-p.x);
+        for(let i=0;i<count;i++){
+          const spread = (i-(count-1)/2) * 0.10;
+          const a = base + spread + rand(-.025,.025);
+          const dmg = calcDamage(.84 + w.pea*.06);
+          spawnBullet({vx:Math.cos(a)*620, vy:Math.sin(a)*620, damage:dmg.d, life:1.05, maxLife:1.05, r:5.5, sprite:"proj_pea", pierce:p.pierce+(p.evolved.peaMachine?1:0), type:"pea"});
+        }
+      }
+    }
+  }
+  // Spread
+  if(w.spread){
+    t.spread -= dt;
+    if(t.spread <= 0){
+      t.spread = (1.35 / p.fireRate);
+      const target = nearestEnemy(p.range*.82);
+      if(target){
+        const pellets = 4 + w.spread*2 + p.extraProjectiles;
+        const base = Math.atan2(target.y-p.y,target.x-p.x);
+        for(let i=0;i<pellets;i++){
+          const a = base + (i-(pellets-1)/2)*0.18;
+          const dmg = calcDamage(.58);
+          spawnBullet({vx:Math.cos(a)*520, vy:Math.sin(a)*520, damage:dmg.d, life:.62, maxLife:.62, r:5, sprite:"proj_pea", pierce:0, type:"spread"});
+        }
+      }
+    }
+  }
+  // Carrot boomerang
+  if(w.carrot){
+    t.carrot -= dt;
+    if(t.carrot <= 0){
+      t.carrot = (1.85 * p.cooldown) / Math.sqrt(w.carrot);
+      const n = w.carrot + Math.floor(p.extraProjectiles/2) + (p.evolved.carrotReaper?2:0);
+      for(let i=0;i<n;i++){
+        const a = G.t*1.3 + i*Math.PI*2/n;
+        const dmg = calcDamage(1.22);
+        spawnBullet({vx:Math.cos(a)*430, vy:Math.sin(a)*430, damage:dmg.d, life:1.55, maxLife:1.55, r:10, sprite:"proj_carrot", pierce:99, type:"carrot", returning:true});
+      }
+    }
+  }
+  // Fireball
+  if(w.fire){
+    t.fire -= dt;
+    if(t.fire <= 0){
+      t.fire = (1.6 * p.cooldown) / Math.sqrt(w.fire);
+      const target = nearestEnemy(p.range*1.15);
+      if(target){
+        const n = Math.min(5, 1 + Math.floor((w.fire-1)/2) + Math.floor(p.extraProjectiles/3));
+        const base = Math.atan2(target.y-p.y,target.x-p.x);
+        for(let i=0;i<n;i++){
+          const a = base + (i-(n-1)/2)*.22;
+          const dmg = calcDamage(1.55);
+          spawnBullet({vx:Math.cos(a)*380, vy:Math.sin(a)*380, damage:dmg.d, life:1.5, maxLife:1.5, r:12, sprite:"proj_fireball", area:(78+w.fire*9)*p.area, type:"fire"});
+        }
+      }
+    }
+  }
+  // Ice shards
+  if(w.ice){
+    t.ice -= dt;
+    if(t.ice <= 0){
+      t.ice = (1.22 * p.cooldown) / Math.sqrt(w.ice);
+      const target = nearestEnemy(p.range*1.05);
+      if(target){
+        const n = 1 + Math.floor(w.ice/2) + Math.floor(p.extraProjectiles/3);
+        const base = Math.atan2(target.y-p.y,target.x-p.x);
+        for(let i=0;i<n;i++){
+          const a = base + (i-(n-1)/2)*.16;
+          const dmg = calcDamage(.95);
+          spawnBullet({vx:Math.cos(a)*560, vy:Math.sin(a)*560, damage:dmg.d, life:.95, maxLife:.95, r:9, sprite:"proj_ice", slow:.45, type:"ice", area:G.p.evolved.iceNova?45*p.area:0});
+        }
+      }
+    }
+  }
+  // Lightning
+  if(w.lightning){
+    t.lightning -= dt;
+    if(t.lightning <= 0){
+      t.lightning = (2.1 * p.cooldown) / (1 + w.lightning*.16) / (p.evolved.storm?1.55:1);
+      const targets = [...G.enemies].sort((a,b)=>dist(p.x,p.y,a.x,a.y)-dist(p.x,p.y,b.x,b.y)).slice(0, Math.min(12, 2+w.lightning+(p.evolved.storm?3:0)));
+      let lastX = p.x, lastY = p.y;
+      for(const e of targets){
+        const dmg = calcDamage(1.2 + w.lightning*.08);
+        damageEnemy(e, dmg.d, "lightning");
+        G.beams.push({x1:lastX,y1:lastY,x2:e.x,y2:e.y,life:.18,color:"#7ec8ff",width:4});
+        lastX=e.x; lastY=e.y;
+        addParticles(e.x,e.y,12,"#7ec8ff");
+      }
+      if(p.evolved.storm){
+        G.clouds.push({x:p.x,y:p.y,r:150*p.area,life:.55,maxLife:.55,damage:p.damage*3,type:"storm",sprite:"lightning"});
+      }
+    }
+  }
+  // Poison cloud
+  if(w.poison){
+    t.poison -= dt;
+    if(t.poison <= 0){
+      t.poison = (2.4 * p.cooldown) / Math.sqrt(w.poison);
+      const target = nearestEnemy(p.range*1.1);
+      const x = target ? target.x : p.x + rand(-160,160);
+      const y = target ? target.y : p.y + rand(-160,160);
+      G.clouds.push({x,y,r:(70+w.poison*13)*(p.area)*(p.evolved.plague?1.45:1),life:4.2+(p.evolved.plague?2.2:0),maxLife:4.2,damage:p.damage*(.58+w.poison*.08),type:"poison",sprite:"poison_cloud"});
+    }
+  }
+  // Aura
+  if(w.aura){
+    const r = (70 + w.aura*18) * p.area * (p.evolved.garlicWall?1.35:1);
+    for(const e of G.enemies){
+      if(dist(p.x,p.y,e.x,e.y) < r + e.r){
+        damageEnemy(e, p.damage * dt * (1.1 + w.aura*.42), "aura");
+        e.slowTimer = Math.max(e.slowTimer, .15);
+        e.slow = Math.min(e.slow, .72);
+      }
+    }
+  }
+  // Orbit blade
+  if(w.blade){
+    const n = Math.min(12, w.blade + Math.floor(p.extraProjectiles/2) + (p.evolved.bladeStorm?3:0));
+    const rad = 78 + w.blade*5;
+    for(let i=0;i<n;i++){
+      const a = G.t*(2.25+(p.evolved.bladeStorm?.9:0)) + i*Math.PI*2/n;
+      const bx = p.x + Math.cos(a)*rad;
+      const by = p.y + Math.sin(a)*rad;
+      for(const e of G.enemies){
+        if(dist(bx,by,e.x,e.y) < e.r+15){
+          damageEnemy(e, p.damage * dt * (5.2 + w.blade*.55), "blade");
+        }
+      }
+    }
+  }
+  // Turrets
+  if(w.turret){
+    // maintain turrets around player
+    const desired = Math.min(8, w.turret + (p.evolved.turretMatrix?2:0));
+    while(G.turrets.length < desired) G.turrets.push({x:p.x+rand(-90,90),y:p.y+rand(-90,90),timer:rand(0,.3)});
+    if(G.turrets.length > desired) G.turrets.length = desired;
+    G.turrets.forEach((tu,idx)=>{
+      const angle = idx*Math.PI*2/desired + G.t*.25;
+      const tx = p.x + Math.cos(angle)*(95+idx%2*20);
+      const ty = p.y + Math.sin(angle)*(95+idx%2*20);
+      tu.x += (tx-tu.x)*dt*2.8;
+      tu.y += (ty-tu.y)*dt*2.8;
+      tu.timer -= dt;
+      if(tu.timer <= 0){
+        tu.timer = (.52 * p.cooldown) / (1 + w.turret*.08);
+        const tar = nearestEnemy(420, tu.x, tu.y);
+        if(tar){
+          const a = Math.atan2(tar.y-tu.y, tar.x-tu.x);
+          const dmg = calcDamage(.62+w.turret*.05);
+          spawnBullet({x:tu.x,y:tu.y,vx:Math.cos(a)*520,vy:Math.sin(a)*520,damage:dmg.d,life:.9,maxLife:.9,r:5,sprite:"proj_pea",pierce:0,type:"turret"});
+        }
       }
     });
-    grid.appendChild(item);
-  });
-  $('result').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  // Mines
+  if(w.mine){
+    t.mine -= dt;
+    if(t.mine <= 0){
+      t.mine = (2.2 * p.cooldown) / Math.sqrt(w.mine);
+      G.mines.push({x:p.x+rand(-50,50),y:p.y+rand(-50,50),r:15,damage:p.damage*(2.4+w.mine*.35),area:(85+w.mine*12)*p.area,life:18,sprite:"proj_mine"});
+    }
+  }
+  // Drones
+  if(w.drone){
+    const count = Math.min(10, w.drone + Math.floor(p.extraProjectiles/2) + (p.evolved.droneSwarm?3:0));
+    t.drone -= dt;
+    if(t.drone <= 0){
+      t.drone = (.72 * p.cooldown) / Math.sqrt(count);
+      for(let i=0;i<count;i++){
+        const a0 = G.t*1.8 + i*Math.PI*2/count;
+        const dx = p.x + Math.cos(a0)*120;
+        const dy = p.y + Math.sin(a0)*120;
+        const tar = nearestEnemy(430, dx, dy);
+        if(tar){
+          const a = Math.atan2(tar.y-dy, tar.x-dx);
+          const dmg = calcDamage(.52);
+          spawnBullet({x:dx,y:dy,vx:Math.cos(a)*560,vy:Math.sin(a)*560,damage:dmg.d,life:.75,maxLife:.75,r:4.5,sprite:"proj_pea",type:"drone"});
+        }
+      }
+    }
+  }
+  // Laser
+  if(w.laser){
+    t.laser -= dt;
+    if(t.laser <= 0){
+      t.laser = (3.6 * p.cooldown) / Math.sqrt(w.laser);
+      const tar = nearestEnemy(650);
+      if(tar){
+        const a = Math.atan2(tar.y-p.y, tar.x-p.x);
+        const len = 780;
+        const x2 = p.x + Math.cos(a)*len, y2 = p.y + Math.sin(a)*len;
+        G.beams.push({x1:p.x,y1:p.y,x2,y2,life:.35,color:"#ff5f75",width:8,damage:p.damage*(2.2+w.laser*.25),laser:true});
+        for(const e of G.enemies){
+          const dd = pointLineDistance(e.x,e.y,p.x,p.y,x2,y2);
+          if(dd < 22 + w.laser*3) damageEnemy(e, p.damage*(2.2+w.laser*.25), "laser");
+        }
+      }
+    }
+  }
+  // Meteor
+  if(w.meteor){
+    t.meteor -= dt;
+    if(t.meteor <= 0){
+      t.meteor = (3.4 * p.cooldown) / Math.sqrt(w.meteor) / (p.evolved.meteorRain?1.55:1);
+      const times = 1 + Math.floor(w.meteor/2) + (p.evolved.meteorRain?2:0);
+      for(let i=0;i<times;i++){
+        const target = nearestEnemy(p.range*1.35);
+        const mx = target ? target.x + rand(-45,45) : p.x + rand(-220,220);
+        const my = target ? target.y + rand(-45,45) : p.y + rand(-220,220);
+        explode(mx,my,(95+w.meteor*13)*p.area,calcDamage(2.25+w.meteor*.18).d,"fire");
+      }
+    }
+  }
+  // Blackhole
+  if(w.blackhole){
+    t.blackhole -= dt;
+    if(t.blackhole <= 0){
+      t.blackhole = (4.8 * p.cooldown) / Math.sqrt(w.blackhole) / (p.evolved.singularity?1.35:1);
+      const target = nearestEnemy(p.range*1.2);
+      const bx = target ? target.x : p.x + rand(-160,160);
+      const by = target ? target.y : p.y + rand(-160,160);
+      G.clouds.push({x:bx,y:by,r:(110+w.blackhole*16)*p.area*(p.evolved.singularity?1.35:1),life:2.8+(p.evolved.singularity?1.2:0),maxLife:2.8,damage:p.damage*(.85+w.blackhole*.08),type:"blackhole",sprite:"poison_cloud"});
+    }
+  }
+  // Coin shot
+  if(w.coinshot){
+    t.coinshot -= dt;
+    if(t.coinshot <= 0){
+      t.coinshot = (.82 / p.fireRate) / Math.sqrt(w.coinshot) / (p.evolved.coinStorm?1.45:1);
+      const target = nearestEnemy(p.range);
+      if(target){
+        const count = 1 + Math.floor(w.coinshot/2) + (p.evolved.coinStorm?2:0);
+        const base = Math.atan2(target.y-p.y,target.x-p.x);
+        for(let i=0;i<count;i++){
+          const a = base + (i-(count-1)/2)*.14;
+          const dmg = calcDamage(.72 + Math.min(1.4,G.coins/260));
+          spawnBullet({vx:Math.cos(a)*610,vy:Math.sin(a)*610,damage:dmg.d,life:.95,maxLife:.95,r:6,sprite:"gem_coin",pierce:p.pierce,type:"coinshot"});
+        }
+      }
+    }
+  }
+  // Pet slime
+  if(w.pet){
+    const count = Math.min(8,w.pet+(p.evolved.petArmy?3:0));
+    t.pet -= dt;
+    if(t.pet <= 0){
+      t.pet = (.72 * p.cooldown) / Math.sqrt(count);
+      for(let i=0;i<count;i++){
+        const a0 = G.t*1.4 + i*Math.PI*2/count;
+        const px = p.x + Math.cos(a0)*95;
+        const py = p.y + Math.sin(a0)*95;
+        const tar = nearestEnemy(190,px,py);
+        if(tar){
+          damageEnemy(tar,p.damage*(1.1+w.pet*.12),"pet");
+          addParticles(tar.x,tar.y,8,"#89f6b5");
+        }
+      }
+    }
+  }
+  // Nova
+  if(w.nova){
+    t.nova -= dt;
+    if(t.nova <= 0){
+      t.nova = (4.2 * p.cooldown) / Math.sqrt(w.nova) / (p.evolved.novaCore?1.35:1);
+      const rad = (115+w.nova*18)*p.area;
+      explode(p.x,p.y,rad,calcDamage(2.0+w.nova*.22).d,"nova");
+      if(p.evolved.novaCore) p.hp = Math.min(p.maxHp,p.hp+8);
+    }
+  }
+  // Saw trap
+  if(w.saw){
+    t.saw -= dt;
+    if(t.saw <= 0){
+      t.saw = (2.8 * p.cooldown) / Math.sqrt(w.saw) / (p.evolved.sawFactory?1.35:1);
+      G.clouds.push({x:p.x+rand(-55,55),y:p.y+rand(-55,55),r:(58+w.saw*8)*p.area,life:5.4,maxLife:5.4,damage:p.damage*(1.0+w.saw*.11),type:"saw",sprite:"slash"});
+      if(p.evolved.sawFactory) G.clouds.push({x:p.x+rand(-95,95),y:p.y+rand(-95,95),r:(58+w.saw*8)*p.area,life:5.4,maxLife:5.4,damage:p.damage*(.85+w.saw*.10),type:"saw",sprite:"slash"});
+    }
+  }
+  // Heal flower
+  if(w.healFlower){
+    t.healFlower -= dt;
+    if(t.healFlower <= 0){
+      t.healFlower = (3.8 * p.cooldown) / Math.sqrt(w.healFlower);
+      p.hp = Math.min(p.maxHp,p.hp+8+w.healFlower*3+(p.evolved.flowerGarden?8:0));
+      const rr = (95+w.healFlower*15)*p.area*(p.evolved.flowerGarden?1.3:1);
+      G.clouds.push({x:p.x,y:p.y,r:rr,life:1.8,maxLife:1.8,damage:p.damage*(.65+w.healFlower*.08),type:"flower",sprite:"poison_cloud"});
+      addText(p.x,p.y-34,"治疗花","#89f6b5",.9,15);
+    }
+  }
+
 }
-function runReading(preset){ if(preset) applyPreset(preset,false); const question=($('question').value||'').trim() || '我现在最需要看清的问题是什么？'; const topic=$('topic').value; const spread=$('spread').value; const pos=positions[spread] || positions.three; const cards=drawCards(pos.length); const reading=buildReading(cards,spread,topic); const yn=(spread==='yesno' || topic==='yesno') ? yesNoJudge(cards) : null; const spreadTxt=spreadLabel(spread); latestText=makePlainText(question,topicLabel(),spreadTxt,cards,pos,reading,yn); renderResult(cards,pos,reading,yn,question,spreadTxt); }
-function resetPage(){ $('question').value=''; $('topic').value='daily'; $('spread').value='daily'; $('result').classList.remove('show'); $('result').innerHTML=''; latestText=''; applyPreset('today', false); }
 
-document.querySelectorAll('.pill').forEach(el=>el.addEventListener('click',()=>applyPreset(el.dataset.preset)));
-document.querySelectorAll('.presetCard').forEach(el=>el.addEventListener('click',()=>applyPreset(el.dataset.preset)));
-document.querySelectorAll('.qchip').forEach(el=>el.addEventListener('click',()=>{$('question').value=el.dataset.q; $('question').focus();}));
-$('drawBtn').addEventListener('click',()=>runReading());
-$('todayBtn').addEventListener('click',()=>runReading('today'));
-$('monthBtn').addEventListener('click',()=>runReading('month'));
-$('yearBtn').addEventListener('click',()=>runReading('year'));
-$('copyBtn').addEventListener('click',async()=>{ if(!latestText){ toast('请先抽牌'); return; } try{ await navigator.clipboard.writeText(latestText); toast('结果已复制'); } catch(e){ toast('复制失败，请手动复制'); } });
-$('downloadBtn').addEventListener('click',()=>{ if(!latestText){ toast('请先抽牌'); return; } const blob=new Blob([latestText],{type:'text/plain;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='大众塔罗占卜结果.txt'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),500); });
-$('resetBtn').addEventListener('click',resetPage);
+function update(dt){
+  if(G.state !== "playing") return;
+  G.t += dt;
+  const p = G.p;
 
-setupDailyCard();
-applyPreset('today', false);
+  // movement
+  let mx=0,my=0;
+  if(keys.has("w")||keys.has("arrowup")) my -= 1;
+  if(keys.has("s")||keys.has("arrowdown")) my += 1;
+  if(keys.has("a")||keys.has("arrowleft")) mx -= 1;
+  if(keys.has("d")||keys.has("arrowright")) mx += 1;
+  if(joy.active){ mx += joy.dx; my += joy.dy; }
+  const md = Math.hypot(mx,my) || 1;
+  if(Math.hypot(mx,my) > 0){
+    p.x += mx/md * p.speed * dt;
+    p.y += my/md * p.speed * dt;
+  }
+
+  // shield / regen
+  p.hp = Math.min(p.maxHp, p.hp + p.regen*dt);
+  if(p.shieldMax){
+    p.shieldTimer += dt;
+    if(p.shieldTimer > p.shieldMax) p.shieldTimer = p.shieldMax;
+  }
+
+  // spawn
+  G.spawnTimer -= dt;
+  const D = G.difficulty || DIFFICULTIES[0];
+  const spawnInterval = Math.max(.12, (.96 - G.t*.0021) / D.spawnRate);
+  if(G.spawnTimer <= 0){
+    G.spawnTimer = spawnInterval;
+    const count = 1 + Math.floor(G.t/(58 / D.spawnRate));
+    for(let i=0;i<count;i++) spawnEnemy("normal");
+  }
+  G.eliteTimer -= dt;
+  if(G.eliteTimer <= 0){
+    G.eliteTimer = (selectedDifficulty==="easy" ? 58 : selectedDifficulty==="normal" ? 48 : 36) / (D.eliteRate || 1) + rand(-8,8);
+    spawnEnemy(G.t > (selectedDifficulty==="easy" ? 150 : 120) && Math.random()<.38 ? "boss" : "elite");
+  }
+
+  fireWeapons(dt);
+  updateBullets(dt);
+  updateEnemies(dt);
+  updateGems(dt);
+  updateMines(dt);
+  updateClouds(dt);
+  updateFX(dt);
+  updateUI();
+}
+
+function updateEnemies(dt){
+  const p = G.p;
+  for(let i=G.enemies.length-1;i>=0;i--){
+    const e = G.enemies[i];
+
+    if(e.poison > 0){
+      e.hp -= e.poison * dt;
+      e.poison = Math.max(0, e.poison - dt*2);
+    }
+    if(e.burn > 0){
+      e.hp -= e.burn * dt;
+      e.burn = Math.max(0, e.burn - dt*2.5);
+    }
+    if(e.slowTimer > 0){
+      e.slowTimer -= dt;
+    } else {
+      e.slow += (1-e.slow) * dt * 2.5;
+    }
+
+    const a = Math.atan2(p.y-e.y, p.x-e.x);
+    const D = G.difficulty || DIFFICULTIES[0];
+    const speedMul = 1 + G.t/(135 / D.progress);
+    e.x += Math.cos(a) * e.speed * e.slow * speedMul * dt;
+    e.y += Math.sin(a) * e.speed * e.slow * speedMul * dt;
+
+    if(dist(p.x,p.y,e.x,e.y) < p.r + e.r){
+      if(p.shieldMax && p.shieldTimer >= p.shieldMax){
+        p.shieldTimer = 0;
+        addText(p.x,p.y-35,"护盾", "#7ec8ff", .8, 16);
+        addParticles(p.x,p.y,20,"#7ec8ff");
+      } else {
+        const hurt = Math.max(1, e.damage - p.armor) * dt;
+        p.hp -= hurt;
+        if(p.thorns) damageEnemy(e, hurt * p.thorns * 7, "thorn");
+      }
+      if(p.hp <= 0){
+        if(p.revive > 0){
+          p.revive -= 1;
+          p.hp = p.maxHp * .55;
+          explode(p.x,p.y,180,p.damage*5,"nova");
+          toast("新手复活触发！");
+        } else { endGame(); return; }
+      }
+    }
+
+    if(e.hp <= 0){
+      killEnemy(e);
+      G.enemies.splice(i,1);
+    }
+  }
+}
+function killEnemy(e){
+  G.kills++;
+  G.coins += Math.ceil(e.coin * (1 + G.p.goldBonus));
+  if(Math.random() < G.p.lifeSteal) G.p.hp = Math.min(G.p.maxHp, G.p.hp + 4);
+  G.gems.push({x:e.x,y:e.y,r:8,type:"xp",value:e.xp,sprite:"gem_xp"});
+  if(Math.random() < .18 + (G.p.luck*.01)) G.gems.push({x:e.x+rand(-16,16),y:e.y+rand(-16,16),r:7,type:"coin",value:1,sprite:"gem_coin"});
+  if(G.p.evolved.iceNova && e.slow < .72) explode(e.x,e.y,70*G.p.area,G.p.damage*1.4,"ice");
+  addParticles(e.x,e.y,16,"#ffd66e");
+  addText(e.x,e.y-18,"+XP","#7ec8ff",.75,13);
+}
+function updateBullets(dt){
+  for(let i=G.bullets.length-1;i>=0;i--){
+    const b = G.bullets[i];
+    if(b.returning && b.life < b.maxLife*.45){
+      const a = Math.atan2(G.p.y-b.y, G.p.x-b.x);
+      b.vx = Math.cos(a)*460;
+      b.vy = Math.sin(a)*460;
+    }
+    b.x += b.vx * dt;
+    b.y += b.vy * dt;
+    b.life -= dt;
+    b.rotate += dt*8;
+    let remove = b.life <= 0;
+
+    for(const e of G.enemies){
+      if(remove) break;
+      if(b.hit.has(e)) continue;
+      if(dist(b.x,b.y,e.x,e.y) < b.r + e.r){
+        b.hit.add(e);
+        damageEnemy(e,b.damage,b.type);
+        if(b.slow){ e.slow = Math.min(e.slow,b.slow); e.slowTimer = Math.max(e.slowTimer, .9); }
+        if(b.poison) e.poison += b.poison;
+        if(b.burn) e.burn += b.burn;
+        addParticles(b.x,b.y,5, weaponColor(b.type));
+        if(b.area > 0){
+          explode(b.x,b.y,b.area,b.damage*.85,b.type);
+          remove = true;
+        } else if(b.pierce > 0) b.pierce--;
+        else if(!b.returning) remove = true;
+      }
+    }
+    if(Math.abs(b.x-G.p.x)>1300 || Math.abs(b.y-G.p.y)>1300) remove = true;
+    if(remove) G.bullets.splice(i,1);
+  }
+}
+function damageEnemy(e, amount, type){
+  e.hp -= amount;
+  if(type === "poison") e.poison += amount*.12;
+  if(type === "fire") e.burn += amount*.10;
+  if(type === "ice"){ e.slow = Math.min(e.slow,.55); e.slowTimer = Math.max(e.slowTimer,1.1); }
+  if(Math.random()<.12) addText(e.x,e.y-10,Math.round(amount),weaponColor(type),.65,13);
+}
+function explode(x,y,r,damage,type){
+  G.clouds.push({x,y,r,life:.28,maxLife:.28,damage:0,type:"boom",sprite:type==="ice"?"iceburst":"explosion"});
+  for(const e of G.enemies){
+    if(dist(x,y,e.x,e.y) < r + e.r){
+      damageEnemy(e, damage, type);
+      if(type==="ice"){ e.slow=.35; e.slowTimer=1.3; }
+    }
+  }
+  addParticles(x,y,24,weaponColor(type));
+}
+function updateClouds(dt){
+  for(let i=G.clouds.length-1;i>=0;i--){
+    const c = G.clouds[i];
+    c.life -= dt;
+    if(c.damage > 0){
+      for(const e of G.enemies){
+        if(dist(c.x,c.y,e.x,e.y) < c.r + e.r){
+          damageEnemy(e,c.damage*dt,c.type);
+          if(c.type==="storm") e.slow = Math.min(e.slow,.75);
+          if(c.type==="blackhole"){
+            const a = Math.atan2(c.y-e.y,c.x-e.x);
+            e.x += Math.cos(a)*150*dt;
+            e.y += Math.sin(a)*150*dt;
+            e.slow = Math.min(e.slow,.62);
+            e.slowTimer = Math.max(e.slowTimer,.25);
+          }
+          if(c.type==="saw") e.slow = Math.min(e.slow,.72);
+          if(c.type==="flower") e.slow = Math.min(e.slow,.82);
+        }
+      }
+    }
+    if(c.life <= 0) G.clouds.splice(i,1);
+  }
+}
+function updateMines(dt){
+  for(let i=G.mines.length-1;i>=0;i--){
+    const m = G.mines[i];
+    m.life -= dt;
+    let boom = m.life <= 0;
+    for(const e of G.enemies){
+      if(dist(m.x,m.y,e.x,e.y) < e.r + 24){ boom = true; break; }
+    }
+    if(boom){
+      explode(m.x,m.y,m.area,m.damage,"fire");
+      G.mines.splice(i,1);
+    }
+  }
+}
+function updateGems(dt){
+  const p = G.p;
+  for(let i=G.gems.length-1;i>=0;i--){
+    const m = G.gems[i];
+    const d = dist(p.x,p.y,m.x,m.y);
+    if(d < p.magnet){
+      const a = Math.atan2(p.y-m.y,p.x-m.x);
+      const pull = 170 + (p.magnet-d)*4.4;
+      m.x += Math.cos(a)*pull*dt;
+      m.y += Math.sin(a)*pull*dt;
+    }
+    if(d < p.r + m.r + 10){
+      if(m.type === "xp"){
+        gainXP(m.value);
+        if(p.pickupHeal && Math.random()<p.pickupHeal) p.hp = Math.min(p.maxHp, p.hp + 3);
+      }
+      else G.coins += Math.ceil(m.value * (1 + p.goldBonus));
+      G.gems.splice(i,1);
+    }
+  }
+}
+function updateFX(dt){
+  for(let i=G.particles.length-1;i>=0;i--){
+    const p = G.particles[i];
+    p.x += p.vx*dt; p.y += p.vy*dt;
+    p.vx *= .90; p.vy *= .90; p.life -= dt;
+    if(p.life <= 0) G.particles.splice(i,1);
+  }
+  for(let i=G.texts.length-1;i>=0;i--){
+    const t = G.texts[i];
+    t.y -= 30*dt; t.life -= dt;
+    if(t.life <= 0) G.texts.splice(i,1);
+  }
+  for(let i=G.beams.length-1;i>=0;i--){
+    G.beams[i].life -= dt;
+    if(G.beams[i].life <= 0) G.beams.splice(i,1);
+  }
+}
+function addParticles(x,y,n,color){
+  for(let i=0;i<n;i++){
+    const a = Math.random()*Math.PI*2, s = rand(45,180);
+    G.particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rand(.22,.56),max:.56,r:rand(2,4),color});
+  }
+}
+function addText(x,y,text,color,life=.8,size=13){
+  G.texts.push({x,y,text,color,life,max:life,size});
+}
+
+function endGame(){
+  G.state = "over";
+  UI.overPanel.classList.remove("hidden");
+  G.result = `萌薯幸存者 V2.1 战绩：存活 ${fmt(G.t)}，等级 ${G.level}，击杀 ${G.kills}，金币 ${G.coins}，主BD：${buildName()}。`;
+  UI.finalText.textContent = G.result;
+}
+
+function updateUI(){
+  const p = G.p;
+  UI.time.textContent = fmt(G.t);
+  UI.lv.textContent = G.level;
+  UI.kills.textContent = G.kills;
+  UI.coins.textContent = G.coins;
+  UI.build.textContent = buildName();
+  UI.hpFill.style.width = clamp(p.hp/p.maxHp*100,0,100) + "%";
+  UI.xpFill.style.width = clamp(G.xp/G.need*100,0,100) + "%";
+  const entries = Object.entries(p.weapons).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+  UI.loadout.innerHTML = entries.map(([k,v])=>`<span>${WEAPON_NAME[k]||k} Lv.${v}</span>`).join("");
+}
+function buildName(){
+  const w = Object.entries(G.p.weapons).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+  const top = w.slice(0,3).map(([k])=>WEAPON_NAME[k]||k).join("+") || "豌豆枪";
+  const evo = Object.keys(G.p.evolved).length;
+  return evo ? top + `｜进化×${evo}` : top;
+}
+
+function render(){
+  ctx.clearRect(0,0,W,H);
+  G.camera.x = G.p.x - W/2;
+  G.camera.y = G.p.y - H/2;
+
+  drawTiles();
+  drawProps();
+  drawClouds();
+  drawMines();
+  drawTurretsAndDrones();
+  drawGems();
+  drawBullets();
+  drawEnemies();
+  drawPlayer();
+  drawBeams();
+  drawParticles();
+  drawTexts();
+
+  if(G.state === "paused") drawOverlay("已暂停","按空格或点继续");
+  if(G.state === "menu") drawMenuDecor();
+}
+function screenX(x){return x-G.camera.x}
+function screenY(y){return y-G.camera.y}
+function drawImage(key,x,y,size=64,rot=0,alpha=1){
+  const im = IMG[key];
+  const sx = screenX(x), sy = screenY(y);
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.translate(sx,sy);
+  ctx.rotate(rot);
+  if(im && im.complete) ctx.drawImage(im,-size/2,-size/2,size,size);
+  else {ctx.fillStyle="#fff";ctx.fillRect(-size/2,-size/2,size,size);}
+  ctx.restore();
+}
+function hash2(x,y){
+  let n = x*374761393 + y*668265263;
+  n = (n ^ (n >> 13)) * 1274126177;
+  return ((n ^ (n >> 16)) >>> 0) / 4294967295;
+}
+function drawTiles(){
+  const tile = 64;
+  const startX = Math.floor(G.camera.x/tile)-1;
+  const endX = Math.floor((G.camera.x+W)/tile)+1;
+  const startY = Math.floor(G.camera.y/tile)-1;
+  const endY = Math.floor((G.camera.y+H)/tile)+1;
+  for(let gy=startY; gy<=endY; gy++){
+    for(let gx=startX; gx<=endX; gx++){
+      const h = hash2(gx,gy);
+      const key = h<.08 ? "crack" : h<.38 ? "floor_b" : h<.68 ? "floor_a" : "floor_c";
+      const im = IMG[key];
+      const sx = gx*tile - G.camera.x;
+      const sy = gy*tile - G.camera.y;
+      if(im && im.complete) ctx.drawImage(im,sx,sy,tile,tile);
+      else {ctx.fillStyle="#202a3e";ctx.fillRect(sx,sy,tile,tile);}
+    }
+  }
+}
+function drawProps(){
+  const tile = 128;
+  const props = ["prop_rock","prop_barrel","prop_bones","prop_plant"];
+  const startX = Math.floor(G.camera.x/tile)-1;
+  const endX = Math.floor((G.camera.x+W)/tile)+1;
+  const startY = Math.floor(G.camera.y/tile)-1;
+  const endY = Math.floor((G.camera.y+H)/tile)+1;
+  for(let gy=startY; gy<=endY; gy++){
+    for(let gx=startX; gx<=endX; gx++){
+      const h = hash2(gx+999,gy-777);
+      if(h < .18){
+        const key = props[Math.floor(h*1000)%props.length];
+        const px = gx*tile + 42 + hash2(gx,gy)*45;
+        const py = gy*tile + 48 + hash2(gx-3,gy+7)*42;
+        drawImage(key,px,py,46+hash2(gx+5,gy)*18,0,.72);
+      }
+    }
+  }
+}
+function drawPlayer(){
+  // shadow
+  ctx.fillStyle = "rgba(0,0,0,.28)";
+  ctx.beginPath(); ctx.ellipse(screenX(G.p.x), screenY(G.p.y)+24, 24, 9, 0, 0, Math.PI*2); ctx.fill();
+
+  // aura range visual
+  if(G.p.weapons.aura){
+    const r = (70 + G.p.weapons.aura*18) * G.p.area * (G.p.evolved.garlicWall?1.35:1);
+    ctx.strokeStyle = "rgba(137,246,181,.22)";
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(screenX(G.p.x),screenY(G.p.y),r,0,Math.PI*2); ctx.stroke();
+  }
+  drawImage(G.p.sprite,G.p.x,G.p.y,64,0,1);
+
+  if(G.p.shieldMax && G.p.shieldTimer >= G.p.shieldMax){
+    ctx.strokeStyle = "rgba(126,200,255,.65)";
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(screenX(G.p.x),screenY(G.p.y),34,0,Math.PI*2); ctx.stroke();
+  }
+
+  // orbit blades
+  const n = Math.min(12, (G.p.weapons.blade||0) + Math.floor(G.p.extraProjectiles/2) + (G.p.evolved.bladeStorm?3:0));
+  if(n>0){
+    const rad = 78 + (G.p.weapons.blade||0)*5;
+    for(let i=0;i<n;i++){
+      const a = G.t*(2.25+(G.p.evolved.bladeStorm?.9:0)) + i*Math.PI*2/n;
+      drawImage("proj_blade",G.p.x+Math.cos(a)*rad,G.p.y+Math.sin(a)*rad,30,a,1);
+    }
+  }
+}
+function drawEnemies(){
+  for(const e of G.enemies){
+    const sx = screenX(e.x), sy = screenY(e.y);
+    ctx.fillStyle = "rgba(0,0,0,.28)";
+    ctx.beginPath(); ctx.ellipse(sx,sy+22,e.r*1.05,7,0,0,Math.PI*2); ctx.fill();
+    drawImage(e.sprite,e.x,e.y,e.r*3.1,0,e.elite?1:.96);
+    if(e.elite){
+      ctx.strokeStyle = "rgba(255,214,110,.8)";
+      ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(sx,sy,e.r*1.7,0,Math.PI*2); ctx.stroke();
+    }
+    const w = e.r*2.3;
+    ctx.fillStyle = "rgba(0,0,0,.45)";
+    ctx.fillRect(sx-w/2, sy-e.r*1.9, w, 4);
+    ctx.fillStyle = e.elite ? "#ffd66e" : "#89f6b5";
+    ctx.fillRect(sx-w/2, sy-e.r*1.9, w*clamp(e.hp/e.maxHp,0,1), 4);
+  }
+}
+function drawBullets(){
+  for(const b of G.bullets){
+    drawImage(b.sprite,b.x,b.y,b.r*4,b.rotate,.96);
+  }
+}
+function drawGems(){
+  for(const m of G.gems){
+    drawImage(m.sprite,m.x,m.y,m.r*4,0,.95);
+  }
+}
+function drawMines(){
+  for(const m of G.mines){
+    drawImage("proj_mine",m.x,m.y,42,0,.95);
+  }
+}
+function drawTurretsAndDrones(){
+  for(const t of G.turrets) drawImage("turret",t.x,t.y,46,0,.95);
+  const pets = Math.min(8,(G.p.weapons.pet||0)+(G.p.evolved.petArmy?3:0));
+  for(let i=0;i<pets;i++){
+    const a = G.t*1.4 + i*Math.PI*2/Math.max(1,pets);
+    drawImage("enemy_slime",G.p.x+Math.cos(a)*95,G.p.y+Math.sin(a)*95,34,a,.92);
+  }
+  if(G.p.weapons.healFlower){
+    const flowers = Math.min(6,G.p.weapons.healFlower);
+    for(let i=0;i<flowers;i++){
+      const a = i*Math.PI*2/flowers + G.t*.18;
+      drawImage("prop_plant",G.p.x+Math.cos(a)*55,G.p.y+Math.sin(a)*55,32,0,.82);
+    }
+  }
+  const count = Math.min(10, (G.p.weapons.drone||0) + Math.floor(G.p.extraProjectiles/2) + (G.p.evolved.droneSwarm?3:0));
+  for(let i=0;i<count;i++){
+    const a = G.t*1.8 + i*Math.PI*2/count;
+    drawImage("drone",G.p.x+Math.cos(a)*120,G.p.y+Math.sin(a)*120,38,a,.95);
+  }
+}
+function drawClouds(){
+  for(const c of G.clouds){
+    const alpha = clamp(c.life/c.maxLife,0,1);
+    const key = c.sprite || "poison_cloud";
+    drawImage(key,c.x,c.y,c.r*2.1, G.t*.2, c.type==="poison" ? .56*alpha : .72*alpha);
+  }
+}
+function drawBeams(){
+  for(const b of G.beams){
+    ctx.save();
+    ctx.globalAlpha = clamp(b.life/.35,0,1);
+    ctx.strokeStyle = b.color;
+    ctx.lineWidth = b.width;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(screenX(b.x1),screenY(b.y1));
+    ctx.lineTo(screenX(b.x2),screenY(b.y2));
+    ctx.stroke();
+    ctx.strokeStyle = "rgba(255,255,255,.82)";
+    ctx.lineWidth = Math.max(2,b.width*.38);
+    ctx.beginPath();
+    ctx.moveTo(screenX(b.x1),screenY(b.y1));
+    ctx.lineTo(screenX(b.x2),screenY(b.y2));
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+function drawParticles(){
+  for(const p of G.particles){
+    ctx.globalAlpha = clamp(p.life/p.max,0,1);
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(screenX(p.x),screenY(p.y),p.r,0,Math.PI*2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+function drawTexts(){
+  ctx.textAlign = "center";
+  for(const t of G.texts){
+    ctx.globalAlpha = clamp(t.life/t.max,0,1);
+    ctx.fillStyle = t.color;
+    ctx.font = `900 ${t.size}px system-ui`;
+    ctx.fillText(t.text,screenX(t.x),screenY(t.y));
+    ctx.globalAlpha = 1;
+  }
+}
+function drawOverlay(title,sub){
+  ctx.fillStyle = "rgba(0,0,0,.38)";
+  ctx.fillRect(0,0,W,H);
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#fff";
+  ctx.font = "900 46px system-ui";
+  ctx.fillText(title,W/2,H/2-8);
+  ctx.fillStyle = "rgba(255,255,255,.78)";
+  ctx.font = "16px system-ui";
+  ctx.fillText(sub,W/2,H/2+28);
+}
+function drawMenuDecor(){
+  ctx.save();
+  ctx.globalAlpha = .55;
+  for(let i=0;i<45;i++){
+    const x = (i*197 + G.t*12) % (W+80) - 40;
+    const y = (i*113 + Math.sin(G.t+i)*25) % (H+80) - 40;
+    ctx.fillStyle = i%4===0 ? "rgba(255,214,110,.8)" : "rgba(126,200,255,.5)";
+    ctx.fillRect(x,y,2,2);
+  }
+  ctx.restore();
+}
+
+function loop(now){
+  const dt = Math.min(.033, (now - G.last)/1000 || .016);
+  G.last = now;
+  if(G.state === "menu") G.t += dt*.22;
+  update(dt);
+  render();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+function weaponColor(type){
+  return {
+    pea:"#9dff80", spread:"#c9ff9e", carrot:"#ff9f52", fire:"#ff6b52", ice:"#9eeaff",
+    lightning:"#7ec8ff", poison:"#89f6b5", blade:"#ffd66e", aura:"#89f6b5", laser:"#ff5f75",
+    meteor:"#ff6b52", blackhole:"#ca95ff", coinshot:"#ffd66e", pet:"#89f6b5", nova:"#ffd66e", saw:"#f8fbff", flower:"#89f6b5", thorn:"#89f6b5"
+  }[type] || "#fff";
+}
+function pointLineDistance(px,py,x1,y1,x2,y2){
+  const A = px-x1, B = py-y1, C = x2-x1, D = y2-y1;
+  const dot = A*C+B*D, len = C*C+D*D;
+  const t = clamp(dot/len,0,1);
+  return dist(px,py,x1+C*t,y1+D*t);
+}
+function rand(a,b){return a + Math.random()*(b-a);}
+function dist(x1,y1,x2,y2){return Math.hypot(x1-x2,y1-y2);}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function fmt(t){const m=Math.floor(t/60), s=Math.floor(t%60); return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+})();
 </script>
 </body>
 </html>
