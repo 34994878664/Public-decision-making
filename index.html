@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>萌薯幸存者 V2.6｜极限流畅版网页肉鸽</title>
-  <meta name="description" content="极限流畅版网页肉鸽 Like 小游戏：手机低负载、经验自动压缩、每10波Boss、无限等级传奇、生命系BD、单文件上传。" />
+  <title>萌薯幸存者 V2.7｜存档通用BD版网页肉鸽</title>
+  <meta name="description" content="存档通用BD版网页肉鸽 Like 小游戏：本地存档、通用BD池、角色buff/debuff、长时间游玩防绿屏、手机单文件上传。" />
   <meta name="keywords" content="网页小游戏,肉鸽,幸存者,土豆兄弟like,HTML5游戏,Canvas游戏,GitHub Pages小游戏" />
   <meta name="robots" content="index,follow" />
   <style>
@@ -91,6 +91,7 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
         <div class="pill wide">BD <b id="build">豌豆枪</b></div>
       </div>
       <div class="btns">
+        <button class="ghost" id="saveBtn">存档</button>
         <button class="ghost" id="stickBtn">摇杆左</button>
         <button class="ghost" id="pauseBtn">暂停</button>
         <button class="ghost" id="restartBtn">重开</button>
@@ -107,17 +108,18 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
 
   <section class="panel" id="startPanel">
     <span class="tag">V2 素材增强版 · 手机/电脑都能玩</span>
-    <h1>萌薯幸存者 V2.6</h1>
-    <p>这版强制锁性能：减少粒子和飘字、限制同屏对象、降低手机渲染压力，后期以流畅优先。同时新增生命系、护盾系、满血爆发系 BD。</p>
+    <h1>萌薯幸存者 V2.7</h1>
+    <p>这版新增本地存档/继续游戏，并把角色改成“所有BD通用、角色只给buff和debuff”。同时修复长时间游玩后毒雾绿屏问题。</p>
     <h3>选择初始角色</h3>
     <div class="cards" id="classCards"></div>
     <h3>选择难度</h3>
     <div class="difficultyCards" id="difficultyCards"></div>
     <h3>摇杆位置</h3>
     <div class="sideCards" id="sideCards"></div>
-    <p class="tinyNote">手机新手建议先选“休闲”。左手玩家选左摇杆，右手玩家选右摇杆。推荐 BD 会根据你选的角色和当前武器自动标出来。</p>
+    <p class="tinyNote">手机新手建议先选“休闲”。所有角色共享同一个BD池，区别只在角色buff/debuff。支持本地存档，刷新网页也能继续。</p>
     <div class="actions">
       <button id="startBtn">开始生存</button>
+      <button class="ghost" id="loadBtn">继续存档</button>
       <button class="ghost" id="guideBtn">玩法提示</button>
     </div>
   </section>
@@ -189,6 +191,8 @@ const UI = {
   sideCards: document.getElementById("sideCards"),
   toast: document.getElementById("toast"),
   pauseBtn: document.getElementById("pauseBtn"),
+  saveBtn: document.getElementById("saveBtn"),
+  loadBtn: document.getElementById("loadBtn"),
   stickBtn: document.getElementById("stickBtn"),
 };
 
@@ -218,13 +222,13 @@ for(const [k, src] of Object.entries(ASSET_PATHS)){
 }
 
 const CLASSES = [
-  {id:"sprout", name:"新手萌薯", sprite:"player_sprout", desc:"均衡开局，容错高。初始：豌豆枪 Lv.1。", mod:p=>{}},
-  {id:"gunner", name:"豌豆枪手", sprite:"player_gunner", desc:"攻速更快，自带豌豆枪 Lv.2。", mod:p=>{p.fireRate*=1.22; p.weapons.pea=2; p.maxHp-=8; p.hp=p.maxHp;}},
-  {id:"mage", name:"闪电法薯", sprite:"player_mage", desc:"自带闪电链，适合法术 BD。", mod:p=>{p.weapons.lightning=1; p.damage*=.92; p.cooldown*=.92;}},
-  {id:"tank", name:"铁皮厚薯", sprite:"player_tank", desc:"血量和护甲更高，适合站撸。", mod:p=>{p.maxHp+=45; p.hp=p.maxHp; p.armor+=5; p.speed*=.90;}},
-  {id:"engineer", name:"工程机薯", sprite:"player_engineer", desc:"自带炮台，适合召唤流。", mod:p=>{p.weapons.turret=1; p.fireRate*=.92;}},
-  {id:"rogue", name:"飞刀刺薯", sprite:"player_rogue", desc:"自带环绕飞刀，暴击更高。", mod:p=>{p.weapons.blade=1; p.crit+=.10; p.speed*=1.08;}},
-  {id:"curse", name:"诅咒芽薯", sprite:"player_mage", desc:"开局很脆很难，但每次升级成长更高，BD成型后爆发极强。", mod:p=>{p.maxHp-=42;p.hp=p.maxHp;p.armor-=2;p.damage*=.82;p.speed*=.96;p.weapons.poison=1;p.curseGrowth=1;p.xpBonus+=.18;p.crit+=.04;}},
+  {id:"sprout", name:"新手萌薯", sprite:"player_sprout", desc:"通用BD池。无明显短板，适合第一次玩。", mod:p=>{p.roleName="均衡";}},
+  {id:"gunner", name:"远程枪薯", sprite:"player_gunner", desc:"远程伤害 +35%，攻击范围 +12%；近战伤害 -20%，生命 -10。", mod:p=>{p.roleName="远程";p.typeMul.ranged*=1.35;p.typeMul.melee*=.80;p.range*=1.12;p.maxHp-=10;p.hp=p.maxHp;}},
+  {id:"mage", name:"元素法薯", sprite:"player_mage", desc:"元素伤害 +40%，范围 +12%，冷却 -8%；生命 -18，召唤伤害 -10%。", mod:p=>{p.roleName="元素";p.typeMul.elemental*=1.40;p.area*=1.12;p.cooldown*=.92;p.typeMul.summon*=.90;p.maxHp-=18;p.hp=p.maxHp;}},
+  {id:"tank", name:"巨盾厚薯", sprite:"player_tank", desc:"生命 +60，护甲 +6，生命转伤更强；移速 -12%，远程/元素 -10%。", mod:p=>{p.roleName="生命坦克";p.maxHp+=60;p.hp=p.maxHp;p.armor+=6;p.speed*=.88;p.typeMul.ranged*=.90;p.typeMul.elemental*=.90;p.hpDamage+=.003;}},
+  {id:"engineer", name:"机械工程薯", sprite:"player_engineer", desc:"召唤伤害 +42%，冷却 -6%；移速 -8%，近战伤害 -10%。", mod:p=>{p.roleName="召唤";p.typeMul.summon*=1.42;p.cooldown*=.94;p.speed*=.92;p.typeMul.melee*=.90;}},
+  {id:"rogue", name:"近战刺薯", sprite:"player_rogue", desc:"近战伤害 +38%，暴击 +12%，移速 +10%；元素伤害 -15%，生命 -16。", mod:p=>{p.roleName="近战暴击";p.typeMul.melee*=1.38;p.crit+=.12;p.speed*=1.10;p.typeMul.elemental*=.85;p.maxHp-=16;p.hp=p.maxHp;}},
+  {id:"curse", name:"诅咒芽薯", sprite:"player_mage", desc:"开局伤害 -22%、生命 -45；经验 +20%，每级成长更强，后期很猛。", mod:p=>{p.roleName="后期成长";p.maxHp-=45;p.hp=p.maxHp;p.damage*=.78;p.armor-=2;p.curseGrowth=1;p.xpBonus+=.20;p.typeMul.elemental*=1.18;p.crit+=.04;}},
 ];
 let selectedClass = "sprout";
 
@@ -441,7 +445,7 @@ function newGame(){
     selectedClass:selectedClass,
     wave:1, waveTimer:0, waveDuration:34, endless:false, cleared:false, wavePower:1,
     legendaryCount:0, nextLegendary:5, legendaryFX:[], perfTimer:0, compressedXP:0, bossRewardCount:0,
-    interactables:[], pickupTimer:14, leechWindow:0, leechHealed:0,
+    interactables:[], pickupTimer:14, leechWindow:0, leechHealed:0, autoSaveTimer:0,
     t:0, last:performance.now(),
     spawnTimer:0, eliteTimer:35,
     kills:0, coins:0, level:1, xp:0, need:12,
@@ -453,7 +457,7 @@ function newGame(){
       hp:110,maxHp:110,armor:0,regen:.2,
       speed:220, damage:18, fireRate:1.25, cooldown:1, range:290, area:1,
       pierce:0, extraProjectiles:0, crit:.06, critDmg:2.0, magnet:96, lifeSteal:0,
-      goldBonus:0, xpBonus:0, luck:0, greed:false, shieldMax:0, shieldTimer:0, invulnTimer:0, pickupHeal:0, thorns:0, recommendBias:0, bossDmg:0, revive:0, curseGrowth:0, comboPower:0, execute:0, bloodMagic:0, lastStand:0, leechPower:0, legendaryPower:0, elementalAmp:0, summonAmp:0, hpDamage:0, fullHpPower:0, overHeal:0, shieldDamage:0,
+      goldBonus:0, xpBonus:0, luck:0, greed:false, shieldMax:0, shieldTimer:0, invulnTimer:0, pickupHeal:0, thorns:0, recommendBias:0, bossDmg:0, revive:0, curseGrowth:0, comboPower:0, execute:0, bloodMagic:0, lastStand:0, leechPower:0, legendaryPower:0, elementalAmp:0, summonAmp:0, hpDamage:0, fullHpPower:0, overHeal:0, shieldDamage:0, typeMul:{ranged:1,melee:1,elemental:1,summon:1,generic:1}, roleName:"均衡",
       weapons:{pea:1}, passives:{}, evolved:{}
     },
     timers:{pea:0,spread:0,carrot:0,fire:0,ice:0,lightning:0,poison:0,turret:0,mine:0,drone:0,laser:0,meteor:0,blackhole:0,coinshot:0,pet:0,nova:0,saw:0,healFlower:0,curseCore:0,execute:0,bloodMagic:0},
@@ -461,6 +465,78 @@ function newGame(){
   };
 }
 let G = newGame();
+
+
+const SAVE_KEY = "potato_survivor_v27_save";
+function makeSaveData(){
+  return {
+    version:"2.7",
+    selectedClass, selectedDifficulty, selectedSide,
+    t:G.t, wave:G.wave, waveTimer:G.waveTimer, waveDuration:G.waveDuration,
+    endless:G.endless, cleared:G.cleared, wavePower:G.wavePower,
+    legendaryCount:G.legendaryCount, nextLegendary:G.nextLegendary,
+    kills:G.kills, coins:G.coins, level:G.level, xp:G.xp, need:G.need,
+    p:JSON.parse(JSON.stringify(G.p)),
+    evolved:JSON.parse(JSON.stringify(G.p.evolved||{}))
+  };
+}
+function saveGame(manual=false){
+  if(!G || G.state==="menu") { if(manual) toast("还没开始，暂无进度"); return; }
+  try{
+    localStorage.setItem(SAVE_KEY, JSON.stringify(makeSaveData()));
+    if(manual) toast("已存档");
+  }catch(e){
+    if(manual) toast("存档失败：浏览器空间不足");
+  }
+}
+function hasSave(){
+  try{return !!localStorage.getItem(SAVE_KEY);}catch(e){return false;}
+}
+function loadGame(){
+  let raw = null;
+  try{ raw = localStorage.getItem(SAVE_KEY); }catch(e){}
+  if(!raw){ toast("没有找到存档"); return; }
+  let data;
+  try{ data = JSON.parse(raw); }catch(e){ toast("存档损坏"); return; }
+  initAudio();
+  selectedClass = data.selectedClass || selectedClass;
+  selectedDifficulty = data.selectedDifficulty || selectedDifficulty;
+  selectedSide = data.selectedSide || selectedSide;
+  G = newGame();
+  G.t = data.t || 0;
+  G.wave = data.wave || 1;
+  G.waveTimer = data.waveTimer || 0;
+  G.waveDuration = data.waveDuration || 34;
+  G.endless = !!data.endless;
+  G.cleared = !!data.cleared;
+  G.wavePower = data.wavePower || 1;
+  G.legendaryCount = data.legendaryCount || 0;
+  G.nextLegendary = data.nextLegendary || 5;
+  G.kills = data.kills || 0;
+  G.coins = data.coins || 0;
+  G.level = data.level || 1;
+  G.xp = data.xp || 0;
+  G.need = data.need || nextXPNeed(G.level || 1);
+  G.selectedClass = selectedClass;
+  G.difficulty = DIFFICULTIES.find(d=>d.id===selectedDifficulty) || DIFFICULTIES[0];
+  const baseP = G.p;
+  G.p = Object.assign(baseP, data.p || {});
+  G.p.weapons = Object.assign({}, (data.p && data.p.weapons) || {pea:1});
+  G.p.passives = Object.assign({}, (data.p && data.p.passives) || {});
+  G.p.evolved = Object.assign({}, data.evolved || (data.p && data.p.evolved) || {});
+  G.p.typeMul = Object.assign({ranged:1,melee:1,elemental:1,summon:1,generic:1}, G.p.typeMul || {});
+  G.p.invulnTimer = Math.max(G.p.invulnTimer || 0, 5);
+  G.enemies=[]; G.bullets=[]; G.gems=[]; G.particles=[]; G.txt=[]; G.clouds=[]; G.mines=[]; G.turrets=[]; G.beams=[]; G.interactables=[];
+  G.state = "playing";
+  G.last = performance.now();
+  UI.startPanel.classList.add("hidden");
+  UI.overPanel.classList.add("hidden");
+  UI.upgradePanel.style.display = "none";
+  applyStickSide();
+  grantInvuln(5,"读档保护");
+  updateUI();
+  toast("已继续存档");
+}
 
 function startGame(){
   initAudio();
@@ -484,17 +560,21 @@ function startGame(){
   UI.upgradePanel.style.display = "none";
   UI.pauseBtn.textContent = "暂停";
   toast("萌薯出战！");
+  G.autoSaveTimer = (G.autoSaveTimer || 0) + dt;
+  if(G.autoSaveTimer > 45){ G.autoSaveTimer = 0; saveGame(false); }
   updateUI();
 }
 
 document.getElementById("startBtn").addEventListener("click", startGame);
+UI.loadBtn.addEventListener("click", loadGame);
+UI.saveBtn.addEventListener("click", () => saveGame(true));
 document.getElementById("againBtn").addEventListener("click", startGame);
 document.getElementById("restartBtn").addEventListener("click", startGame);
 document.getElementById("guideBtn").addEventListener("click", () => toast("移动躲怪，自动攻击，升级三选一"));
 UI.pauseBtn.addEventListener("click", togglePause);
 UI.stickBtn.addEventListener("click", () => { selectedSide = selectedSide === "left" ? "right" : "left"; localStorage.setItem("potatoStickSide", selectedSide); applyStickSide(); document.querySelectorAll(".sideCard").forEach(c => c.classList.toggle("active", c.dataset.id === selectedSide)); });
 document.getElementById("copyBtn").addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText(G.result || "萌薯幸存者 V2.6"); toast("战绩已复制"); }
+  try { await navigator.clipboard.writeText(G.result || "萌薯幸存者 V2.7"); toast("战绩已复制"); }
   catch(e){ toast("复制失败"); }
 });
 
@@ -586,7 +666,7 @@ function openLegendaryUpgrade(){
       UI.upgradePanel.style.display="none";
       G.state="playing";
       G.last=performance.now();
-      toast("融合传奇："+u.name);
+      toast("融合传奇："+u.name); saveGame(false);
       updateUI();
     });
     UI.choices.appendChild(div);
@@ -1218,6 +1298,7 @@ function optimizePerformance(dt){
   if(G.particles.length > PERF.particleCap) G.particles.splice(0, G.particles.length - PERF.particleCap);
   if(G.texts.length > PERF.textCap) G.texts.splice(0, G.texts.length - PERF.textCap);
   if(G.beams.length > PERF.beamCap) G.beams.splice(0, G.beams.length - PERF.beamCap);
+  for(const c of G.clouds){ c.r = Math.min(c.r, 260); if(!isFinite(c.life)||!isFinite(c.maxLife)){c.life=.1;c.maxLife=.1;} }
   if(G.clouds.length > PERF.cloudCap) G.clouds.splice(0, G.clouds.length - PERF.cloudCap);
   if(G.mines.length > PERF.mineCap) G.mines.splice(0, G.mines.length - PERF.mineCap);
   if(G.gems.length > PERF.gemCap) compressGemsIfNeeded(true);
@@ -1364,7 +1445,7 @@ function updateWaves(dt){
       playSound("wave",.055); applyTempoGrowth();
       if((G.wave-20)%3===0) spawnEnemy("elite");
       if(G.wave%10===0) spawnEnemy("boss");
-      toast("无尽第 "+(G.wave-20)+" 波｜强度 x"+G.wavePower.toFixed(1));
+      toast("无尽第 "+(G.wave-20)+" 波｜强度 x"+G.wavePower.toFixed(1)); saveGame(false);
     }
     return;
   }
@@ -1548,8 +1629,21 @@ function updateBullets(dt){
     if(remove) G.bullets.splice(i,1);
   }
 }
+function damageTypeMul(type){
+  const m = G.p.typeMul || {};
+  const ranged = ["pea","spread","carrot","coinshot","laser"];
+  const melee = ["blade","aura","saw","execute"];
+  const elemental = ["fire","ice","lightning","poison","meteor","blackhole","curse","bloodMagic","nova","legendary"];
+  const summon = ["turret","drone","pet"];
+  if(ranged.includes(type)) return m.ranged || 1;
+  if(melee.includes(type)) return m.melee || 1;
+  if(elemental.includes(type)) return m.elemental || 1;
+  if(summon.includes(type)) return m.summon || 1;
+  return m.generic || 1;
+}
 function damageEnemy(e, amount, type){
   if(!amount || amount <= 0) return;
+  amount *= damageTypeMul(type);
   if(G.p.elementalAmp && ["fire","ice","lightning","poison","meteor","blackhole","curse","bloodMagic","nova"].includes(type)) amount *= 1 + G.p.elementalAmp;
   if(G.p.summonAmp && ["turret","drone","pet"].includes(type)) amount *= 1 + G.p.summonAmp;
   const before = Math.max(0, e.hp);
@@ -1678,9 +1772,10 @@ function addText(x,y,text,color,life=.8,size=13){
 }
 
 function endGame(){
+  try{localStorage.removeItem(SAVE_KEY);}catch(e){}
   G.state = "over";
   UI.overPanel.classList.remove("hidden");
-  G.result = `萌薯幸存者 V2.6 战绩：存活 ${fmt(G.t)}，波次 ${G.endless ? "无尽"+Math.max(1,G.wave-20) : Math.min(G.wave,20)+"/20"}，等级 ${G.level}，击杀 ${G.kills}，金币 ${G.coins}，Boss宝箱 ${G.bossRewardCount||0} 个，主BD：${buildName()}。`;
+  G.result = `萌薯幸存者 V2.7 战绩：存活 ${fmt(G.t)}，波次 ${G.endless ? "无尽"+Math.max(1,G.wave-20) : Math.min(G.wave,20)+"/20"}，等级 ${G.level}，击杀 ${G.kills}，金币 ${G.coins}，Boss宝箱 ${G.bossRewardCount||0} 个，主BD：${buildName()}。`;
   UI.finalText.textContent = G.result;
 }
 
@@ -1903,10 +1998,12 @@ function drawTurretsAndDrones(){
 function drawClouds(){
   let drawn=0;
   for(const c of G.clouds){
-    if(drawn++ > 18) break;
+    if(drawn++ > 12) break;
     const alpha = clamp(c.life/c.maxLife,0,1);
     const key = c.sprite || "poison_cloud";
-    drawImage(key,c.x,c.y,c.r*2.1, G.t*.2, c.type==="poison" ? .56*alpha : .72*alpha);
+    const visualSize = Math.min(c.r*2.1, c.type==="poison" || c.type==="flower" || c.type==="blackhole" || c.type==="curse" ? 220 : 280);
+    const visualAlpha = c.type==="poison" || c.type==="flower" ? .18*alpha : c.type==="blackhole" || c.type==="curse" ? .20*alpha : .42*alpha;
+    drawImage(key,c.x,c.y,visualSize, G.t*.2, visualAlpha);
   }
 }
 function drawBeams(){
