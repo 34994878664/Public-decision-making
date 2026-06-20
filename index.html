@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>萌薯幸存者 V2.7｜存档通用BD版网页肉鸽</title>
-  <meta name="description" content="存档通用BD版网页肉鸽 Like 小游戏：本地存档、通用BD池、角色buff/debuff、长时间游玩防绿屏、手机单文件上传。" />
+  <title>萌薯幸存者 V2.8｜BGM特效淡化版网页肉鸽</title>
+  <meta name="description" content="BGM特效淡化版网页肉鸽 Like 小游戏：提神BGM、音乐开关、特效淡化、存档、通用BD、手机单文件上传。" />
   <meta name="keywords" content="网页小游戏,肉鸽,幸存者,土豆兄弟like,HTML5游戏,Canvas游戏,GitHub Pages小游戏" />
   <meta name="robots" content="index,follow" />
   <style>
@@ -91,6 +91,8 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
         <div class="pill wide">BD <b id="build">豌豆枪</b></div>
       </div>
       <div class="btns">
+        <button class="ghost" id="musicBtn">音乐关</button>
+        <button class="ghost" id="fxBtn">特效淡</button>
         <button class="ghost" id="saveBtn">存档</button>
         <button class="ghost" id="stickBtn">摇杆左</button>
         <button class="ghost" id="pauseBtn">暂停</button>
@@ -108,15 +110,15 @@ button.ghost{background:rgba(255,255,255,.10);border:1px solid var(--line);box-s
 
   <section class="panel" id="startPanel">
     <span class="tag">V2 素材增强版 · 手机/电脑都能玩</span>
-    <h1>萌薯幸存者 V2.7</h1>
-    <p>这版新增本地存档/继续游戏，并把角色改成“所有BD通用、角色只给buff和debuff”。同时修复长时间游玩后毒雾绿屏问题。</p>
+    <h1>萌薯幸存者 V2.8</h1>
+    <p>这版新增提神醒脑循环BGM、音乐开关、特效淡化/极简/关闭功能。仍然保留存档、通用BD池、角色buff/debuff和长时间防绿屏优化。</p>
     <h3>选择初始角色</h3>
     <div class="cards" id="classCards"></div>
     <h3>选择难度</h3>
     <div class="difficultyCards" id="difficultyCards"></div>
     <h3>摇杆位置</h3>
     <div class="sideCards" id="sideCards"></div>
-    <p class="tinyNote">手机新手建议先选“休闲”。所有角色共享同一个BD池，区别只在角色buff/debuff。支持本地存档，刷新网页也能继续。</p>
+    <p class="tinyNote">手机新手建议先选“休闲”。所有角色共享同一个BD池，区别只在角色buff/debuff。支持存档、音乐开关和特效淡化。手机想更流畅可点“特效极简/关闭”。</p>
     <div class="actions">
       <button id="startBtn">开始生存</button>
       <button class="ghost" id="loadBtn">继续存档</button>
@@ -191,6 +193,8 @@ const UI = {
   sideCards: document.getElementById("sideCards"),
   toast: document.getElementById("toast"),
   pauseBtn: document.getElementById("pauseBtn"),
+  musicBtn: document.getElementById("musicBtn"),
+  fxBtn: document.getElementById("fxBtn"),
   saveBtn: document.getElementById("saveBtn"),
   loadBtn: document.getElementById("loadBtn"),
   stickBtn: document.getElementById("stickBtn"),
@@ -308,6 +312,56 @@ function playSound(type, volume=.045){
   const [freq,dur,wave]=map[type]||[500,.05,"sine"]; const osc=audioCtx.createOscillator(), gain=audioCtx.createGain(); osc.type=wave; osc.frequency.setValueAtTime(freq,now);
   if(["lightning"].includes(type)) osc.frequency.exponentialRampToValueAtTime(freq*1.8,now+dur); if(["blackhole","fire","meteor","mine"].includes(type)) osc.frequency.exponentialRampToValueAtTime(Math.max(40,freq*.55),now+dur);
   gain.gain.setValueAtTime(volume,now); gain.gain.exponentialRampToValueAtTime(.0001,now+dur); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now); osc.stop(now+dur+.02);
+}
+
+
+function playTone(freq, dur=.08, type="sine", volume=.025, when=0, targetGain=null){
+  initAudio();
+  if(!audioCtx) return;
+  const t = audioCtx.currentTime + when;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t);
+  gain.gain.setValueAtTime(volume, t);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  osc.connect(gain);
+  gain.connect(targetGain || audioCtx.destination);
+  osc.start(t);
+  osc.stop(t + dur + .02);
+}
+function startBGM(){
+  initAudio();
+  if(!audioCtx || bgmTimer) return;
+  musicEnabled = true;
+  localStorage.setItem("potatoMusic", "on");
+  updateMusicButton();
+  bgmGain = audioCtx.createGain();
+  bgmGain.gain.value = .32;
+  bgmGain.connect(audioCtx.destination);
+  bgmStep = 0;
+  const scale = [196,233,262,294,330,392,440,523];
+  bgmTimer = setInterval(()=>{
+    if(!musicEnabled || !audioCtx){ stopBGM(false); return; }
+    const step = bgmStep++ % 16;
+    const bass = step % 8 < 4 ? 98 : 123;
+    if(step % 4 === 0) playTone(bass,.13,"sawtooth",.022,0,bgmGain);
+    if(step % 2 === 0) playTone(220,.025,"square",.008,0,bgmGain);
+    const lead = scale[(step*3 + Math.floor(bgmStep/16)) % scale.length];
+    playTone(lead,.055, step%3===0?"triangle":"square", .012, .01, bgmGain);
+    if(step === 7 || step === 15) playTone(740,.035,"triangle",.010,0,bgmGain);
+  }, 145);
+}
+function stopBGM(save=true){
+  if(bgmTimer){ clearInterval(bgmTimer); bgmTimer = null; }
+  if(bgmGain){ try{bgmGain.disconnect();}catch(e){} bgmGain = null; }
+  musicEnabled = false;
+  if(save) localStorage.setItem("potatoMusic", "off");
+  updateMusicButton();
+}
+function toggleBGM(){
+  if(musicEnabled && bgmTimer) stopBGM(true);
+  else startBGM();
 }
 
 const keys = new Set();
@@ -499,6 +553,7 @@ function loadGame(){
   let data;
   try{ data = JSON.parse(raw); }catch(e){ toast("存档损坏"); return; }
   initAudio();
+  if(musicEnabled) startBGM();
   selectedClass = data.selectedClass || selectedClass;
   selectedDifficulty = data.selectedDifficulty || selectedDifficulty;
   selectedSide = data.selectedSide || selectedSide;
@@ -540,6 +595,7 @@ function loadGame(){
 
 function startGame(){
   initAudio();
+  if(musicEnabled) startBGM();
   G = newGame();
   const c = CLASSES.find(x => x.id === selectedClass);
   G.p.sprite = c.sprite;
@@ -568,13 +624,17 @@ function startGame(){
 document.getElementById("startBtn").addEventListener("click", startGame);
 UI.loadBtn.addEventListener("click", loadGame);
 UI.saveBtn.addEventListener("click", () => saveGame(true));
+UI.musicBtn.addEventListener("click", toggleBGM);
+UI.fxBtn.addEventListener("click", cycleFxMode);
+applyFxMode();
+updateMusicButton();
 document.getElementById("againBtn").addEventListener("click", startGame);
 document.getElementById("restartBtn").addEventListener("click", startGame);
 document.getElementById("guideBtn").addEventListener("click", () => toast("移动躲怪，自动攻击，升级三选一"));
 UI.pauseBtn.addEventListener("click", togglePause);
 UI.stickBtn.addEventListener("click", () => { selectedSide = selectedSide === "left" ? "right" : "left"; localStorage.setItem("potatoStickSide", selectedSide); applyStickSide(); document.querySelectorAll(".sideCard").forEach(c => c.classList.toggle("active", c.dataset.id === selectedSide)); });
 document.getElementById("copyBtn").addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText(G.result || "萌薯幸存者 V2.7"); toast("战绩已复制"); }
+  try { await navigator.clipboard.writeText(G.result || "萌薯幸存者 V2.8"); toast("战绩已复制"); }
   catch(e){ toast("复制失败"); }
 });
 
@@ -1775,7 +1835,7 @@ function endGame(){
   try{localStorage.removeItem(SAVE_KEY);}catch(e){}
   G.state = "over";
   UI.overPanel.classList.remove("hidden");
-  G.result = `萌薯幸存者 V2.7 战绩：存活 ${fmt(G.t)}，波次 ${G.endless ? "无尽"+Math.max(1,G.wave-20) : Math.min(G.wave,20)+"/20"}，等级 ${G.level}，击杀 ${G.kills}，金币 ${G.coins}，Boss宝箱 ${G.bossRewardCount||0} 个，主BD：${buildName()}。`;
+  G.result = `萌薯幸存者 V2.8 战绩：存活 ${fmt(G.t)}，波次 ${G.endless ? "无尽"+Math.max(1,G.wave-20) : Math.min(G.wave,20)+"/20"}，等级 ${G.level}，击杀 ${G.kills}，金币 ${G.coins}，Boss宝箱 ${G.bossRewardCount||0} 个，主BD：${buildName()}。`;
   UI.finalText.textContent = G.result;
 }
 
@@ -2002,7 +2062,8 @@ function drawClouds(){
     const alpha = clamp(c.life/c.maxLife,0,1);
     const key = c.sprite || "poison_cloud";
     const visualSize = Math.min(c.r*2.1, c.type==="poison" || c.type==="flower" || c.type==="blackhole" || c.type==="curse" ? 220 : 280);
-    const visualAlpha = c.type==="poison" || c.type==="flower" ? .18*alpha : c.type==="blackhole" || c.type==="curse" ? .20*alpha : .42*alpha;
+    const modeAlpha = (FX_MODES[fxMode]||FX_MODES.fade).cloudAlpha;
+    const visualAlpha = modeAlpha * (c.type==="poison" || c.type==="flower" ? .42*alpha : c.type==="blackhole" || c.type==="curse" ? .48*alpha : alpha);
     drawImage(key,c.x,c.y,visualSize, G.t*.2, visualAlpha);
   }
 }
@@ -2031,7 +2092,7 @@ function drawLegendaryFX(){
     const t = 1 - f.life/f.max;
     const sx = screenX(f.x), sy = screenY(f.y);
     ctx.save();
-    ctx.globalAlpha = clamp(f.life/f.max,0,1);
+    ctx.globalAlpha = clamp(f.life/f.max,0,1) * ((FX_MODES[fxMode]||FX_MODES.fade).legendaryAlpha || .5);
     ctx.strokeStyle = f.color;
     ctx.lineWidth = 6;
     for(let i=0;i<4;i++){
